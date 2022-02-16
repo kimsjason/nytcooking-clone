@@ -10,8 +10,8 @@ import RecipeBox from "./RecipeBox";
 function App() {
   return (
     <div className="App">
-      <Header />
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route to="/" element={Home} />
           <Route to="/weeknight" element={Weeknight} />
@@ -19,7 +19,6 @@ function App() {
           <Route to="/recipe-box" element={RecipeBox} />
         </Routes>
       </BrowserRouter>
-      <Footer />
     </div>
   );
 }
