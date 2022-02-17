@@ -18,6 +18,7 @@ function App() {
           <Route to="/grocery-list" element={GroceryList} />
           <Route to="/recipe-box" element={RecipeBox} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );
