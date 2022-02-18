@@ -1,5 +1,13 @@
+import { RecipeOfTheDay } from "./RecipeOfTheDay";
+
 const Home = (props) => {
-  return <div className="home-page"></div>;
+  const recipeOfTheDay = props.recipes[0];
+
+  return (
+    <div className="home-page">
+      <RecipeOfTheDay recipe={recipeOfTheDay} />
+    </div>
+  );
 };
 
 export default Home;
