@@ -28,7 +28,6 @@ const StyledRecipeOfTheDay = styled.div`
     width: 320px;
     height: 280px;
     padding: 30px;
-    border: 1px solid lightgray;
     background: white;
   }
 
