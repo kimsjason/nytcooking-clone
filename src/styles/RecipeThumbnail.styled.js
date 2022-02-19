@@ -8,6 +8,7 @@ const StyledRecipeThumbnail = styled.div`
     height: 275px;
     border: 1px solid #cccccc;
     background: white;
+    cursor: pointer;
   }
 
   .recipe-thumbnail:hover {
