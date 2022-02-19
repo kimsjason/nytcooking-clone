@@ -29,7 +29,7 @@ const WhatToCookThisWeek = (props) => {
             {props.recipes.map((recipe) => {
               return (
                 <Link to={`/${recipe.title}`}>
-                  <RecipeThumbnail recipe={recipe} />;
+                  <RecipeThumbnail recipe={recipe} />
                 </Link>
               );
             })}

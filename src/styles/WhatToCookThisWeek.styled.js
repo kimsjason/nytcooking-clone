@@ -56,8 +56,9 @@ const StyledWhatToCookThisWeek = styled.div`
   .recipes {
     display: flex;
     gap: 25px;
-    overflow: hidden;
+    overflow: scroll;
     margin: 4rem 0;
+    padding: 1rem;
   }
 `;
 
