@@ -3,6 +3,7 @@ import { format, startOfWeek } from "date-fns";
 import { StyledWhatToCookThisWeek } from "../styles/WhatToCookThisWeek.styled";
 import { RecipeThumbnail } from "./RecipeThumbnail";
 import { RecipeCollectionThumbnail } from "./RecipeCollectionThumbnail";
+import { CookingGuideThumbnail } from "./CookingGuideThumbnail";
 
 const WhatToCookThisWeek = (props) => {
   const date = new Date();
@@ -63,7 +64,11 @@ const WhatToCookThisWeek = (props) => {
               and advanced cooks.
             </div>
           </div>
-          <div className="recipes"></div>
+          <div className="recipes">
+            {props.cookingGuides.map((cookingGuide) => {
+              return <CookingGuideThumbnail cookingGuide={cookingGuide} />;
+            })}
+          </div>
           <div className="see-all">See All Cooking Guides</div>
         </div>
       </div>

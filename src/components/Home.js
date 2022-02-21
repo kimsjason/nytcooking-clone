@@ -10,6 +10,7 @@ const Home = (props) => {
       <WhatToCookThisWeek
         recipes={props.recipes}
         recipeCollections={props.recipeCollections}
+        cookingGuides={props.cookingGuides}
       />
     </div>
   );

@@ -483,6 +483,34 @@ function App() {
     },
   ];
 
+  const cookingGuides = [
+    {
+      title: "Homer Simpson's Donuts",
+      author: "Homer Simpson",
+      img: require("../assets/simpsons-donut.jpeg"),
+    },
+    {
+      title: "Homer Simpson's Donuts",
+      author: "Homer Simpson",
+      img: require("../assets/simpsons-donut.jpeg"),
+    },
+    {
+      title: "Homer Simpson's Donuts",
+      author: "Homer Simpson",
+      img: require("../assets/simpsons-donut.jpeg"),
+    },
+    {
+      title: "Homer Simpson's Donuts",
+      author: "Homer Simpson",
+      img: require("../assets/simpsons-donut.jpeg"),
+    },
+    {
+      title: "Homer Simpson's Donuts",
+      author: "Homer Simpson",
+      img: require("../assets/simpsons-donut.jpeg"),
+    },
+  ];
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -491,7 +519,11 @@ function App() {
           <Route
             path="/"
             element={
-              <Home recipes={recipes} recipeCollections={recipeCollections} />
+              <Home
+                recipes={recipes}
+                recipeCollections={recipeCollections}
+                cookingGuides={cookingGuides}
+              />
             }
           />
           <Route path="/weeknight" element={<Weeknight recipes={recipes} />} />
