@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { format, startOfWeek } from "date-fns";
 import { StyledWhatToCookThisWeek } from "../styles/WhatToCookThisWeek.styled";
 import { RecipeThumbnail } from "./RecipeThumbnail";
+import { RecipeCollectionThumbnail } from "./RecipeCollectionThumbnail";
 
 const WhatToCookThisWeek = (props) => {
   const date = new Date();
@@ -34,6 +35,36 @@ const WhatToCookThisWeek = (props) => {
               );
             })}
           </div>
+        </div>
+        <div className="editor-recommendations">
+          <div className="sub-header">
+            <div className="title">More From Our Editors</div>
+            <div className="subtitle">
+              Weeknight suppers, seasonal favorites and other ideas for this
+              week.
+            </div>
+          </div>
+          <div className="recipes">
+            {props.recipeCollections.map((recipeCollection) => {
+              return (
+                <RecipeCollectionThumbnail
+                  recipeCollection={recipeCollection}
+                />
+              );
+            })}
+          </div>
+          <div className="see-all">See All Editor's Collections</div>
+        </div>
+        <div className="editor-recommendations">
+          <div className="sub-header">
+            <div className="title">Master the Basics</div>
+            <div className="subtitle">
+              Our guides offer recipes, videos, techniques and tips for novices
+              and advanced cooks.
+            </div>
+          </div>
+          <div className="recipes"></div>
+          <div className="see-all">See All Cooking Guides</div>
         </div>
       </div>
     </StyledWhatToCookThisWeek>

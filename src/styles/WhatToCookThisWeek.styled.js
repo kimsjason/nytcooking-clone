@@ -7,7 +7,6 @@ const StyledWhatToCookThisWeek = styled.div`
     justify-content: center;
     width: 1000px;
     margin: 0 auto;
-    padding: 0 5rem;
   }
 
   .main-header {
@@ -31,11 +30,15 @@ const StyledWhatToCookThisWeek = styled.div`
   }
 
   .editor-recommendations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border-top: 7px solid #222222;
     padding: 1.2rem 0;
   }
 
   .sub-header {
+    align-self: flex-start;
     display: flex;
     flex-direction: column;
   }
@@ -55,10 +58,28 @@ const StyledWhatToCookThisWeek = styled.div`
 
   .recipes {
     display: flex;
-    gap: 25px;
+    gap: 1rem;
+    width: 100%;
     overflow: scroll;
     margin: 4rem 0;
     padding: 1rem;
+  }
+
+  .see-all {
+    display: flex;
+    justify-content: center;
+    width: 235px;
+    margin-bottom: 5rem;
+    border: 1px solid #222222;
+    border-radius: 3px;
+    padding: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .see-all:hover {
+    background: #222222;
+    color: white;
   }
 `;
 

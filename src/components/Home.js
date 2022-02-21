@@ -7,7 +7,10 @@ const Home = (props) => {
   return (
     <div className="home-page">
       <RecipeOfTheDay recipe={recipeOfTheDay} />
-      <WhatToCookThisWeek recipes={props.recipes} />
+      <WhatToCookThisWeek
+        recipes={props.recipes}
+        recipeCollections={props.recipeCollections}
+      />
     </div>
   );
 };

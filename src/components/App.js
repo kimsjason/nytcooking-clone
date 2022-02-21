@@ -10,6 +10,7 @@ import RecipeBox from "./RecipeBox";
 function App() {
   // Firebase();
   const recipes = [
+    // SOURCE: https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett
     {
       title: "Homer Simpson's Donut",
       author: "The Simpsons",
@@ -469,12 +470,30 @@ function App() {
     },
   ];
 
+  const recipeCollections = [
+    {
+      title: "Recipes to Cook Over a Long Weekend",
+      img: require("../assets/simpsons-donut.jpeg"),
+      recipes: [],
+    },
+    {
+      title: "Best Recipes for Leftover Rice",
+      img: require("../assets/krabby-patty.jpeg"),
+      recipes: [],
+    },
+  ];
+
   return (
     <div className="App">
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<Home recipes={recipes} />} />
+          <Route
+            path="/"
+            element={
+              <Home recipes={recipes} recipeCollections={recipeCollections} />
+            }
+          />
           <Route path="/weeknight" element={<Weeknight recipes={recipes} />} />
           <Route
             path="/grocery-list"
