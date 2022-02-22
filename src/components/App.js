@@ -1,14 +1,23 @@
-import "../styles/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { FirebaseConfig } from "../FirebaseConfig";
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
 import Weeknight from "./Weeknight";
 import GroceryList from "./GroceryList";
 import RecipeBox from "./RecipeBox";
+import Recipe from "./Recipe";
+import "../styles/App.css";
+import { useLocation } from "react-router";
 
 function App() {
   // Firebase();
+  useEffect(() => {
+    console.log("this ran");
+    FirebaseConfig();
+  }, []);
+
   const recipes = [
     // SOURCE: https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett
     {
@@ -20,7 +29,7 @@ function App() {
         "Any fan of The Simpsons knows that Homer goes absolutely nuts for donuts with a pretty pink glaze.",
       description:
         "Any fan of The Simpsons knows that Homer goes absolutely nuts for donuts with a pretty pink glaze. Make some mouthwatering confections that Homer himself would be drooling over with this recipe from Let's Eat Fiction!",
-      tags: [],
+      tags: ["Snack", "Egg"],
       ratings: "",
       ingredients: [
         "6 1/2 cups all-purpose flour",
@@ -50,7 +59,15 @@ function App() {
         "Remove the lid and seal from the tub of icing, and heat in the microwave until it's liquid. Spoon the frosting over the donuts and top with rainbow sprinkles. Let them set for about 15 minutes, and enjoy.",
       ],
       category: "Snack",
-      notes: [{ user: "", date: "", text: "", likes: "" }],
+      notes: [
+        {
+          user: "Test",
+          date: "1 minute ago",
+          text: "This is a test note!",
+          likes: "3",
+          userProfileImage: "",
+        },
+      ],
       img: require("../assets/simpsons-donut.jpeg"),
     },
     {
@@ -490,22 +507,22 @@ function App() {
       img: require("../assets/simpsons-donut.jpeg"),
     },
     {
-      title: "Homer Simpson's Donuts",
+      title: "Homer Simpson's Donuts1",
       author: "Homer Simpson",
       img: require("../assets/simpsons-donut.jpeg"),
     },
     {
-      title: "Homer Simpson's Donuts",
+      title: "Homer Simpson's Donuts2",
       author: "Homer Simpson",
       img: require("../assets/simpsons-donut.jpeg"),
     },
     {
-      title: "Homer Simpson's Donuts",
+      title: "Homer Simpson's Donuts3",
       author: "Homer Simpson",
       img: require("../assets/simpsons-donut.jpeg"),
     },
     {
-      title: "Homer Simpson's Donuts",
+      title: "Homer Simpson's Donuts4",
       author: "Homer Simpson",
       img: require("../assets/simpsons-donut.jpeg"),
     },
@@ -532,6 +549,7 @@ function App() {
             element={<GroceryList recipes={recipes} />}
           />
           <Route path="/recipe-box" element={<RecipeBox recipes={recipes} />} />
+          <Route path="/recipe/:recipe" element={<Recipe />} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -30,7 +30,11 @@ const WhatToCookThisWeek = (props) => {
           <div className="recipes">
             {props.recipes.map((recipe) => {
               return (
-                <Link to={`/${recipe.title}`}>
+                <Link
+                  key={recipe.title}
+                  to={`/recipe/${recipe.title}`}
+                  state={{ recipe: recipe }}
+                >
                   <RecipeThumbnail recipe={recipe} />
                 </Link>
               );
@@ -49,6 +53,7 @@ const WhatToCookThisWeek = (props) => {
             {props.recipeCollections.map((recipeCollection) => {
               return (
                 <RecipeCollectionThumbnail
+                  key={recipeCollection.title}
                   recipeCollection={recipeCollection}
                 />
               );
@@ -66,7 +71,12 @@ const WhatToCookThisWeek = (props) => {
           </div>
           <div className="recipes">
             {props.cookingGuides.map((cookingGuide) => {
-              return <CookingGuideThumbnail cookingGuide={cookingGuide} />;
+              return (
+                <CookingGuideThumbnail
+                  key={cookingGuide.title}
+                  cookingGuide={cookingGuide}
+                />
+              );
             })}
           </div>
           <div className="see-all">See All Cooking Guides</div>
