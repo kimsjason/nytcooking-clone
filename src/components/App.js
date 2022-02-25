@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useEffect } from "react";
-import { FirebaseConfig } from "../FirebaseConfig";
+import { useEffect, useState } from "react";
+import { initializeApp } from "firebase/app";
+import { collection, addDoc, getFirestore } from "firebase/firestore";
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
@@ -9,14 +10,23 @@ import GroceryList from "./GroceryList";
 import RecipeBox from "./RecipeBox";
 import Recipe from "./Recipe";
 import "../styles/App.css";
-import { useLocation } from "react-router";
+import { LogInPopup } from "./LogInPopup";
 
 function App() {
-  // Firebase();
-  useEffect(() => {
-    console.log("this ran");
-    FirebaseConfig();
-  }, []);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [displayLogInPopup, setDisplayLogInPopup] = useState(false);
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA9kwwvwh3hcuotK1nBd36bOGOZM-RcSh4",
+    authDomain: "nyt-cooking-clone.firebaseapp.com",
+    projectId: "nyt-cooking-clone",
+    storageBucket: "nyt-cooking-clone.appspot.com",
+    messagingSenderId: "7910689021",
+    appId: "1:7910689021:web:eb4b978cf826ade44bd694",
+    measurementId: "G-MVK92FWB4Y",
+  };
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
   const recipes = [
     // SOURCE: https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett
@@ -528,10 +538,36 @@ function App() {
     },
   ];
 
+  useEffect(() => {
+    // FirebaseConfig();
+    const addRecipe = async (recipe) => {
+      try {
+        await addDoc(collection(db, "recipes"), recipe);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+    };
+
+    // recipes.forEach((recipe) => addRecipe(recipe));
+  }, []);
+
   return (
     <div className="App">
+      {displayLogInPopup ? (
+        <LogInPopup
+          className="log-in-popup"
+          displayLogInPopup={displayLogInPopup}
+          setDisplayLogInPopup={setDisplayLogInPopup}
+        />
+      ) : (
+        ""
+      )}
       <BrowserRouter>
-        <Header />
+        <Header
+          loggedIn={loggedIn}
+          displayLogInPopup={displayLogInPopup}
+          setDisplayLogInPopup={setDisplayLogInPopup}
+        />
         <Routes>
           <Route
             path="/"
