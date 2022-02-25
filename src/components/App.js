@@ -1,6 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
+import {
+  getAuth,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 import { collection, addDoc, getFirestore } from "firebase/firestore";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -551,13 +558,26 @@ function App() {
     // recipes.forEach((recipe) => addRecipe(recipe));
   }, []);
 
+  const signIn = async () => {
+    let provider = new GoogleAuthProvider();
+    await signInWithPopup(getAuth(), provider);
+    setLoggedIn(true);
+  };
+
+  const signOutUser = () => {
+    signOut(getAuth());
+    setLoggedIn(false);
+    setDisplayLogInPopup(false);
+  };
+
   return (
     <div className="App">
-      {displayLogInPopup ? (
+      {!loggedIn && displayLogInPopup ? (
         <LogInPopup
           className="log-in-popup"
           displayLogInPopup={displayLogInPopup}
           setDisplayLogInPopup={setDisplayLogInPopup}
+          signIn={signIn}
         />
       ) : (
         ""
@@ -567,25 +587,36 @@ function App() {
           loggedIn={loggedIn}
           displayLogInPopup={displayLogInPopup}
           setDisplayLogInPopup={setDisplayLogInPopup}
+          signOutUser={signOutUser}
         />
         <Routes>
           <Route
             path="/"
             element={
               <Home
+                loggedIn={loggedIn}
                 recipes={recipes}
                 recipeCollections={recipeCollections}
                 cookingGuides={cookingGuides}
               />
             }
           />
-          <Route path="/weeknight" element={<Weeknight recipes={recipes} />} />
+          <Route
+            path="/weeknight"
+            element={<Weeknight loggedIn={loggedIn} recipes={recipes} />}
+          />
           <Route
             path="/grocery-list"
-            element={<GroceryList recipes={recipes} />}
+            element={<GroceryList loggedIn={loggedIn} recipes={recipes} />}
           />
-          <Route path="/recipe-box" element={<RecipeBox recipes={recipes} />} />
-          <Route path="/recipe/:recipe" element={<Recipe />} />
+          <Route
+            path="/recipe-box"
+            element={<RecipeBox loggedIn={loggedIn} recipes={recipes} />}
+          />
+          <Route
+            path="/recipe/:recipe"
+            element={<Recipe loggedIn={loggedIn} />}
+          />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -1,35 +1,44 @@
 import styled from "styled-components";
 
 const StyledHeader = styled.div`
-  & .header {
+  .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #cccccc;
+    background: white;
     color: #666666;
   }
 
-  & .nyt-cooking-logo {
+  .nyt-cooking-logo {
     display: flex;
     align-self: stretch;
     padding: 1.5rem 4.5rem 1.5rem 2.5rem;
     border-right: 1px solid #cccccc;
   }
 
-  & .search {
+  .extended-search-container {
+    flex: 1;
+    align-self: stretch;
+    display: flex;
+    transition: flex 1s;
+  }
+
+  .search {
     flex: 1;
     display: flex;
     align-items: center;
     padding: 0 1.5rem;
+    transition: flex 1s;
   }
 
-  & .search-icon {
+  .search-icon {
     width: 25px;
     height: 25px;
     color: #9b9b9b;
   }
 
-  & .search-bar {
+  .search-bar {
     flex: 1;
     border: none;
     padding: 5px;
@@ -38,12 +47,17 @@ const StyledHeader = styled.div`
     color: #666666;
   }
 
-  & .search-bar:focus {
+  .search-bar:focus {
     outline: none;
   }
 
+  .tabs {
+    display: ${(props) => (props.searchSelected ? "none" : "flex")};
+  }
+
   .weeknight,
-  .grocery-list {
+  .grocery-list,
+  .subscribe {
     align-self: stretch;
     display: flex;
     align-items: center;
@@ -53,10 +67,20 @@ const StyledHeader = styled.div`
     font-size: 1.1rem;
   }
 
+  .subscribe {
+    margin: 0 2.5rem;
+    color: #e33d26;
+  }
+
   .weeknight:hover,
   .grocery-list:hover {
     margin-top: 4px;
     border-bottom: 4px solid #666666;
+  }
+
+  .subscribe:hover {
+    margin-top: 4px;
+    border-bottom: 4px solid #e33d26;
   }
 
   .recipe-box-container {
@@ -76,7 +100,11 @@ const StyledHeader = styled.div`
   }
 
   .recipe-box {
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
     margin-bottom: 1rem;
+    padding-top: 1.35rem;
     text-align: center;
     font-weight: bold;
     font-size: 1.1rem;
@@ -87,11 +115,18 @@ const StyledHeader = styled.div`
     color: #c83c26;
   }
 
+  .recipe-box span {
+    font-weight: normal;
+    color: #222222;
+  }
+
   .settings {
     align-self: stretch;
     display: flex;
     align-items: center;
+    position: relative;
     padding: 0 1.5rem;
+    cursor: pointer;
   }
 
   .settings-icon {
@@ -102,6 +137,30 @@ const StyledHeader = styled.div`
 
   .settings:hover .settings-icon {
     color: #e33d26;
+  }
+
+  .settings:hover .settings-expanded {
+    display: flex;
+  }
+
+  .settings-expanded {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    width: 156px;
+    bottom: -80px;
+    right: 2.5rem;
+    font-size: 1.2rem;
+    background: #f2f3ef;
+    z-index: 10;
+  }
+
+  .settings-expanded > * {
+    width: 100%;
+    height: 4rem;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid #ccc;
+    cursor: pointer;
   }
 `;
 

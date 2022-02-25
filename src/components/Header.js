@@ -8,6 +8,10 @@ import { Search } from "@mui/icons-material";
 const Header = (props) => {
   const [searchSelected, setSearchSelected] = useState(false);
 
+  const signOutUser = () => {
+    props.signOutUser();
+  };
+
   const expandSearchBar = () => {
     setSearchSelected(true);
   };
@@ -19,7 +23,7 @@ const Header = (props) => {
     }
   });
 
-  const setDisplayLogInPopup = (e) => {
+  const setDisplayLogInPopup = () => {
     props.setDisplayLogInPopup(true);
   };
 
@@ -61,9 +65,15 @@ const Header = (props) => {
           </Link>
         </div>
         {props.loggedIn ? (
-          <Link to="/settings" className="settings">
+          <div className="settings">
             <Settings className="settings-icon" />
-          </Link>
+            <div className="settings-expanded">
+              <div className="account">Manage Your Account</div>
+              <div className="log-out" onClick={signOutUser}>
+                Log Out
+              </div>
+            </div>
+          </div>
         ) : (
           <Link to="/subscribe" className="subscribe">
             SUBSCRIBE

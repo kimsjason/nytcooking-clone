@@ -6,6 +6,10 @@ const LogInPopup = (props) => {
     props.setDisplayLogInPopup(false);
   };
 
+  const signIn = () => {
+    props.signIn();
+  };
+
   return (
     <StyledLogInPopup displayLogInPopup={props.displayLogInPopup}>
       <div className="overlay">
@@ -40,7 +44,7 @@ const LogInPopup = (props) => {
               our Privacy Policy.
             </div>
             <div className="log-in-social">
-              <div className="google">
+              <div className="google" onClick={signIn}>
                 <Google className="google-icon" />
                 Continue with Google
               </div>
