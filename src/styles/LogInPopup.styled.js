@@ -11,7 +11,7 @@ const StyledLogInPopup = styled.div`
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.6);
-    z-index: 10;
+    z-index: 100;
     transition: opacity 2s ease;
     animation: fadeIn 0.3s;
   }
