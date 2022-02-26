@@ -5,9 +5,13 @@ const StyledHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
     border-bottom: 1px solid #cccccc;
     background: white;
     color: #666666;
+    z-index: 10;
   }
 
   .nyt-cooking-logo {
