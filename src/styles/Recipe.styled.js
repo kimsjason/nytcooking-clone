@@ -361,6 +361,10 @@ const StyledRecipe = styled.div`
     font-weight: bold;
     font-family: Arvo;
   }
+
+  .close-icon {
+    display: none;
+  }
 `;
 
 export { StyledRecipe };

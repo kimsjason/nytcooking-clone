@@ -11,6 +11,7 @@ import {
   Twitter,
 } from "@mui/icons-material";
 import { CookingNote } from "./CookingNote";
+import { LogInPopup } from "./LogInPopup";
 
 const Recipe = (props) => {
   const location = useLocation();
@@ -18,6 +19,11 @@ const Recipe = (props) => {
 
   return (
     <StyledRecipe>
+      {!props.loggedIn ? (
+        <LogInPopup className="log-in-popup" signIn={props.signIn} />
+      ) : (
+        ""
+      )}
       <div className="recipe-page">
         <div className="recipe-content">
           <div className="share-recipe">

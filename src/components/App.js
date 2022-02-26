@@ -615,7 +615,7 @@ function App() {
           />
           <Route
             path="/recipe/:recipe"
-            element={<Recipe loggedIn={loggedIn} />}
+            element={<Recipe loggedIn={loggedIn} signIn={signIn} />}
           />
         </Routes>
         <Footer />
