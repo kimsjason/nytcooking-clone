@@ -8,7 +8,14 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { collection, addDoc, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  addDoc,
+  getFirestore,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
@@ -562,12 +569,37 @@ function App() {
     let provider = new GoogleAuthProvider();
     await signInWithPopup(getAuth(), provider);
     setLoggedIn(true);
+    if (!(await getUser())) {
+      createUser();
+    }
   };
 
   const signOutUser = () => {
     signOut(getAuth());
     setLoggedIn(false);
     setDisplayLogInPopup(false);
+  };
+
+  const createUser = async () => {
+    const currentUser = getAuth().currentUser;
+    let user = {
+      uid: currentUser.uid,
+      displayName: currentUser.displayName,
+      email: currentUser.email,
+    };
+    await setDoc(doc(db, "users", currentUser.uid), user);
+  };
+
+  const getUser = async () => {
+    const userID = getAuth().currentUser.uid;
+    const docRef = doc(db, "users", userID);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.data();
+    } else {
+      return false;
+    }
   };
 
   return (
@@ -598,6 +630,7 @@ function App() {
                 recipes={recipes}
                 recipeCollections={recipeCollections}
                 cookingGuides={cookingGuides}
+                setDisplayLogInPopup={setDisplayLogInPopup}
               />
             }
           />
