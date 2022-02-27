@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const StyledRecipeOfTheDay = styled.div`
-  // RECIPE OF THE DAY STYLES
   .recipe-of-the-day {
     position: relative;
     cursor: pointer;
@@ -81,6 +80,7 @@ const StyledRecipeOfTheDay = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     width: 170px;
     height: 3.8rem;
     margin-right: 0.7rem;
@@ -95,6 +95,60 @@ const StyledRecipeOfTheDay = styled.div`
     width: 2.5rem;
     height: auto;
     margin-right: 0.3rem;
+  }
+
+  .save-recipe:hover .description-box-container {
+    display: flex;
+  }
+
+  .description-box-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    width: 220px;
+    bottom: 4rem;
+    color: #222222;
+  }
+
+  .description-box {
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    background: #f2f3ef;
+    
+  }
+
+  .title {
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+  }
+
+  .description {
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    font-weight: normal;
+  }
+
+  .log-in-sign-up{
+    font-size: 1.5rem;
+  }
+
+  .log-in-sign-up span {
+    color: #e33d26;
+  }
+  .log-in-sign-up span:hover {
+    text-decoration: underline;
+  }
+
+  .arrow {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 1rem solid transparent;
+    border-right: 1rem solid transparent;
+    border-top: 1rem solid #f2f3ef;
   }
 
   .facebook-icon,
@@ -115,9 +169,6 @@ const StyledRecipeOfTheDay = styled.div`
   .expand-icon:hover {
     background: #e33d26;
   }
-  
-  // WHAT TO COOK THIS WEEK STYLES
-  
 `;
 
 export { StyledRecipeOfTheDay };

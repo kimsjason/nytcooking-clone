@@ -10,14 +10,19 @@ import { StyledRecipeOfTheDay } from "../styles/RecipeOfTheDay.styled";
 const RecipeOfTheDay = (props) => {
   const recipeOfTheDay = props.recipe;
 
+  const setDisplayLogInPopup = () => {
+    props.setDisplayLogInPopup(true);
+  };
+
   return (
     <StyledRecipeOfTheDay>
-      <Link
-        to={`/recipe/${recipeOfTheDay.title}`}
-        state={{ recipe: recipeOfTheDay }}
-      >
-        <div className="recipe-of-the-day">
+      <div className="recipe-of-the-day">
+        <Link
+          to={`/recipe/${recipeOfTheDay.title}`}
+          state={{ recipe: recipeOfTheDay }}
+        >
           <img src={recipeOfTheDay.img} alt="recipe of the day" />
+
           <div className="recipe-label">
             <div className="recipe-info">
               <div className="recipe-title">{recipeOfTheDay.title}</div>
@@ -26,17 +31,36 @@ const RecipeOfTheDay = (props) => {
               <div className="label">RECIPE OF THE DAY</div>
             </div>
           </div>
-          <div className="save-share-recipe">
-            <div className="save-recipe">
-              <BookmarkBorder className="bookmark-icon" />
-              Save To Recipe Box
-            </div>
-            <Facebook className="facebook-icon" />
-            <Pinterest className="pinterest-icon" />
-            <Expand className="expand-icon" />
+        </Link>
+
+        <div className="save-share-recipe">
+          <div className="save-recipe" onClick={setDisplayLogInPopup}>
+            <BookmarkBorder className="bookmark-icon" />
+            Save To Recipe Box
+            {props.loggedIn ? (
+              ""
+            ) : (
+              <div className="description-box-container">
+                <div className="description-box">
+                  <div className="title">Build Your Recipe Box</div>
+                  <div className="description">
+                    Save your favorite recipes, even recipes from other
+                    websites, in one place.
+                  </div>
+                  <div className="log-in-sign-up">
+                    <span>Log in</span> or <span>Sign up</span> to save this
+                    recipe.
+                  </div>
+                </div>
+                <div className="arrow"></div>
+              </div>
+            )}
           </div>
+          <Facebook className="facebook-icon" />
+          <Pinterest className="pinterest-icon" />
+          <Expand className="expand-icon" />
         </div>
-      </Link>
+      </div>
     </StyledRecipeOfTheDay>
   );
 };
