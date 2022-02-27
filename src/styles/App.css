@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arvo:wght@700&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Libre Franklin", "Franklin Gothic Medium", "Arial Narrow", Arial,
+    sans-serif;
+}
+
+body {
+  background: #f2f3ef;
+}
+
+a {
+  all: unset;
+  cursor: pointer;
+}
+
+button {
+  font-family: "Libre Franklin";
+  cursor: pointer;
+}
+
+.App:nth-child(1) {
+  position: relative;
+  top: 61px;
+}
