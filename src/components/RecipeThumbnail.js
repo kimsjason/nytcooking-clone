@@ -1,7 +1,13 @@
-import { BookmarkBorder } from "@mui/icons-material";
+import { Bookmark, BookmarkBorder } from "@mui/icons-material";
 import { StyledRecipeThumbnail } from "../styles/RecipeThumbnail.styled";
 
 const RecipeThumbnail = (props) => {
+  const handleSaveRecipe = () => {
+    props.saveRecipe(props.recipe);
+  };
+
+  console.log(props.recipe.title);
+
   return (
     <StyledRecipeThumbnail>
       <div className="recipe-thumbnail">
@@ -17,7 +23,31 @@ const RecipeThumbnail = (props) => {
           </div>
           <div className="thumbnail-footer">
             <div className="time">{props.recipe.time}</div>
-            <BookmarkBorder className="bookmark-icon" />
+            {props.user.savedRecipes.some(
+              (savedRecipe) => savedRecipe.title === props.recipe.title
+            ) ? (
+              <div
+                className="saved"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  handleSaveRecipe();
+                }}
+              >
+                <Bookmark className="bookmark-icon" />
+              </div>
+            ) : (
+              <div
+                className="not-saved"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  handleSaveRecipe();
+                }}
+              >
+                <BookmarkBorder className="bookmark-icon" />
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -48,6 +48,16 @@ const StyledRecipeThumbnail = styled.div`
     align-items: center;
   }
 
+  .saved,
+  .not-saved {
+    display: flex;
+    align-items: center;
+  }
+
+  .saved:active {
+    transform: scale(1.1);
+  }
+
   .bookmark-icon {
     width: 2.5rem;
     height: auto;

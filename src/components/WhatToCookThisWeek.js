@@ -21,10 +21,10 @@ const WhatToCookThisWeek = (props) => {
         </div>
         <div className="editor-recommendations">
           <div className="sub-header">
-            <div className="title">Sam's Suggestions</div>
+            <div className="title">Jason's Suggestions</div>
             <div className="subtitle">
-              Recipes selected throughout the week by Sam Sifton, food editor of
-              The New York Times.
+              Recipes selected throughout the week by Jason Kim, not the food
+              editor of The New York Times.
             </div>
           </div>
           <div className="recipes">
@@ -35,7 +35,11 @@ const WhatToCookThisWeek = (props) => {
                   to={`/recipe/${recipe.title}`}
                   state={{ recipe: recipe }}
                 >
-                  <RecipeThumbnail recipe={recipe} />
+                  <RecipeThumbnail
+                    recipe={recipe}
+                    user={props.user}
+                    saveRecipe={props.saveRecipe}
+                  />
                 </Link>
               );
             })}

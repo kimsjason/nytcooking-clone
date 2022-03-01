@@ -72,8 +72,8 @@ const StyledRecipeOfTheDay = styled.div`
   .save-share-recipe {
     display: flex;
     position: absolute;
-    bottom 27px;
-    right: 27px;
+    bottom 1.5rem;
+    right: 1.5rem;
   }
 
   .save-recipe {
@@ -84,11 +84,11 @@ const StyledRecipeOfTheDay = styled.div`
     width: 170px;
     height: 3.8rem;
     margin-right: 0.7rem;
-    border-radius: 5px;
+    border-radius: 3px;
     font-size: 1.3rem;
-    font-weight: bold;
     color: white;
-    background: black;
+    background: #000000cc;
+    ;
   }
 
   .bookmark-icon {
@@ -99,6 +99,16 @@ const StyledRecipeOfTheDay = styled.div`
 
   .save-recipe:hover .description-box-container {
     display: flex;
+  }
+
+  .saved, .not-saved {
+    display: flex;
+    align-items: center;
+  }
+
+  .saved {
+    padding-left: 1rem;
+    margin-right: auto;
   }
 
   .description-box-container {
@@ -151,16 +161,20 @@ const StyledRecipeOfTheDay = styled.div`
     border-top: 1rem solid #f2f3ef;
   }
 
+  .share-recipe {
+    display: flex;
+    gap: 0.7rem;
+  }
+
   .facebook-icon,
   .pinterest-icon,
   .expand-icon {
     width: 3.8rem;
     height: 3.8rem;
-    margin-right: 0.7rem;
     padding: 0.75rem;
-    border-radius: 5px;
+    border-radius: 3px;
     color: white;
-    background: black;
+    background: #000000cc;
   }
 
   .save-recipe:hover,

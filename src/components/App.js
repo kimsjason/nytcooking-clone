@@ -15,6 +15,11 @@ import {
   getFirestore,
   getDoc,
   setDoc,
+  updateDoc,
+  arrayUnion,
+  where,
+  query,
+  arrayRemove,
 } from "firebase/firestore";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -27,9 +32,7 @@ import "../styles/App.css";
 import { LogInPopup } from "./LogInPopup";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [displayLogInPopup, setDisplayLogInPopup] = useState(false);
-
+  // Firebase configuration
   const firebaseConfig = {
     apiKey: "AIzaSyA9kwwvwh3hcuotK1nBd36bOGOZM-RcSh4",
     authDomain: "nyt-cooking-clone.firebaseapp.com",
@@ -42,6 +45,18 @@ function App() {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
+  // React State hooks
+  const [user, setUser] = useState({
+    uid: "",
+    displayName: "",
+    email: "",
+    savedRecipes: [],
+    groceryList: [],
+  });
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [displayLogInPopup, setDisplayLogInPopup] = useState(false);
+
+  // Recipe data
   const recipes = [
     // SOURCE: https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett
     {
@@ -552,8 +567,9 @@ function App() {
     },
   ];
 
+  // React Effect hooks
   useEffect(() => {
-    // FirebaseConfig();
+    // add recipes to database
     const addRecipe = async (recipe) => {
       try {
         await addDoc(collection(db, "recipes"), recipe);
@@ -565,12 +581,28 @@ function App() {
     // recipes.forEach((recipe) => addRecipe(recipe));
   }, []);
 
+  // update firestore users collection on user state change
+  useEffect(() => {
+    const updateUser = async () => {
+      const userID = getAuth().currentUser.uid;
+      const docRef = doc(db, "users", userID);
+      await updateDoc(docRef, user);
+    };
+
+    if (loggedIn) {
+      updateUser();
+    }
+  }, [user]);
+
   const signIn = async () => {
     let provider = new GoogleAuthProvider();
     await signInWithPopup(getAuth(), provider);
     setLoggedIn(true);
+
+    // create new user if users database returns nothing
     if (!(await getUser())) {
-      createUser();
+      const newUser = await createUser();
+      setUser(newUser);
     }
   };
 
@@ -582,12 +614,16 @@ function App() {
 
   const createUser = async () => {
     const currentUser = getAuth().currentUser;
-    let user = {
+    const user = {
       uid: currentUser.uid,
       displayName: currentUser.displayName,
       email: currentUser.email,
+      savedRecipes: [],
+      groceryList: [],
     };
     await setDoc(doc(db, "users", currentUser.uid), user);
+
+    return user;
   };
 
   const getUser = async () => {
@@ -596,9 +632,29 @@ function App() {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
+      setUser(docSnap.data());
       return docSnap.data();
     } else {
       return false;
+    }
+  };
+
+  const saveRecipe = (recipe) => {
+    if (loggedIn) {
+      const userCopy = { ...user };
+      const saved = user.savedRecipes.some(
+        (savedRecipe) => savedRecipe.title === recipe.title
+      );
+
+      if (saved) {
+        userCopy.savedRecipes = userCopy.savedRecipes.filter(
+          (savedRecipe) => savedRecipe.title !== recipe.title
+        );
+        console.log("im saving this");
+      } else {
+        userCopy.savedRecipes.push(recipe);
+      }
+      setUser(userCopy);
     }
   };
 
@@ -630,7 +686,9 @@ function App() {
                 recipes={recipes}
                 recipeCollections={recipeCollections}
                 cookingGuides={cookingGuides}
+                user={user}
                 setDisplayLogInPopup={setDisplayLogInPopup}
+                saveRecipe={saveRecipe}
               />
             }
           />
@@ -648,7 +706,14 @@ function App() {
           />
           <Route
             path="/recipe/:recipe"
-            element={<Recipe loggedIn={loggedIn} signIn={signIn} />}
+            element={
+              <Recipe
+                loggedIn={loggedIn}
+                user={user}
+                signIn={signIn}
+                saveRecipe={saveRecipe}
+              />
+            }
           />
         </Routes>
         <Footer />

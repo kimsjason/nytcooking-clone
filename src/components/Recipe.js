@@ -1,6 +1,8 @@
 import { StyledRecipe } from "../styles/Recipe.styled";
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import {
+  Bookmark,
   BookmarkBorder,
   Check,
   Facebook,
@@ -16,6 +18,14 @@ import { LogInPopup } from "./LogInPopup";
 const Recipe = (props) => {
   const location = useLocation();
   const { recipe } = location.state || {};
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleSaveRecipe = () => {
+    props.saveRecipe(recipe);
+  };
 
   return (
     <StyledRecipe>
@@ -44,15 +54,24 @@ const Recipe = (props) => {
                   <span>TIME</span> {recipe.time}
                 </div>
               </div>
-              <div className="save-share-recipe">
-                <div className="save-print-recipe">
-                  <div className="save-recipe">
-                    <BookmarkBorder className="bookmark-icon" />
-                    Save to Recipe Box
-                  </div>
-                  <div className="print-recipe">
-                    <Print className="print-icon" />
-                  </div>
+              <div className="save-print-recipe">
+                <div className="save-recipe" onClick={handleSaveRecipe}>
+                  {props.user.savedRecipes.some(
+                    (savedRecipe) => savedRecipe.title === recipe.title
+                  ) ? (
+                    <div className="saved">
+                      <Bookmark className="bookmark-icon" />
+                      Saved
+                    </div>
+                  ) : (
+                    <div className="not-saved">
+                      <BookmarkBorder className="bookmark-icon" />
+                      Save To Recipe Box
+                    </div>
+                  )}
+                </div>
+                <div className="print-recipe">
+                  <Print className="print-icon" onClick={window.print} />
                 </div>
               </div>
             </div>

@@ -112,6 +112,17 @@ const StyledRecipe = styled.div`
     height: auto;
   }
 
+  .saved,
+  .not-saved {
+    display: flex;
+    align-items: center;
+  }
+
+  .saved {
+    padding-left: 1rem;
+    margin-right: auto;
+  }
+
   .print-recipe {
     display: flex;
     align-items: center;

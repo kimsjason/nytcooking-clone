@@ -3,6 +3,7 @@ import {
   Expand,
   Facebook,
   Pinterest,
+  Bookmark,
   BookmarkBorder,
 } from "@mui/icons-material";
 import { StyledRecipeOfTheDay } from "../styles/RecipeOfTheDay.styled";
@@ -10,8 +11,9 @@ import { StyledRecipeOfTheDay } from "../styles/RecipeOfTheDay.styled";
 const RecipeOfTheDay = (props) => {
   const recipeOfTheDay = props.recipe;
 
-  const setDisplayLogInPopup = () => {
+  const handleSaveRecipe = () => {
     props.setDisplayLogInPopup(true);
+    props.saveRecipe(recipeOfTheDay);
   };
 
   return (
@@ -34,9 +36,21 @@ const RecipeOfTheDay = (props) => {
         </Link>
 
         <div className="save-share-recipe">
-          <div className="save-recipe" onClick={setDisplayLogInPopup}>
-            <BookmarkBorder className="bookmark-icon" />
-            Save To Recipe Box
+          <div className="save-recipe" onClick={handleSaveRecipe}>
+            {props.user.savedRecipes.some(
+              (savedRecipe) => savedRecipe.title === recipeOfTheDay.title
+            ) ? (
+              <div className="saved">
+                <Bookmark className="bookmark-icon" />
+                Saved
+              </div>
+            ) : (
+              <div className="not-saved">
+                <BookmarkBorder className="bookmark-icon" />
+                Save To Recipe Box
+              </div>
+            )}
+
             {props.loggedIn ? (
               ""
             ) : (
@@ -56,9 +70,11 @@ const RecipeOfTheDay = (props) => {
               </div>
             )}
           </div>
-          <Facebook className="facebook-icon" />
-          <Pinterest className="pinterest-icon" />
-          <Expand className="expand-icon" />
+          <div className="share-recipe">
+            <Facebook className="facebook-icon" />
+            <Pinterest className="pinterest-icon" />
+            <Expand className="expand-icon" />
+          </div>
         </div>
       </div>
     </StyledRecipeOfTheDay>
