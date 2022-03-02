@@ -650,12 +650,64 @@ function App() {
         userCopy.savedRecipes = userCopy.savedRecipes.filter(
           (savedRecipe) => savedRecipe.title !== recipe.title
         );
-        console.log("im saving this");
       } else {
         userCopy.savedRecipes.push(recipe);
       }
       setUser(userCopy);
     }
+  };
+
+  const addToGroceryList = (recipe) => {
+    const userCopy = { ...user };
+    const groceryInfo = {
+      title: recipe.title,
+      yield: recipe.yield,
+      ingredients: recipe.ingredients,
+    };
+
+    userCopy.groceryList.push(groceryInfo);
+
+    setUser(userCopy);
+  };
+
+  const removeGroceryRecipe = (e) => {
+    const recipe = e.target.closest(".recipe");
+    const recipeTitle = recipe.querySelector(".title").textContent;
+    const userCopy = { ...user };
+
+    userCopy.groceryList = userCopy.groceryList.filter(
+      (recipe) => recipe.title !== recipeTitle
+    );
+
+    setUser(userCopy);
+  };
+
+  const removeGroceryIngredient = (e) => {
+    const recipe = e.target.closest(".recipe");
+    const recipeTitle = recipe.querySelector(".title").textContent;
+    const ingredientName = e.target.closest(".ingredient").textContent;
+    const userCopy = { ...user };
+
+    userCopy.groceryList = userCopy.groceryList.map((recipe) => {
+      if (recipe.title === recipeTitle) {
+        recipe.ingredients = recipe.ingredients.filter(
+          (ingredient) => ingredient !== ingredientName
+        );
+      }
+      return recipe;
+    });
+
+    setUser(userCopy);
+  };
+
+  const showGroceryList = () => {
+    const groceryList = document.querySelector(".overlay");
+    groceryList.classList.remove("hidden");
+  };
+
+  const hideGroceryList = () => {
+    const groceryList = document.querySelector(".overlay");
+    groceryList.classList.add("hidden");
   };
 
   return (
@@ -670,12 +722,20 @@ function App() {
       ) : (
         ""
       )}
+      <GroceryList
+        user={user}
+        removeGroceryRecipe={removeGroceryRecipe}
+        removeGroceryIngredient={removeGroceryIngredient}
+        showGroceryList={showGroceryList}
+        hideGroceryList={hideGroceryList}
+      />
       <BrowserRouter>
         <Header
           loggedIn={loggedIn}
           displayLogInPopup={displayLogInPopup}
           setDisplayLogInPopup={setDisplayLogInPopup}
           signOutUser={signOutUser}
+          showGroceryList={showGroceryList}
         />
         <Routes>
           <Route
@@ -697,10 +757,6 @@ function App() {
             element={<Weeknight loggedIn={loggedIn} recipes={recipes} />}
           />
           <Route
-            path="/grocery-list"
-            element={<GroceryList loggedIn={loggedIn} recipes={recipes} />}
-          />
-          <Route
             path="/recipe-box"
             element={<RecipeBox loggedIn={loggedIn} recipes={recipes} />}
           />
@@ -712,6 +768,8 @@ function App() {
                 user={user}
                 signIn={signIn}
                 saveRecipe={saveRecipe}
+                addToGroceryList={addToGroceryList}
+                showGroceryList={showGroceryList}
               />
             }
           />

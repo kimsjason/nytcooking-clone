@@ -291,6 +291,25 @@ const StyledRecipe = styled.div`
     color: white;
   }
 
+  .added {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    font-size: 1.4rem;
+  }
+
+  .open-grocery {
+    font-weight: bold;
+    color: #e33d26;
+    cursor: pointer;
+  }
+
+  .open-grocery:hover {
+    color: #c83c26;
+  }
+
   .ingredient-substitution {
     font-size: 1.3rem;
     color: #e33d26;

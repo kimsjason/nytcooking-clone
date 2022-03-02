@@ -27,6 +27,10 @@ const Recipe = (props) => {
     props.saveRecipe(recipe);
   };
 
+  const handleAddToGroceryList = () => {
+    props.addToGroceryList(recipe);
+  };
+
   return (
     <StyledRecipe>
       {!props.loggedIn ? (
@@ -126,9 +130,24 @@ const Recipe = (props) => {
                   })}
                 </div>
               </div>
-              <div className="add-to-grocery-list">
-                Add to Your Grocery List
-              </div>
+              {props.user.groceryList.some(
+                (groceryRecipe) => groceryRecipe.title === recipe.title
+              ) ? (
+                <div className="added">
+                  Added <div className="divider"></div>
+                  <div className="open-grocery" onClick={props.showGroceryList}>
+                    Open Grocery List
+                  </div>
+                </div>
+              ) : (
+                <div
+                  className="add-to-grocery-list"
+                  onClick={handleAddToGroceryList}
+                >
+                  Add to Your Grocery List
+                </div>
+              )}
+
               <div className="ingredient-substitution">
                 Ingredient Substitution Guide
               </div>

@@ -48,13 +48,14 @@ const Header = (props) => {
             <Link to="/weeknight" className="weeknight">
               WEEKNIGHT
             </Link>
-            <Link
-              to="/grocery-list"
+            <div
               className="grocery-list"
-              onClick={setDisplayLogInPopup}
+              onClick={
+                props.loggedIn ? props.showGroceryList : setDisplayLogInPopup
+              }
             >
               YOUR GROCERY LIST
-            </Link>
+            </div>
           </div>
         </div>
 

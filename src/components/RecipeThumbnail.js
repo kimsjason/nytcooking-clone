@@ -6,8 +6,6 @@ const RecipeThumbnail = (props) => {
     props.saveRecipe(props.recipe);
   };
 
-  console.log(props.recipe.title);
-
   return (
     <StyledRecipeThumbnail>
       <div className="recipe-thumbnail">
