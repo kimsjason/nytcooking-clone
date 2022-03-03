@@ -31,6 +31,10 @@ const Recipe = (props) => {
     props.addToGroceryList(recipe);
   };
 
+  const handleMarkCooked = () => {
+    props.markCooked(recipe);
+  };
+
   return (
     <StyledRecipe>
       {!props.loggedIn ? (
@@ -104,9 +108,17 @@ const Recipe = (props) => {
               })}
             </div>
             <div className="cooked-and-ratings">
-              <div className="mark-as-cooked">
-                <Check className="check-icon" /> Mark as <span> Cooked</span>
-              </div>
+              {props.user.cookedRecipes.some(
+                (cookedRecipe) => cookedRecipe.title === recipe.title
+              ) ? (
+                <div className="mark-as-cooked" onClick={handleMarkCooked}>
+                  <Check className="check-icon cooked" /> Cooked
+                </div>
+              ) : (
+                <div className="mark-as-cooked" onClick={handleMarkCooked}>
+                  <Check className="check-icon" /> Mark as <span> Cooked</span>
+                </div>
+              )}
               <span className="divider"></span>
               <div className="ratings">
                 {recipe.ratings.length} ratings
@@ -168,13 +180,26 @@ const Recipe = (props) => {
                   })}
                 </div>
               </div>
-              <div className="mark-as-cooked-container">
-                Have you cooked this?
-                <div className="mark-as-cooked">
-                  <Check className="check-icon" />
-                  Mark as <span> Cooked</span>
+
+              {props.user.cookedRecipes.some(
+                (cookedRecipe) => cookedRecipe.title === recipe.title
+              ) ? (
+                <div className="mark-as-cooked-container">
+                  You've Cooked This
+                  <div className="mark-as-cooked" onClick={handleMarkCooked}>
+                    <Check className="check-icon cooked" /> Cooked
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="mark-as-cooked-container">
+                  Have you cooked this?
+                  <div className="mark-as-cooked" onClick={handleMarkCooked}>
+                    <Check className="check-icon" /> Mark as{" "}
+                    <span> Cooked</span>
+                  </div>
+                </div>
+              )}
+
               <div className="cooking-notes">
                 <div className="cooking-notes-title">COOKING NOTES</div>
                 <input

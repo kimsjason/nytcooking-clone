@@ -16,10 +16,6 @@ import {
   getDoc,
   setDoc,
   updateDoc,
-  arrayUnion,
-  where,
-  query,
-  arrayRemove,
 } from "firebase/firestore";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -51,6 +47,8 @@ function App() {
     displayName: "",
     email: "",
     savedRecipes: [],
+    cookedRecipes: [],
+    ratedRecipes: [],
     groceryList: [],
   });
   const [loggedIn, setLoggedIn] = useState(false);
@@ -610,6 +608,7 @@ function App() {
     signOut(getAuth());
     setLoggedIn(false);
     setDisplayLogInPopup(false);
+    window.location.reload();
   };
 
   const createUser = async () => {
@@ -619,6 +618,8 @@ function App() {
       displayName: currentUser.displayName,
       email: currentUser.email,
       savedRecipes: [],
+      cookedRecipes: [],
+      ratedRecipes: [],
       groceryList: [],
     };
     await setDoc(doc(db, "users", currentUser.uid), user);
@@ -710,6 +711,24 @@ function App() {
     groceryList.classList.add("hidden");
   };
 
+  const markCooked = (recipe) => {
+    if (loggedIn) {
+      const userCopy = { ...user };
+      const cooked = user.cookedRecipes.some(
+        (cookedRecipe) => cookedRecipe.title === recipe.title
+      );
+
+      if (cooked) {
+        userCopy.cookedRecipes = userCopy.cookedRecipes.filter(
+          (cookedRecipe) => cookedRecipe.title !== recipe.title
+        );
+      } else {
+        userCopy.cookedRecipes.push(recipe);
+      }
+      setUser(userCopy);
+    }
+  };
+
   return (
     <div className="App">
       {!loggedIn && displayLogInPopup ? (
@@ -758,7 +777,9 @@ function App() {
           />
           <Route
             path="/recipe-box"
-            element={<RecipeBox loggedIn={loggedIn} recipes={recipes} />}
+            element={
+              <RecipeBox user={user} loggedIn={loggedIn} recipes={recipes} />
+            }
           />
           <Route
             path="/recipe/:recipe"
@@ -768,6 +789,7 @@ function App() {
                 user={user}
                 signIn={signIn}
                 saveRecipe={saveRecipe}
+                markCooked={markCooked}
                 addToGroceryList={addToGroceryList}
                 showGroceryList={showGroceryList}
               />

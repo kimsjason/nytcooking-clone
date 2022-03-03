@@ -215,6 +215,11 @@ const StyledRecipe = styled.div`
     color: #b7b4b4;
   }
 
+  .check-icon.cooked {
+    color: white;
+    background: #b7b4b4;
+  }
+
   .mark-as-cooked span {
     white-space: pre;
     font-weight: bold;
