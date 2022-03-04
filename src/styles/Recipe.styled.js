@@ -239,14 +239,41 @@ const StyledRecipe = styled.div`
 
   .stars {
     display: flex;
-    align-items: center;
+    position: relative;
+  }
+
+  .stars > * {
+    cursor: pointer;
+    z-index: 25;
+  }
+
+  .star-icon,
+  .star-border-icon {
+    display: flex;
+    width: 2.25rem;
+    height: auto;
+    z-index: 50;
+    color: #ccc;
+    pointer-events: none;
   }
 
   .star-icon {
-    width: 2.25rem;
-    height: auto;
-    color: #b7b4b4;
-    cursor: pointer;
+    color: ${(props) => (props.recipeRating >= 4 ? "#e33d26" : "#fbaa2a")};
+  }
+
+  .stars-hover {
+    text-align: center;
+    position: absolute;
+    bottom: -1.8rem;
+    right: -3rem;
+    width: 175px;
+    height: 8rem;
+    padding: 1.5rem 3rem;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 4px rbga(0, 0, 0, 0.1);
+    font-size: 1.4rem;
+    background: white;
+    z-index: 10;
   }
 
   .instructions-and-cooking-notes {
@@ -398,6 +425,10 @@ const StyledRecipe = styled.div`
   }
 
   .close-icon {
+    display: none;
+  }
+
+  .hidden {
     display: none;
   }
 `;

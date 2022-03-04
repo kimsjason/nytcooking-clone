@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { StyledRecipe } from "../styles/Recipe.styled";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import {
   Bookmark,
@@ -9,6 +10,7 @@ import {
   Mail,
   Pinterest,
   Print,
+  Star,
   StarBorder,
   Twitter,
 } from "@mui/icons-material";
@@ -16,15 +18,41 @@ import { CookingNote } from "./CookingNote";
 import { LogInPopup } from "./LogInPopup";
 
 const Recipe = (props) => {
-  const location = useLocation();
-  const { recipe } = location.state || {};
+  const recipeTitle = useParams().recipe;
+  const [recipe] = props.recipes.filter(
+    (recipe) => recipe.title === recipeTitle
+  );
+
+  const [hoverOneStar, setHoverOneStar] = useState(false);
+  const [hoverTwoStar, setHoverTwoStar] = useState(false);
+  const [hoverThreeStar, setHoverThreeStar] = useState(false);
+  const [hoverFourStar, setHoverFourStar] = useState(false);
+  const [hoverFiveStar, setHoverFiveStar] = useState(false);
+
+  const recipeRating = Math.round(
+    recipe.ratings.reduce((sum, x) => sum + x.rating, 0) / recipe.ratings.length
+  );
+  const userRecipeRating = props.user.ratedRecipes.some(
+    (ratedRecipe) => ratedRecipe.title === recipe.title
+  )
+    ? parseInt(
+        props.user.ratedRecipes.filter(
+          (ratedRecipe) => ratedRecipe.title === recipe.title
+        )[0].rating
+      )
+    : 0;
 
   useEffect(() => {
+    props.setLastViewedRecipe(recipe);
     window.scrollTo(0, 0);
   }, []);
 
   const handleSaveRecipe = () => {
     props.saveRecipe(recipe);
+  };
+
+  const handleRateRecipe = (e) => {
+    props.rateRecipe(e, recipe);
   };
 
   const handleAddToGroceryList = () => {
@@ -35,8 +63,18 @@ const Recipe = (props) => {
     props.markCooked(recipe);
   };
 
+  const showRatingsText = () => {
+    const starsHover = document.querySelector(".stars-hover");
+    starsHover.classList.remove("hidden");
+  };
+
+  const hideRatingsText = () => {
+    const starsHover = document.querySelector(".stars-hover");
+    starsHover.classList.add("hidden");
+  };
+
   return (
-    <StyledRecipe>
+    <StyledRecipe recipeRating={recipeRating}>
       {!props.loggedIn ? (
         <LogInPopup className="log-in-popup" signIn={props.signIn} />
       ) : (
@@ -123,11 +161,136 @@ const Recipe = (props) => {
               <div className="ratings">
                 {recipe.ratings.length} ratings
                 <div className="stars">
-                  <StarBorder className="star-icon" />
-                  <StarBorder className="star-icon" />
-                  <StarBorder className="star-icon" />
-                  <StarBorder className="star-icon" />
-                  <StarBorder className="star-icon" />
+                  <div
+                    className="1-star"
+                    onMouseOver={() => {
+                      setHoverOneStar(true);
+                      showRatingsText();
+                    }}
+                    onMouseOut={() => {
+                      setHoverOneStar(false);
+                      hideRatingsText();
+                    }}
+                    onClick={handleRateRecipe}
+                    data-rating="1"
+                  >
+                    {recipeRating >= 1 ||
+                    userRecipeRating >= 1 ||
+                    hoverOneStar ||
+                    hoverTwoStar ||
+                    hoverThreeStar ||
+                    hoverFourStar ||
+                    hoverFiveStar ? (
+                      <Star className="star-icon" />
+                    ) : (
+                      <StarBorder className="star-border-icon" />
+                    )}
+                  </div>
+                  <div
+                    className="2-star"
+                    onMouseOver={() => {
+                      setHoverTwoStar(true);
+                      showRatingsText();
+                    }}
+                    onMouseOut={() => {
+                      setHoverTwoStar(false);
+                      hideRatingsText();
+                    }}
+                    onClick={handleRateRecipe}
+                    data-rating="2"
+                  >
+                    {recipeRating >= 2 ||
+                    userRecipeRating >= 2 ||
+                    hoverTwoStar ||
+                    hoverThreeStar ||
+                    hoverFourStar ||
+                    hoverFiveStar ? (
+                      <Star className="star-icon" />
+                    ) : (
+                      <StarBorder className="star-border-icon" />
+                    )}
+                  </div>
+                  <div
+                    className="3-star"
+                    onMouseOver={() => {
+                      setHoverThreeStar(true);
+                      showRatingsText();
+                    }}
+                    onMouseOut={() => {
+                      setHoverThreeStar(false);
+                      hideRatingsText();
+                    }}
+                    onClick={handleRateRecipe}
+                    data-rating="3"
+                  >
+                    {recipeRating >= 3 ||
+                    userRecipeRating >= 3 ||
+                    hoverThreeStar ||
+                    hoverFourStar ||
+                    hoverFiveStar ? (
+                      <Star className="star-icon" />
+                    ) : (
+                      <StarBorder className="star-border-icon" />
+                    )}
+                  </div>
+                  <div
+                    className="4-star"
+                    onMouseOver={() => {
+                      setHoverFourStar(true);
+                      showRatingsText();
+                    }}
+                    onMouseOut={() => {
+                      setHoverFourStar(false);
+                      hideRatingsText();
+                    }}
+                    onClick={handleRateRecipe}
+                    data-rating="4"
+                  >
+                    {recipeRating >= 4 ||
+                    userRecipeRating >= 4 ||
+                    hoverFourStar ||
+                    hoverFiveStar ? (
+                      <Star className="star-icon" />
+                    ) : (
+                      <StarBorder className="star-border-icon" />
+                    )}
+                  </div>
+                  <div
+                    className="5-star"
+                    onMouseOver={() => {
+                      setHoverFiveStar(true);
+                      showRatingsText();
+                    }}
+                    onMouseOut={() => {
+                      setHoverFiveStar(false);
+                      hideRatingsText();
+                    }}
+                    onClick={handleRateRecipe}
+                    data-rating="5"
+                  >
+                    {recipeRating === 5 ||
+                    userRecipeRating === 5 ||
+                    hoverFiveStar ? (
+                      <Star className="star-icon" />
+                    ) : (
+                      <StarBorder className="star-border-icon" />
+                    )}
+                  </div>
+                  <div className="stars-hover hidden">
+                    <div className="star-text">
+                      {hoverFiveStar
+                        ? "Delicious!"
+                        : hoverFourStar
+                        ? "Really Good"
+                        : hoverThreeStar
+                        ? "Good"
+                        : hoverTwoStar
+                        ? "Fine"
+                        : hoverOneStar
+                        ? "Not Worth It"
+                        : ""}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -138,7 +301,11 @@ const Recipe = (props) => {
                 <div className="ingredients-header">INGREDIENTS</div>
                 <div className="ingredients">
                   {recipe.ingredients.map((ingredient) => {
-                    return <div className="ingredient">{ingredient}</div>;
+                    return (
+                      <div key={ingredient} className="ingredient">
+                        {ingredient}
+                      </div>
+                    );
                   })}
                 </div>
               </div>
@@ -170,7 +337,7 @@ const Recipe = (props) => {
                 <div className="steps">
                   {recipe.instructions.map((step) => {
                     return (
-                      <div className="step">
+                      <div key={step} className="step">
                         <div className="step-number">
                           Step {recipe.instructions.indexOf(step) + 1}
                         </div>
@@ -214,9 +381,9 @@ const Recipe = (props) => {
                     <div className="private">Private</div>
                   </div>
                   <div className="notes">
-                    {recipe.notes.map((note) => {
-                      return <CookingNote note={note} />;
-                    })}
+                    {/* {recipe.notes.map((note) => {
+                      return <CookingNote key={note} note={note} />;
+                    })} */}
                   </div>
                 </div>
               </div>

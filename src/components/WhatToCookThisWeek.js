@@ -30,11 +30,7 @@ const WhatToCookThisWeek = (props) => {
           <div className="recipes">
             {props.recipes.map((recipe) => {
               return (
-                <Link
-                  key={recipe.title}
-                  to={`/recipe/${recipe.title}`}
-                  state={{ recipe: recipe }}
-                >
+                <Link key={recipe.title} to={`/recipe/${recipe.title}`}>
                   <RecipeThumbnail
                     recipe={recipe}
                     user={props.user}
