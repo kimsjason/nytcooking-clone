@@ -1,25 +1,38 @@
+import { useEffect } from "react";
 import { RecipeOfTheDay } from "./RecipeOfTheDay";
 import { WhatToCookThisWeek } from "./WhatToCookThisWeek";
 
-const Home = (props) => {
-  const recipeOfTheDay = props.recipes[0];
+const Home = ({
+  user,
+  loggedIn,
+  recipes,
+  recipeCollections,
+  cookingGuides,
+  showLogInPopup,
+  saveRecipe,
+}) => {
+  const recipeOfTheDay = recipes[0];
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="home-page">
       <RecipeOfTheDay
         recipe={recipeOfTheDay}
-        user={props.user}
-        setDisplayLogInPopup={props.setDisplayLogInPopup}
-        loggedIn={props.loggedIn}
-        saveRecipe={props.saveRecipe}
+        user={user}
+        showLogInPopup={showLogInPopup}
+        loggedIn={loggedIn}
+        saveRecipe={saveRecipe}
       />
       <WhatToCookThisWeek
-        recipes={props.recipes}
-        user={props.user}
-        recipeCollections={props.recipeCollections}
-        cookingGuides={props.cookingGuides}
-        loggedIn={props.loggedIn}
-        saveRecipe={props.saveRecipe}
+        recipes={recipes}
+        user={user}
+        recipeCollections={recipeCollections}
+        cookingGuides={cookingGuides}
+        loggedIn={loggedIn}
+        saveRecipe={saveRecipe}
       />
     </div>
   );

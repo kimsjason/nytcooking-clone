@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const StyledHeader = styled.div`
+  z-index: 50;
+
   .header {
     display: flex;
     justify-content: space-between;
@@ -11,7 +13,6 @@ const StyledHeader = styled.div`
     border-bottom: 1px solid #cccccc;
     background: white;
     color: #666666;
-    z-index: 10;
   }
 
   .nyt-cooking-logo {

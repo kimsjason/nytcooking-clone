@@ -23,10 +23,6 @@ const Header = (props) => {
     }
   });
 
-  const setDisplayLogInPopup = () => {
-    props.setDisplayLogInPopup(true);
-  };
-
   return (
     <StyledHeader searchSelected={searchSelected}>
       <div className="header">
@@ -51,7 +47,7 @@ const Header = (props) => {
             <div
               className="grocery-list"
               onClick={
-                props.loggedIn ? props.showGroceryList : setDisplayLogInPopup
+                props.loggedIn ? props.showGroceryList : props.showLogInPopup
               }
             >
               YOUR GROCERY LIST
@@ -59,7 +55,7 @@ const Header = (props) => {
           </div>
         </div>
 
-        <div className="recipe-box-container" onClick={setDisplayLogInPopup}>
+        <div className="recipe-box-container" onClick={props.showLogInPopup}>
           <Link to="/recipe-box" className="recipe-box">
             YOUR RECIPE BOX
             {props.loggedIn ? "" : <span>Log In</span>}

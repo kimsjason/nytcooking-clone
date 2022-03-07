@@ -1,20 +1,25 @@
 import { Close, Facebook, Google, Apple } from "@mui/icons-material";
 import { StyledLogInPopup } from "../styles/LogInPopup.styled";
 
-const LogInPopup = (props) => {
-  const closeDisplayLogInPopup = () => {
-    props.setDisplayLogInPopup(false);
-  };
-
-  const signIn = () => {
-    props.signIn();
-  };
-
+const LogInPopup = ({ currentPage, signIn, hideLogInPopup }) => {
   return (
-    <StyledLogInPopup displayLogInPopup={props.displayLogInPopup}>
-      <div className="overlay">
-        <div className="log-in-popup">
-          <Close className="close-icon" onClick={closeDisplayLogInPopup} />
+    <StyledLogInPopup className="log-in-popup">
+      <div
+        className="overlay"
+        onClick={currentPage === "recipe" ? () => {} : hideLogInPopup}
+      >
+        <div
+          className="content"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+        >
+          {currentPage === "recipe" ? (
+            ""
+          ) : (
+            <Close className="close-icon" onClick={hideLogInPopup} />
+          )}
           <div className="image-container">
             <img
               src={require("../assets/login-popup.jpg")}

@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 const StyledRecipe = styled.div`
+  position: ${(props) => (props.loggedIn ? "" : "fixed")};
+  width: ${(props) => (props.loggedIn ? "" : "100%")};
+  overflow: ${(props) => (props.loggedIn ? "" : "hidden")};
+
   .recipe-page {
     display: flex;
     flex-direction: column;
@@ -225,7 +229,7 @@ const StyledRecipe = styled.div`
     font-weight: bold;
   }
 
-  .divider {
+  .cooked-and-ratings .divider {
     height: 3rem;
     border: 0.25px solid #b7b4b4;
   }

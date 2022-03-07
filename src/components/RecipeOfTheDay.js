@@ -12,7 +12,7 @@ const RecipeOfTheDay = (props) => {
   const recipeOfTheDay = props.recipe;
 
   const handleSaveRecipe = () => {
-    props.setDisplayLogInPopup(true);
+    props.showLogInPopup();
     props.saveRecipe(recipeOfTheDay);
   };
 

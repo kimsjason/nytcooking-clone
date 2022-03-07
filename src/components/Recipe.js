@@ -15,7 +15,6 @@ import {
   Twitter,
 } from "@mui/icons-material";
 import { CookingNote } from "./CookingNote";
-import { LogInPopup } from "./LogInPopup";
 
 const Recipe = (props) => {
   const recipeTitle = useParams().recipe;
@@ -42,8 +41,14 @@ const Recipe = (props) => {
       )
     : 0;
 
+  // display login popup if user not logged in
+  useEffect(() => {
+    props.loggedIn ? props.hideLogInPopup() : props.showLogInPopup();
+  });
+
   useEffect(() => {
     props.setLastViewedRecipe(recipe);
+    props.setCurrentPage("recipe");
     window.scrollTo(0, 0);
   }, []);
 
@@ -74,12 +79,7 @@ const Recipe = (props) => {
   };
 
   return (
-    <StyledRecipe recipeRating={recipeRating}>
-      {!props.loggedIn ? (
-        <LogInPopup className="log-in-popup" signIn={props.signIn} />
-      ) : (
-        ""
-      )}
+    <StyledRecipe loggedIn={props.loggedIn} recipeRating={recipeRating}>
       <div className="recipe-page">
         <div className="recipe-content">
           <div className="share-recipe">

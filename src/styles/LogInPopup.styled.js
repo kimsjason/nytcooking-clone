@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const StyledLogInPopup = styled.div`
+  z-index: 100;
+
   .overlay {
     display: flex;
     justify-content: center;
@@ -25,7 +27,7 @@ const StyledLogInPopup = styled.div`
     }
   }
 
-  .log-in-popup {
+  .content {
     display: flex;
     position: relative;
     height: 635px;
