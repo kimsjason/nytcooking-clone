@@ -30,10 +30,10 @@ const GroceryList = ({
   };
 
   return (
-    <StyledGroceryList>
-      <div className="overlay hidden" onClick={hideGroceryList}>
+    <StyledGroceryList className="grocery-list-popup hidden">
+      <div className="overlay" onClick={hideGroceryList}>
         <div
-          className="grocery-list-popup"
+          className="content"
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -48,7 +48,7 @@ const GroceryList = ({
             {groceryList.length > 0 ? (
               groceryList.map((recipe) => {
                 return (
-                  <div className="recipe">
+                  <div key={recipe.title} className="recipe">
                     <div className="main">
                       <ChevronRight
                         className="arrow-icon"
@@ -68,7 +68,7 @@ const GroceryList = ({
                     <div className="ingredients">
                       {recipe.ingredients.map((ingredient) => {
                         return (
-                          <div className="ingredient">
+                          <div key={ingredient} className="ingredient">
                             {ingredient}
                             <Close
                               className="remove-ingredient"

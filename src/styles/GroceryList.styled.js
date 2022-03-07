@@ -25,7 +25,7 @@ const StyledGroceryList = styled.div`
     }
   }
 
-  .grocery-list-popup {
+  .content {
     display: flex;
     flex-direction: column;
     width: 670px;
