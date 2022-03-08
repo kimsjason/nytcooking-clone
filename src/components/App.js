@@ -58,46 +58,9 @@ function App() {
   const [recipes, setRecipes] = useState(require("../data/recipes.json"));
   const [lastViewedRecipe, setLastViewedRecipe] = useState({});
 
-  const recipeCollections = [
-    {
-      title: "Recipes to Cook Over a Long Weekend",
-      img: require("../assets/simpsons-donut.jpeg"),
-      recipes: [],
-    },
-    {
-      title: "Best Recipes for Leftover Rice",
-      img: require("../assets/krabby-patty.jpeg"),
-      recipes: [],
-    },
-  ];
+  const recipeCollections = require("../data/recipe-collections.json");
 
-  const cookingGuides = [
-    {
-      title: "Homer Simpson's Donuts",
-      author: "Homer Simpson",
-      img: require("../assets/simpsons-donut.jpeg"),
-    },
-    {
-      title: "Homer Simpson's Donuts1",
-      author: "Homer Simpson",
-      img: require("../assets/simpsons-donut.jpeg"),
-    },
-    {
-      title: "Homer Simpson's Donuts2",
-      author: "Homer Simpson",
-      img: require("../assets/simpsons-donut.jpeg"),
-    },
-    {
-      title: "Homer Simpson's Donuts3",
-      author: "Homer Simpson",
-      img: require("../assets/simpsons-donut.jpeg"),
-    },
-    {
-      title: "Homer Simpson's Donuts4",
-      author: "Homer Simpson",
-      img: require("../assets/simpsons-donut.jpeg"),
-    },
-  ];
+  const cookingGuides = require("../data/cooking-guides.json");
 
   // React Effect hooks
   useEffect(() => {

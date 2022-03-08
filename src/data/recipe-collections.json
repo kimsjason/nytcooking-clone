@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Disney Recipes",
+    "img": "ratatouille.png",
+    "recipes": [
+      {
+        "title": "Tiana's Beignets",
+        "author": "The Princess and the Frog",
+        "time": "1 hour",
+        "img": "tianas-beignets.jpeg"
+      },
+      {
+        "title": "Remy's Ratatouille",
+        "author": "Ratatouille",
+        "time": "2 hours",
+        "img": "ratatouille.png"
+      },
+      {
+        "title": "Cheese Souffle",
+        "author": "Beauty and the Beast",
+        "time": "2 hours",
+        "img": "cheese-souffle.png"
+      },
+      {
+        "title": "Empire Biscuits",
+        "author": "Brave",
+        "time": "1 hour 30 minutes",
+        "img": "empire-biscuits.jpeg"
+      }
+    ]
+  },
+  {
+    "title": "Best Recipes for Leftover Rice",
+    "img": "monsters-inc-snow-cones.png",
+    "recipes": []
+  }
+]
