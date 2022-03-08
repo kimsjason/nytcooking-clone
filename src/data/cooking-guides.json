@@ -1,27 +1,69 @@
 [
   {
-    "title": "Homer Simpson's Donuts",
-    "author": "Homer Simpson",
-    "img": "simpsons-donut.jpeg"
+    "title": "Takoyaki",
+    "author": "Assassination Classroom",
+    "time": "45 minutes",
+    "img": "takoyaki"
   },
   {
-    "title": "Homer Simpson's Donuts1",
-    "author": "Homer Simpson",
-    "img": "simpsons-donut.jpeg"
+    "title": "Katsudon",
+    "author": "Yuri on Ice",
+    "time": "45 minutes",
+    "img": "katsudon"
   },
   {
-    "title": "Homer Simpson's Donuts2",
-    "author": "Homer Simpson",
-    "img": "simpsons-donut.jpeg"
+    "title": "Taiyaki",
+    "author": "Fate/stay night",
+    "time": "30 minutes",
+    "img": "taiyaki"
   },
   {
-    "title": "Homer Simpson's Donuts3",
-    "author": "Homer Simpson",
-    "img": "simpsons-donut.jpeg"
+    "title": "Onigiri",
+    "author": "Pokemon",
+    "time": "30 minutes",
+    "img": "onigiri"
   },
   {
-    "title": "Homer Simpson's Donuts4",
-    "author": "Homer Simpson",
-    "img": "simpsons-donut.jpeg"
+    "title": "Ramen",
+    "author": "Naruto",
+    "time": "2 hours 30 minutes",
+    "img": "ramen"
+  },
+  {
+    "title": "Curry",
+    "author": "Black Butler",
+    "time": "1 hour",
+    "img": "curry"
+  },
+  {
+    "title": "Pocky",
+    "author": "Ga-Rei Zero",
+    "time": "3 hours",
+    "img": "pocky"
+  },
+  {
+    "title": "Ramune",
+    "author": "RahXephon",
+    "time": "Buy at Japanese Market",
+    "img": "ramune"
+  },
+  {
+    "title": "Omurice",
+    "author": "The Garden of Words",
+    "time": "45 minutes",
+    "img": "omurice"
+  },
+
+  {
+    "title": "Tamagoyaki",
+    "author": "Blood-C",
+    "time": "25 minutes",
+    "img": "tamagoyaki"
+  },
+  {
+    "title": "Parfait",
+    "author": "Working!!",
+    "time": "10 minutes",
+    "img": "parfait"
   }
 ]

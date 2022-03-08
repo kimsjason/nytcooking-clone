@@ -26,12 +26,194 @@
         "author": "Brave",
         "time": "1 hour 30 minutes",
         "img": "empire-biscuits.jpeg"
+      },
+      {
+        "title": "Yellow Snow Cones",
+        "author": "Monsters, Inc.",
+        "time": "10 minutes",
+        "img": "monsters-inc-snow-cones.png"
+      },
+      {
+        "title": "The Giant Cookie",
+        "author": "Honey, I Shrunk the Kids",
+        "time": "3 days",
+        "img": "giant-cookie.jpeg"
+      },
+      {
+        "title": "Twinkie",
+        "author": "Wall-E",
+        "time": "1 hour 15 minutes",
+        "img": "twinkie.png"
+      },
+      {
+        "title": "Mushu's Breakfast",
+        "author": "Mulan",
+        "time": "25 minutes",
+        "img": "mushus-breakfast.png"
+      },
+      {
+        "title": "Hi Dad Soup",
+        "author": "A Goofy Movie",
+        "time": "5 minutes",
+        "img": "hi-dad-soup.jpeg"
+      },
+      {
+        "title": "Tony's Spaghetti and Meatballs",
+        "author": "Lady and the Tramp",
+        "time": "45 minutes",
+        "img": "tonys-spaghetti-and-meatballs.png"
+      },
+      {
+        "title": "Gooseberry Pie",
+        "author": "Snow White and the Seven Dwarfs",
+        "time": "1 hour 30 minutes",
+        "img": "gooseberry-pie.jpeg"
+      },
+      {
+        "title": "The Magical Cookies",
+        "author": "Alice in Wonderland",
+        "time": "30 minutes",
+        "img": "magical-cookies.png"
+      },
+      {
+        "title": "Turkey Dinner",
+        "author": "The Adventures of Ichabod and Mr. Toad",
+        "time": "5 hours",
+        "img": "turkey-dinner.png"
+      },
+      {
+        "title": "Rapunzel's Cookies",
+        "author": "Tangled",
+        "time": "45 minutes",
+        "img": "rapunzels-cookies.png"
+      },
+      {
+        "title": "The Stolen Baguette",
+        "author": "Aladdin",
+        "time": "5 seconds",
+        "img": "stolen-baguette.jpeg"
+      },
+      {
+        "title": "Gopher's Succotash",
+        "author": "The Many Adventures of Winnie the Pooh",
+        "time": "30 minutes",
+        "img": "gophers-succotash.jpeg"
+      },
+      {
+        "title": "Phil's Fried Egg",
+        "author": "Hercules",
+        "time": "5 minutes",
+        "img": "phils-fried-egg.jpeg"
+      },
+      {
+        "title": "Martini",
+        "author": "Enchanted",
+        "time": "5 minutes",
+        "img": "enchanted-martini.jpeg"
+      },
+      {
+        "title": "Sushi",
+        "author": "Monsters, Inc.",
+        "time": "30 minutes",
+        "img": "monsters-inc-sushi.png"
+      },
+      {
+        "title": "Kronk's Spinach Puffs",
+        "author": "The Emperor's New Groove",
+        "time": "45 minutes",
+        "img": "spinach-puffs.jpeg"
+      },
+      {
+        "title": "Porridge",
+        "author": "Beauty and the Beast",
+        "time": "25 minutes",
+        "img": "porridge.jpeg"
+      },
+      {
+        "title": "Vanellope's Cookie Medal",
+        "author": "Wreck-It Ralph",
+        "time": "45 minutes",
+        "img": "vanellopes-cookie-medal.jpeg"
+      },
+      {
+        "title": "Tiana's Gumbo",
+        "author": "The Princess and the Frog",
+        "time": "50 minutes",
+        "img": "tianas-gumbo.jpeg"
       }
     ]
   },
   {
-    "title": "Best Recipes for Leftover Rice",
-    "img": "monsters-inc-snow-cones.png",
-    "recipes": []
+    "title": "Anime Foods Every Anime Fan Needs to Try",
+    "img": "takoyaki",
+    "recipes": [
+      {
+        "title": "Takoyaki",
+        "author": "Assassination Classroom",
+        "time": "45 minutes",
+        "img": "takoyaki"
+      },
+      {
+        "title": "Katsudon",
+        "author": "Yuri!!! on Ice",
+        "time": "45 minutes",
+        "img": "katsudon"
+      },
+      {
+        "title": "Taiyaki",
+        "author": "Fate/stay night",
+        "time": "30 minutes",
+        "img": "taiyaki"
+      },
+      {
+        "title": "Onigiri",
+        "author": "Pokemon",
+        "time": "30 minutes",
+        "img": "onigiri"
+      },
+      {
+        "title": "Ramen",
+        "author": "Naruto",
+        "time": "2 hours 30 minutes",
+        "img": "ramen"
+      },
+      {
+        "title": "Curry",
+        "author": "Black Butler",
+        "time": "1 hour",
+        "img": "curry"
+      },
+      {
+        "title": "Pocky",
+        "author": "Ga-Rei Zero",
+        "time": "3 hours",
+        "img": "pocky"
+      },
+      {
+        "title": "Ramune",
+        "author": "RahXephon",
+        "time": "Buy at Japanese Market",
+        "img": "ramune"
+      },
+      {
+        "title": "Omurice",
+        "author": "The Garden of Words",
+        "time": "45 minutes",
+        "img": "omurice"
+      },
+
+      {
+        "title": "Tamagoyaki",
+        "author": "Blood-C",
+        "time": "25 minutes",
+        "img": "tamagoyaki"
+      },
+      {
+        "title": "Parfait",
+        "author": "Working!!",
+        "time": "10 minutes",
+        "img": "parfait"
+      }
+    ]
   }
 ]
