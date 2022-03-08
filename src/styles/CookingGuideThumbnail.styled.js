@@ -12,6 +12,12 @@ const StyledCookingGuideThumbnail = styled.div`
     cursor: pointer;
   }
 
+  .cooking-guide-image {
+    object-fit: cover;
+    width: 235px;
+    height: 145px;
+  }
+
   .cooking-guide-thumbnail:hover {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   }
