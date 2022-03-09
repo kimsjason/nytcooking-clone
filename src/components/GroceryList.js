@@ -10,11 +10,16 @@ const GroceryList = ({
   const groceryList = user.groceryList;
 
   const handleRemoveGroceryRecipe = (e) => {
-    removeGroceryRecipe(e);
+    const recipe = e.target.closest(".recipe");
+    const recipeTitle = recipe.querySelector(".title").textContent;
+    removeGroceryRecipe(recipeTitle);
   };
 
   const handleRemoveGroceryIngredient = (e) => {
-    removeGroceryIngredient(e);
+    const recipe = e.target.closest(".recipe");
+    const recipeTitle = recipe.querySelector(".title").textContent;
+    const ingredientName = e.target.closest(".ingredient").textContent;
+    removeGroceryIngredient(recipeTitle, ingredientName);
   };
 
   const handleExpandGroceryItem = (e) => {
