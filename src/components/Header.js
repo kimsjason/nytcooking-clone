@@ -1,30 +1,28 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { StyledHeader } from "../styles/Header.styled";
-import Settings from "@mui/icons-material/Settings";
 import { ReactComponent as Logo } from "../assets/nyt-cooking-logo.svg";
-import { Search } from "@mui/icons-material";
+import { Close, Search, Settings } from "@mui/icons-material";
 
-const Header = (props) => {
-  const [searchSelected, setSearchSelected] = useState(false);
-
-  const signOutUser = () => {
-    props.signOutUser();
-  };
-
+const Header = ({ loggedIn, signOutUser, showLogInPopup, showGroceryList }) => {
   const expandSearchBar = () => {
-    setSearchSelected(true);
+    const search = document.querySelector(".search");
+    const closeIcon = search.querySelector(".close-icon");
+    search.classList.add("expanded");
+    closeIcon.classList.add("fade-in");
   };
 
   // collapse search bar
   document.addEventListener("click", (e) => {
     if (e.target.className !== "search-bar") {
-      setSearchSelected(false);
+      const search = document.querySelector(".search");
+      const closeIcon = search.querySelector(".close-icon");
+      search.classList.remove("expanded");
+      closeIcon.classList.remove("fade-in");
     }
   });
 
   return (
-    <StyledHeader searchSelected={searchSelected}>
+    <StyledHeader>
       <div className="header">
         <Link to="/" className="nyt-cooking-logo">
           <Logo />
@@ -38,6 +36,7 @@ const Header = (props) => {
               placeholder="What would you like to cook?"
               onClick={expandSearchBar}
             />
+            <Close className="close-icon" />
           </div>
 
           <div className="tabs">
@@ -46,22 +45,20 @@ const Header = (props) => {
             </Link>
             <div
               className="grocery-list"
-              onClick={
-                props.loggedIn ? props.showGroceryList : props.showLogInPopup
-              }
+              onClick={loggedIn ? showGroceryList : showLogInPopup}
             >
               YOUR GROCERY LIST
             </div>
           </div>
         </div>
 
-        <div className="recipe-box-container" onClick={props.showLogInPopup}>
+        <div className="recipe-box-container" onClick={showLogInPopup}>
           <Link to="/recipe-box" className="recipe-box">
             YOUR RECIPE BOX
-            {props.loggedIn ? "" : <span>Log In</span>}
+            {loggedIn ? "" : <span>Log In</span>}
           </Link>
         </div>
-        {props.loggedIn ? (
+        {loggedIn ? (
           <div className="settings">
             <Settings className="settings-icon" />
             <div className="settings-expanded">

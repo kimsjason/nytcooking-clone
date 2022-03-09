@@ -26,21 +26,27 @@ const StyledHeader = styled.div`
     flex: 1;
     align-self: stretch;
     display: flex;
-    transition: flex 1s;
+    position: relative;
   }
 
   .search {
-    flex: 1;
     display: flex;
     align-items: center;
+    width: 325px;
     padding: 0 1.5rem;
-    transition: flex 1s;
+    background: white;
+    transition: 0.5s width;
+    z-index: 10;
   }
 
   .search-icon {
     width: 25px;
     height: 25px;
     color: #9b9b9b;
+  }
+
+  .expanded {
+    width: 100%;
   }
 
   .search-bar {
@@ -56,8 +62,28 @@ const StyledHeader = styled.div`
     outline: none;
   }
 
+  .close-icon {
+    position: absolute;
+    right: 2rem;
+    width: 2rem;
+    height: auto;
+    padding: 1px;
+    border-radius: 50%;
+    background: #ccc;
+    color: white;
+    opacity: 0;
+    transition: opacity 1s;
+  }
+
+  .fade-in {
+    opacity: 1;
+  }
+
   .tabs {
-    display: ${(props) => (props.searchSelected ? "none" : "flex")};
+    display: flex;
+    position: absolute;
+    right: 0;
+    height: 100%;
   }
 
   .weeknight,
@@ -167,6 +193,10 @@ const StyledHeader = styled.div`
     padding: 0.8rem 1.5rem;
     border: 1px solid #ccc;
     cursor: pointer;
+  }
+
+  .hidden {
+    display: none;
   }
 `;
 
