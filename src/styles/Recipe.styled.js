@@ -38,16 +38,32 @@ const StyledRecipe = styled.div`
     background: #b7b4b4;
   }
 
+  .mail-icon:hover {
+    background: #9b9b9b;
+  }
+
   .pinterest-icon {
     background: #e34c5c;
+  }
+
+  .pinterest-icon:hover {
+    background: #ce1810;
   }
 
   .facebook-icon {
     background: #6d81b8;
   }
 
+  .facebook-icon:hover {
+    background: #465a94;
+  }
+
   .twitter-icon {
     background: #74b8ee;
+  }
+
+  .twitter-icon:hover {
+    background: #4baaf4;
   }
 
   .title {
@@ -383,36 +399,6 @@ const StyledRecipe = styled.div`
   .mark-as-cooked-container:hover .check-icon {
     color: white;
     background: #b7b4b4;
-  }
-
-  .cooking-notes {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .cooking-notes-title {
-    padding-bottom: 1rem;
-    font-size: 1.3rem;
-    font-family: Arvo;
-  }
-
-  .comment {
-    display: flex;
-    margin-bottom: 4rem;
-    padding: 1.5rem;
-    border: 1px solid #dddddd;
-    font-family: "Libre Franklin";
-  }
-
-  .notes-header {
-    display: flex;
-    font-size: 1.6rem;
-    border-bottom: 1px solid #cccccc;
-    color: #666666;
-  }
-
-  .notes-header > * {
-    padding: 1.6rem;
   }
 
   .recommendations {

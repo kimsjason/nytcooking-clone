@@ -25,6 +25,7 @@ import Weeknight from "./Weeknight";
 import GroceryList from "./GroceryList";
 import RecipeBox from "./RecipeBox";
 import Recipe from "./Recipe";
+import RecipeCollection from "./RecipeCollection";
 import "../styles/App.css";
 import { LogInPopup } from "./LogInPopup";
 
@@ -50,6 +51,7 @@ function App() {
     savedRecipes: [],
     cookedRecipes: [],
     ratedRecipes: [],
+    commentedRecipes: [],
     groceryList: [],
   });
   const [loggedIn, setLoggedIn] = useState(false);
@@ -61,6 +63,13 @@ function App() {
   const recipeCollections = require("../data/recipe-collections.json");
 
   const cookingGuides = require("../data/cooking-guides.json");
+  const profileIcons = [
+    "ramen.png",
+    "bibimbap.png",
+    "tteok.png",
+    "chicken-soup.png",
+    "sushi-roll.png",
+  ];
 
   // React Effect hooks
   useEffect(() => {
@@ -160,6 +169,7 @@ function App() {
 
   const createUser = async () => {
     const currentUser = getAuth().currentUser;
+    const randomIndex = Math.floor(Math.random() * 5);
     const user = {
       uid: currentUser.uid,
       displayName: currentUser.displayName,
@@ -167,8 +177,11 @@ function App() {
       savedRecipes: [],
       cookedRecipes: [],
       ratedRecipes: [],
+      commentedRecipes: [],
       groceryList: [],
+      profileIcon: profileIcons[randomIndex],
     };
+
     await setDoc(doc(db, "users", currentUser.uid), user);
 
     return user;
@@ -266,12 +279,8 @@ function App() {
     setUser(userCopy);
   };
 
-  const removeGroceryIngredient = (e) => {
-    const recipe = e.target.closest(".recipe");
-    const recipeTitle = recipe.querySelector(".title").textContent;
-    const ingredientName = e.target.closest(".ingredient").textContent;
+  const removeGroceryIngredient = (recipeTitle, ingredientName) => {
     const userCopy = { ...user };
-
     userCopy.groceryList = userCopy.groceryList.map((recipe) => {
       if (recipe.title === recipeTitle) {
         recipe.ingredients = recipe.ingredients.filter(
@@ -282,6 +291,89 @@ function App() {
     });
 
     setUser(userCopy);
+  };
+
+  const syncDisplayName = (recipeTitle, note) => {
+    const recipesCopy = [...recipes];
+    const userCopy = { ...user };
+
+    recipesCopy.map((recipeData) => {
+      if (recipeData.title === recipeTitle) {
+        recipeData.notes.forEach((oldNote) => {
+          if (oldNote.uid === user.uid) {
+            oldNote.user = note.user;
+          }
+        });
+      }
+      return recipeData;
+    });
+
+    userCopy.commentedRecipes.map((commentedRecipe) => {
+      if (commentedRecipe.title === recipeTitle) {
+        commentedRecipe.notes.forEach((oldNote) => (oldNote.user = note.user));
+      }
+      return commentedRecipe;
+    });
+
+    setUser(userCopy);
+    setRecipes(recipesCopy);
+  };
+
+  const addPublicNote = (recipeTitle, note) => {
+    const recipesCopy = [...recipes];
+
+    recipesCopy.map((recipeData) => {
+      if (recipeData.title === recipeTitle) {
+        recipeData.notes.push(note);
+      }
+      return recipeData;
+    });
+
+    syncDisplayName(recipeTitle, note);
+    setRecipes(recipesCopy);
+  };
+
+  const addPrivateNote = (recipeTitle, note) => {
+    const userCopy = { ...user };
+    const isFirstPrivateComment = userCopy.commentedRecipes.some(
+      (commentedRecipe) => commentedRecipe.title === recipeTitle
+    );
+
+    if (isFirstPrivateComment) {
+      userCopy.commentedRecipes.map((commentedRecipe) => {
+        if (commentedRecipe.title === recipeTitle) {
+          commentedRecipe.notes.push(note);
+        }
+        return commentedRecipe;
+      });
+    } else {
+      userCopy.commentedRecipes.push({ title: recipeTitle, notes: [note] });
+    }
+
+    syncDisplayName(recipeTitle, note);
+    setUser(userCopy);
+  };
+
+  const likeNote = (recipeTitle, likedNote) => {
+    const recipesCopy = [...recipes];
+
+    recipesCopy.map((recipe) => {
+      if (recipe.title === recipeTitle) {
+        recipe.notes.map((note) => {
+          if (note.id === likedNote.id) {
+            if (note.likes.some((like) => like === user.uid)) {
+              note.likes = note.likes.filter((like) => like !== user.uid);
+            } else {
+              note.likes.push(user.uid);
+            }
+          }
+          return note;
+        });
+      }
+      return recipe;
+    });
+
+    setRecipes(recipesCopy);
   };
 
   // DOM functions
@@ -369,7 +461,6 @@ function App() {
                 loggedIn={loggedIn}
                 user={user}
                 recipes={recipes}
-                signIn={signIn}
                 setCurrentPage={setCurrentPage}
                 setLastViewedRecipe={setLastViewedRecipe}
                 addToGroceryList={addToGroceryList}
@@ -377,9 +468,28 @@ function App() {
                 unsaveRecipe={unsaveRecipe}
                 rateRecipe={rateRecipe}
                 markCooked={markCooked}
+                addPublicNote={addPublicNote}
+                addPrivateNote={addPrivateNote}
+                likeNote={likeNote}
                 showLogInPopup={showLogInPopup}
                 hideLogInPopup={hideLogInPopup}
                 showGroceryList={showGroceryList}
+              />
+            }
+          />
+          <Route
+            path="/collection/:collection"
+            element={
+              <RecipeCollection
+                loggedIn={loggedIn}
+                user={user}
+                recipeCollections={recipeCollections}
+                signIn={signIn}
+                setCurrentPage={setCurrentPage}
+                saveRecipe={saveRecipe}
+                unsaveRecipe={unsaveRecipe}
+                showLogInPopup={showLogInPopup}
+                hideLogInPopup={hideLogInPopup}
               />
             }
           />
