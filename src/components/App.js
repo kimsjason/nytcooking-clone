@@ -415,8 +415,10 @@ function App() {
       <BrowserRouter>
         <Header
           loggedIn={loggedIn}
+          recipes={recipes}
           signOutUser={signOutUser}
           showLogInPopup={showLogInPopup}
+          hideLogInPopup={hideLogInPopup}
           showGroceryList={showGroceryList}
         />
         <Routes>

@@ -73,6 +73,7 @@ const StyledHeader = styled.div`
     color: white;
     opacity: 0;
     transition: opacity 1s;
+    cursor: pointer;
   }
 
   .fade-in {
@@ -108,6 +109,40 @@ const StyledHeader = styled.div`
   .grocery-list:hover {
     margin-top: 4px;
     border-bottom: 4px solid #666666;
+  }
+
+  .search-results-preview {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    top: 61px;
+    right: -1px;
+    border: 1px solid #cccccc;
+    background: #f2f3ef;
+    box-sizing: content-box;
+  }
+
+  .search-result {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  .search-result:hover {
+    background: #767676;
+    color: white;
+  }
+  .bold {
+    font-weight: bold;
+  }
+
+  .recipe-image-icon {
+    width: 5rem;
+    height: auto;
   }
 
   .subscribe:hover {
