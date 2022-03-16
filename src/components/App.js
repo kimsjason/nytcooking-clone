@@ -440,7 +440,18 @@ function App() {
           />
           <Route
             path="/weeknight"
-            element={<Weeknight loggedIn={loggedIn} recipes={recipes} />}
+            element={
+              <Weeknight
+                user={user}
+                loggedIn={loggedIn}
+                recipes={recipes}
+                recipeCollections={recipeCollections}
+                saveRecipe={saveRecipe}
+                unsaveRecipe={unsaveRecipe}
+                showLogInPopup={showLogInPopup}
+                hideLogInPopup={hideLogInPopup}
+              />
+            }
           />
           <Route
             path="/recipe-box"
