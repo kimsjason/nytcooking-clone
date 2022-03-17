@@ -5,7 +5,17 @@ import { RecipeThumbnail } from "./RecipeThumbnail";
 import { RecipeCollectionThumbnail } from "./RecipeCollectionThumbnail";
 import { CookingGuideThumbnail } from "./CookingGuideThumbnail";
 
-const WhatToCookThisWeek = (props) => {
+const WhatToCookThisWeek = ({
+  user,
+  loggedIn,
+  recipes,
+  recipeCollections,
+  cookingGuides,
+  saveRecipe,
+  unsaveRecipe,
+  showLogInPopup,
+  hideLogInPopup,
+}) => {
   const date = new Date();
   const begOfWeek = startOfWeek(date);
   const formattedDate = format(begOfWeek, "LLLL do").toLocaleUpperCase();
@@ -28,13 +38,17 @@ const WhatToCookThisWeek = (props) => {
             </div>
           </div>
           <div className="recipes">
-            {props.recipes.map((recipe) => {
+            {recipes.map((recipe) => {
               return (
                 <Link key={recipe.title} to={`/recipe/${recipe.title}`}>
                   <RecipeThumbnail
+                    user={user}
+                    loggedIn={loggedIn}
                     recipe={recipe}
-                    user={props.user}
-                    saveRecipe={props.saveRecipe}
+                    saveRecipe={saveRecipe}
+                    unsaveRecipe={unsaveRecipe}
+                    showLogInPopup={showLogInPopup}
+                    hideLogInPopup={hideLogInPopup}
                   />
                 </Link>
               );
@@ -50,12 +64,16 @@ const WhatToCookThisWeek = (props) => {
             </div>
           </div>
           <div className="recipes">
-            {props.recipeCollections.map((recipeCollection) => {
+            {recipeCollections.map((recipeCollection) => {
               return (
-                <RecipeCollectionThumbnail
+                <Link
+                  to={`/collection/${recipeCollection.title}`}
                   key={recipeCollection.title}
-                  recipeCollection={recipeCollection}
-                />
+                >
+                  <RecipeCollectionThumbnail
+                    recipeCollection={recipeCollection}
+                  />
+                </Link>
               );
             })}
           </div>
@@ -63,14 +81,14 @@ const WhatToCookThisWeek = (props) => {
         </div>
         <div className="editor-recommendations">
           <div className="sub-header">
-            <div className="title">Master the Basics</div>
+            <div className="title">Master the Anime Basics</div>
             <div className="subtitle">
               Our guides offer recipes, videos, techniques and tips for novices
               and advanced cooks.
             </div>
           </div>
           <div className="recipes">
-            {props.cookingGuides.map((cookingGuide) => {
+            {cookingGuides.map((cookingGuide) => {
               return (
                 <CookingGuideThumbnail
                   key={cookingGuide.title}
