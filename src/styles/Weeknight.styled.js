@@ -95,10 +95,7 @@ const StyledWeeknight = styled.div`
   }
 
   @media only screen and (min-width: 510px) {
-    .weeknight-page {
-      width: 490px;
-    }
-
+    .weeknight-page,
     .recipes {
       width: 490px;
     }

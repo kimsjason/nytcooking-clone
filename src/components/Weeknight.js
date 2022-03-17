@@ -1,4 +1,5 @@
 import { Facebook, Mail, Pinterest, Twitter } from "@mui/icons-material";
+import { useEffect } from "react";
 import { StyledWeeknight } from "../styles/Weeknight.styled";
 import { RecipeThumbnail } from "./RecipeThumbnail";
 
@@ -12,6 +13,10 @@ const Weeknight = ({
   showLogInPopup,
   hideLogInPopup,
 }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <StyledWeeknight>
       <div className="weeknight-page">
