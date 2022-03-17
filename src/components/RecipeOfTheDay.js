@@ -8,23 +8,27 @@ import {
 } from "@mui/icons-material";
 import { StyledRecipeOfTheDay } from "../styles/RecipeOfTheDay.styled";
 
-const RecipeOfTheDay = (props) => {
-  const recipeOfTheDay = props.recipe;
-
-  const handleSaveRecipe = () => {
-    props.showLogInPopup();
-    props.saveRecipe(recipeOfTheDay);
-  };
+const RecipeOfTheDay = ({
+  user,
+  loggedIn,
+  recipeOfTheDay,
+  saveRecipe,
+  unsaveRecipe,
+  hideLogInPopup,
+  showLogInPopup,
+}) => {
+  const saved = user.savedRecipes.some(
+    (recipe) => recipe.title === recipeOfTheDay.title
+  );
 
   return (
     <StyledRecipeOfTheDay>
       <div className="recipe-of-the-day">
-        <Link
-          to={`/recipe/${recipeOfTheDay.title}`}
-          state={{ recipe: recipeOfTheDay }}
-        >
-          <img src={recipeOfTheDay.img} alt="recipe of the day" />
-
+        <Link to={`/recipe/${recipeOfTheDay.title}`}>
+          <img
+            src={require(`../assets/${recipeOfTheDay.img}`)}
+            alt="recipe of the day"
+          />
           <div className="recipe-label">
             <div className="recipe-info">
               <div className="recipe-title">{recipeOfTheDay.title}</div>
@@ -34,10 +38,26 @@ const RecipeOfTheDay = (props) => {
             </div>
           </div>
         </Link>
-
         <div className="save-share-recipe">
-          <div className="save-recipe" onClick={handleSaveRecipe}>
-            {props.user.savedRecipes.some(
+          <div
+            className="save-recipe"
+            onClick={
+              loggedIn
+                ? () => {
+                    hideLogInPopup();
+                    saved
+                      ? unsaveRecipe(recipeOfTheDay)
+                      : saveRecipe(recipeOfTheDay);
+                  }
+                : () => {
+                    showLogInPopup();
+                    saved
+                      ? unsaveRecipe(recipeOfTheDay)
+                      : saveRecipe(recipeOfTheDay);
+                  }
+            }
+          >
+            {user.savedRecipes.some(
               (savedRecipe) => savedRecipe.title === recipeOfTheDay.title
             ) ? (
               <div className="saved">
@@ -50,8 +70,7 @@ const RecipeOfTheDay = (props) => {
                 Save To Recipe Box
               </div>
             )}
-
-            {props.loggedIn ? (
+            {loggedIn ? (
               ""
             ) : (
               <div className="description-box-container">

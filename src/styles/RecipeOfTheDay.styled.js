@@ -2,8 +2,16 @@ import styled from "styled-components";
 
 const StyledRecipeOfTheDay = styled.div`
   .recipe-of-the-day {
-    position: relative;
+    display: flex;
     cursor: pointer;
+  }
+
+  .recipe-of-the-day:hover {
+    box-shadow: 0 0 49px 15px rgb(0 0 0 / 20%);
+  }
+
+  .recipe-of-the-day a {
+    flex: 1;
   }
 
   .recipe-of-the-day img {
@@ -12,20 +20,12 @@ const StyledRecipeOfTheDay = styled.div`
     max-height: 85vh;
   }
 
-  .recipe-label {
-    position: absolute;
-    bottom: 7rem;
-    left: 10rem;
-  }
-
   .recipe-info {
     display: flex;
     position: relative;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 320px;
-    height: 280px;
     padding: 30px;
     background: white;
   }
@@ -55,25 +55,19 @@ const StyledRecipeOfTheDay = styled.div`
     display: flex;
     align-items: center;
     position: absolute;
-    top: -54px;
-    right: -54px;
-    width: 108px;
-    height: 108px;
-    border-radius: 50%;
-    padding: 1rem;
+    top: -12px;
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
     text-align: center;
     font-family: "Arvo";
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: white;
     background: #e33d26;
   }
 
   .save-share-recipe {
-    display: flex;
-    position: absolute;
-    bottom 1.5rem;
-    right: 1.5rem;
+    display: none;
   }
 
   .save-recipe {
@@ -88,7 +82,6 @@ const StyledRecipeOfTheDay = styled.div`
     font-size: 1.3rem;
     color: white;
     background: #000000cc;
-    ;
   }
 
   .bookmark-icon {
@@ -101,7 +94,8 @@ const StyledRecipeOfTheDay = styled.div`
     display: flex;
   }
 
-  .saved, .not-saved {
+  .saved,
+  .not-saved {
     display: flex;
     align-items: center;
   }
@@ -126,11 +120,11 @@ const StyledRecipeOfTheDay = styled.div`
     margin-bottom: 1rem;
     padding: 1.5rem;
     background: #f2f3ef;
-    
   }
 
   .title {
     margin-bottom: 1rem;
+    font-weight: bold;
     font-size: 1.6rem;
   }
 
@@ -140,13 +134,15 @@ const StyledRecipeOfTheDay = styled.div`
     font-weight: normal;
   }
 
-  .log-in-sign-up{
+  .log-in-sign-up {
+    font-weight: bold;
     font-size: 1.5rem;
   }
 
   .log-in-sign-up span {
     color: #e33d26;
   }
+
   .log-in-sign-up span:hover {
     text-decoration: underline;
   }
@@ -182,6 +178,47 @@ const StyledRecipeOfTheDay = styled.div`
   .pinterest-icon:hover,
   .expand-icon:hover {
     background: #e33d26;
+  }
+
+  @media only screen and (min-width: 765px) {
+    .recipe-of-the-day {
+      position: relative;
+    }
+
+    .recipe-of-the-day:hover {
+      box-shadow: none;
+    }
+
+    .recipe-label {
+      position: absolute;
+      bottom: 7rem;
+      left: 10rem;
+    }
+
+    .recipe-info {
+      width: 320px;
+      height: 280px;
+    }
+
+    .recipe-subtitle {
+      width: auto;
+    }
+
+    .label {
+      top: -54px;
+      right: -54px;
+      width: 108px;
+      height: 108px;
+      border-radius: 50%;
+    }
+
+    .save-share-recipe {
+      display: flex;
+      position: absolute;
+      bottom 1.5rem;
+      right: 1.5rem;
+    }
+    }
   }
 `;
 
