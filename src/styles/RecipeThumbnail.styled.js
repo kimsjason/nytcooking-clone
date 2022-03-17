@@ -131,6 +131,31 @@ const StyledRecipeThumbnail = styled.div`
     bottom: 2px;
     right: -9px;
   }
+
+  @media only screen and (max-width: 510px) {
+    .recipe-thumbnail {
+      width: 144px;
+      height: 212px;
+    }
+
+    .recipe-image {
+      height: 96px;
+    }
+
+    .title {
+      font-size: 1.3rem;
+      text-align: left;
+    }
+
+    .author {
+      font-size: 1.1rem;
+      text-align: left;
+    }
+
+    .time {
+      font-size: 1.1rem;
+    }
+  }
 `;
 
 export { StyledRecipeThumbnail };
