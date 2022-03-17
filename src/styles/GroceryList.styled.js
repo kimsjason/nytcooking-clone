@@ -28,8 +28,7 @@ const StyledGroceryList = styled.div`
   .content {
     display: flex;
     flex-direction: column;
-    width: 670px;
-    height: 600px;
+    min-width: 320px;
     padding-top: 2rem;
     border-radius: 4px;
     background: #f2f3ef;
@@ -58,6 +57,7 @@ const StyledGroceryList = styled.div`
     flex: 1;
     display: flex;
     flex-direction: column;
+    align-items: center;
     overflow: scroll;
   }
 
@@ -65,13 +65,14 @@ const StyledGroceryList = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 250px;
+    margin: 100px 93px;
     text-align: center;
-    margin: 0 93px;
   }
 
-  .title {
-    font-size: 2.4rem;
-    font-family: "Sorts Mill Goudy";
+  .grocery-list .title {
+    font-size: 1.7rem;
+    font-family: "Libre Franklin";
     color: #222222;
   }
 
@@ -126,6 +127,7 @@ const StyledGroceryList = styled.div`
 
   // grocery list item
   .recipe {
+    align-self: stretch;
     display: flex;
     flex-direction: column;
   }
@@ -167,6 +169,7 @@ const StyledGroceryList = styled.div`
   }
 
   .remove {
+    margin-left: auto;
     font-size: 1.4rem;
     text-decoration: underline;
     cursor: pointer;
@@ -191,6 +194,7 @@ const StyledGroceryList = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1.5rem;
     padding: 2.5rem 0;
   }
 
@@ -209,6 +213,19 @@ const StyledGroceryList = styled.div`
 
   .expanded {
     max-height: 5000px;
+  }
+
+  @media only screen and (min-width: 765px) {
+    .content {
+      width: 475px;
+      height: 600px;
+    }
+  }
+
+  @media only screen and (min-width: 1020px) {
+    .content {
+      width: 670px;
+    }
   }
 `;
 
