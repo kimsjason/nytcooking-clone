@@ -8,31 +8,39 @@ const Home = ({
   recipes,
   recipeCollections,
   cookingGuides,
+  hideLogInPopup,
   showLogInPopup,
   saveRecipe,
+  unsaveRecipe,
 }) => {
   const recipeOfTheDay = recipes[0];
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    hideLogInPopup();
   }, []);
 
   return (
     <div className="home-page">
       <RecipeOfTheDay
-        recipe={recipeOfTheDay}
         user={user}
-        showLogInPopup={showLogInPopup}
         loggedIn={loggedIn}
+        recipeOfTheDay={recipeOfTheDay}
         saveRecipe={saveRecipe}
+        unsaveRecipe={unsaveRecipe}
+        hideLogInPopup={hideLogInPopup}
+        showLogInPopup={showLogInPopup}
       />
       <WhatToCookThisWeek
-        recipes={recipes}
         user={user}
+        loggedIn={loggedIn}
+        recipes={recipes}
         recipeCollections={recipeCollections}
         cookingGuides={cookingGuides}
-        loggedIn={loggedIn}
         saveRecipe={saveRecipe}
+        unsaveRecipe={unsaveRecipe}
+        hideLogInPopup={hideLogInPopup}
+        showLogInPopup={showLogInPopup}
       />
     </div>
   );
