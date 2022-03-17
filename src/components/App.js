@@ -399,19 +399,6 @@ function App() {
 
   return (
     <div className="App">
-      <LogInPopup
-        currentPage={currentPage}
-        signIn={signIn}
-        showLogInPopup={showLogInPopup}
-        hideLogInPopup={hideLogInPopup}
-      />
-      <GroceryList
-        user={user}
-        removeGroceryRecipe={removeGroceryRecipe}
-        removeGroceryIngredient={removeGroceryIngredient}
-        showGroceryList={showGroceryList}
-        hideGroceryList={hideGroceryList}
-      />
       <BrowserRouter>
         <Header
           loggedIn={loggedIn}
@@ -508,6 +495,19 @@ function App() {
           />
         </Routes>
         <Footer />
+        <LogInPopup
+          currentPage={currentPage}
+          signIn={signIn}
+          showLogInPopup={showLogInPopup}
+          hideLogInPopup={hideLogInPopup}
+        />
+        <GroceryList
+          user={user}
+          removeGroceryRecipe={removeGroceryRecipe}
+          removeGroceryIngredient={removeGroceryIngredient}
+          showGroceryList={showGroceryList}
+          hideGroceryList={hideGroceryList}
+        />
       </BrowserRouter>
     </div>
   );
