@@ -72,7 +72,7 @@ const Header = ({
             <Search className="search-icon" />
           </div>
         </div>
-        <div className="header-web hidden">
+        <div className="header-web">
           <Link to="/" className="nyt-cooking-logo">
             <Logo />
           </Link>

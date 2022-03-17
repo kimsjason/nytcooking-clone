@@ -11,6 +11,10 @@ const StyledHeader = styled.div`
     background: white;
   }
 
+  .header-web {
+    display: none;
+  }
+
   .header-mobile {
     display: flex;
     justify-content: space-between;
@@ -205,6 +209,7 @@ const StyledHeader = styled.div`
       background: #767676;
       color: white;
     }
+
     .bold {
       font-weight: bold;
     }
@@ -304,11 +309,15 @@ const StyledHeader = styled.div`
       cursor: pointer;
     }
 
-    @media only screen and (min-width: 1200px) {
-      .grocery-list span,
-      .recipe-box span {
-        display: inline-block;
-      }
+    .hidden {
+      display: none;
+    }
+  }
+
+  @media only screen and (min-width: 1200px) {
+    .grocery-list span,
+    .recipe-box span {
+      display: inline-block;
     }
   }
 `;
