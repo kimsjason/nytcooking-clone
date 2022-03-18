@@ -9,20 +9,20 @@ const StyledRecipe = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 3rem;
     background: white;
   }
 
   .recipe-content {
     display: flex;
     flex-direction: column;
-    width: 1000px;
+    padding: 3rem 0;
   }
 
   .share-recipe {
+    margin-left: auto;
     display: flex;
     justify-content: flex-end;
-    gap: 0.9rem;
+    gap: 0.5rem;
   }
 
   .share-recipe > * {
@@ -59,6 +59,7 @@ const StyledRecipe = styled.div`
   }
 
   .twitter-icon {
+    display: none;
     background: #74b8ee;
   }
 
@@ -68,21 +69,26 @@ const StyledRecipe = styled.div`
 
   .title {
     margin-bottom: 1.5rem;
-    font-size: 4.2rem;
+    padding: 0 1.5rem;
+    font-size: 3.4rem;
     font-family: "Sorts Mill Goudy";
   }
 
   .author {
+    padding: 0 1.5rem;
     padding-bottom: 2.2rem;
-    border-bottom: 1px solid #cccccc;
-    margin-bottom: 2.4rem;
+
     font-size: 1.5rem;
     font-weight: bold;
   }
 
   .yield-time-save-print {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    padding: 0 1.5rem;
+  }
+
+  .yield-time-save-print > * {
   }
 
   .yield-and-time {
@@ -94,7 +100,7 @@ const StyledRecipe = styled.div`
   .yield,
   .time {
     display: flex;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .yield span,
@@ -107,6 +113,7 @@ const StyledRecipe = styled.div`
     display: flex;
     align-items: center;
     gap: 1rem;
+    margin-top: 3rem;
   }
 
   .save-recipe:hover,
@@ -121,7 +128,7 @@ const StyledRecipe = styled.div`
     width: 170px;
     height: 3.4rem;
     border-radius: 3px;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     color: white;
     background: #e33d26;
     cursor: pointer;
@@ -144,34 +151,25 @@ const StyledRecipe = styled.div`
   }
 
   .print-recipe {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 4.5rem;
-    height: 3.4rem;
-    border-radius: 3px;
-    background: #e33d26;
-    color: white;
-    cursor: pointer;
-  }
-
-  .print-icon {
-    width: 2.5rem;
-    height: auto;
+    display: none;
   }
 
   .image-and-description {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
     margin: 3rem 0;
+    padding: 0 1.5rem;
   }
 
   .recipe-image {
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
   }
 
   .description {
-    width: 370px;
+    margin-top: 3rem;
     font-size: 1.7rem;
     font-family: "Sorts Mill Goudy";
   }
@@ -179,44 +177,29 @@ const StyledRecipe = styled.div`
   .tags-and-ratings {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin: 3rem 0;
+    justify-content: center;
+    margin-top: 3rem;
     padding: 1.5rem 0;
     border-top: 2px solid #222222;
     border-bottom: 1px solid #cccccc;
   }
 
   .tags {
-    display: flex;
-  }
-
-  .tag {
-    white-space: pre;
-    font-size: 1.5rem;
-    color: #e33d26;
-    cursor: pointer;
-  }
-
-  .tag:hover {
-    color: #c83c26;
-    text-decoration: underline;
-  }
-
-  .tag span {
-    color: #222222;
+    display: none;
   }
 
   .cooked-and-ratings {
     display: flex;
     align-items: center;
     gap: 2rem;
+    padding: 0 1.5rem;
+    font-size: 1.2rem;
   }
 
   .mark-as-cooked {
     display: flex;
     align-items: center;
-    font-size: 1.5rem;
-    font-weight: normal;
+    font-weight: bold;
     cursor: pointer;
   }
 
@@ -240,11 +223,6 @@ const StyledRecipe = styled.div`
     background: #b7b4b4;
   }
 
-  .mark-as-cooked span {
-    white-space: pre;
-    font-weight: bold;
-  }
-
   .cooked-and-ratings .divider {
     height: 3rem;
     border: 0.25px solid #b7b4b4;
@@ -254,7 +232,6 @@ const StyledRecipe = styled.div`
     display: flex;
     align-items: center;
     gap: 1rem;
-    font-size: 1.5rem;
   }
 
   .stars {
@@ -302,26 +279,23 @@ const StyledRecipe = styled.div`
     gap: 5rem;
   }
 
-  .col-1 {
-    flex: 1;
-  }
-
-  .col-2 {
-    flex: 2;
-  }
-
   .ingredients-header,
   .preparation-header {
-    padding-bottom: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
     font-family: Arvo;
     font-size: 1.3rem;
+    background: #f2f3ef;
   }
 
   .ingredients {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    font-size: 1.5rem;
+    gap: 1.6rem;
+    padding: 4rem 1.5rem 0 8rem;
+    font-size: 1.4rem;
     font-weight: bold;
   }
 
@@ -345,6 +319,7 @@ const StyledRecipe = styled.div`
 
   .added {
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 1rem;
     padding: 2rem;
@@ -363,6 +338,8 @@ const StyledRecipe = styled.div`
   }
 
   .ingredient-substitution {
+    margin-bottom: 5rem;
+    text-align: center;
     font-size: 1.3rem;
     color: #e33d26;
     cursor: pointer;
@@ -371,7 +348,9 @@ const StyledRecipe = styled.div`
   .preparation {
     font-size: 1.8rem;
   }
+
   .steps {
+    padding: 4rem 1.5rem;
     line-height: 2.5rem;
   }
 
@@ -401,10 +380,14 @@ const StyledRecipe = styled.div`
     background: #b7b4b4;
   }
 
+  .normal {
+    white-space: pre;
+    font-weight: normal;
+  }
+
   .recommendations {
     display: flex;
     flex-direction: column;
-    width: 1000px;
     padding: 7.5rem;
   }
 
@@ -420,6 +403,165 @@ const StyledRecipe = styled.div`
 
   .hidden {
     display: none;
+  }
+
+  @media only screen and (min-width: 370px) {
+    .twitter-icon {
+      display: block;
+    }
+  }
+
+  @media only screen and (min-width: 400px) {
+    .cooked-and-ratings .mark-as-cooked span {
+      display: block;
+      font-weight: normal;
+    }
+  }
+
+  @media only screen and (min-width: 765px) {
+    .title,
+    .yield-time-save-print {
+      padding: 0 3rem;
+    }
+
+    .author {
+      padding-left: 3rem;
+      padding-bottom: 0;
+    }
+
+    .yield-time-save-print {
+      padding-top: 3rem;
+    }
+
+    .print-recipe {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 4.5rem;
+      height: 3.4rem;
+      border-radius: 3px;
+      background: #e33d26;
+      color: white;
+      cursor: pointer;
+    }
+
+    .print-icon {
+      width: 2.5rem;
+      height: auto;
+    }
+
+    .tags-and-ratings {
+      justify-content: space-between;
+      padding: 1.5rem;
+      margin: 0 1.5rem;
+    }
+
+    .tags {
+      display: flex;
+    }
+
+    .tag {
+      white-space: pre;
+      font-size: 1.5rem;
+      color: #e33d26;
+      cursor: pointer;
+    }
+
+    .tag:hover {
+      color: #c83c26;
+      text-decoration: underline;
+    }
+
+    .tag span {
+      color: #222222;
+    }
+
+    .columns {
+      display: flex;
+    }
+
+    .col-1 {
+      flex: 1;
+    }
+
+    .col-2 {
+      flex: 2;
+    }
+
+    .ingredients-header,
+    .preparation-header {
+      justify-content: flex-start;
+      padding: 4rem 1.5rem 0;
+      background: white;
+    }
+
+    .ingredients-header {
+      padding-left: 3rem;
+    }
+  }
+
+  @media only screen and (min-width: 1020px) {
+    .recipe-content {
+      width: 1000px;
+    }
+
+    .yield-time-save-print {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .yield,
+    .time {
+      font-size: 1.5rem;
+    }
+
+    .save-print-recipe {
+      margin-top: 0;
+    }
+
+    .save-print-recipe .share-recipe {
+      display: none;
+    }
+
+    .recipe-content > .share-recipe {
+      display: flex;
+      padding: 0 3rem;
+    }
+
+    .title {
+      font-size: 4.2rem;
+    }
+
+    .author {
+      margin: 0 3rem;
+      padding-left: 0;
+      padding-bottom: 2.2rem;
+      border-bottom: 1px solid #cccccc;
+      font-size: 1.5rem;
+    }
+
+    .image-and-description {
+      flex-direction: row;
+      gap: 2rem;
+    }
+
+    .description {
+      margin-top: 0;
+    }
+
+    .recipe-image {
+      width: 600px;
+    }
+
+    .cooked-and-ratings {
+      font-size: 1.5rem;
+    }
+
+    .mark-as-cooked span {
+      display: inline-block;
+      white-space: pre;
+      font-weight: normal;
+    }
   }
 `;
 

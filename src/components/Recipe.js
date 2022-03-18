@@ -14,13 +14,28 @@ import {
   StarBorder,
   Twitter,
 } from "@mui/icons-material";
-import { CookingNote } from "./CookingNote";
+import CookingNotes from "./CookingNotes";
 
-const Recipe = (props) => {
+const Recipe = ({
+  loggedIn,
+  user,
+  recipes,
+  setCurrentPage,
+  setLastViewedRecipe,
+  addToGroceryList,
+  saveRecipe,
+  unsaveRecipe,
+  rateRecipe,
+  markCooked,
+  addPublicNote,
+  addPrivateNote,
+  likeNote,
+  showLogInPopup,
+  hideLogInPopup,
+  showGroceryList,
+}) => {
   const recipeTitle = useParams().recipe;
-  const [recipe] = props.recipes.filter(
-    (recipe) => recipe.title === recipeTitle
-  );
+  const [recipe] = recipes.filter((recipe) => recipe.title === recipeTitle);
 
   const [hoverOneStar, setHoverOneStar] = useState(false);
   const [hoverTwoStar, setHoverTwoStar] = useState(false);
@@ -31,43 +46,28 @@ const Recipe = (props) => {
   const recipeRating = Math.round(
     recipe.ratings.reduce((sum, x) => sum + x.rating, 0) / recipe.ratings.length
   );
-  const userRecipeRating = props.user.ratedRecipes.some(
+
+  const userRecipeRating = user.ratedRecipes.some(
     (ratedRecipe) => ratedRecipe.title === recipe.title
   )
     ? parseInt(
-        props.user.ratedRecipes.filter(
+        user.ratedRecipes.filter(
           (ratedRecipe) => ratedRecipe.title === recipe.title
         )[0].rating
       )
     : 0;
 
-  // display login popup if user not logged in
   useEffect(() => {
-    props.loggedIn ? props.hideLogInPopup() : props.showLogInPopup();
+    loggedIn ? hideLogInPopup() : showLogInPopup();
   });
 
   useEffect(() => {
-    props.setLastViewedRecipe(recipe);
-    props.setCurrentPage("recipe");
+    setLastViewedRecipe(recipe);
+    setCurrentPage("recipe");
     window.scrollTo(0, 0);
   }, []);
 
-  const handleSaveRecipe = () => {
-    props.saveRecipe(recipe);
-  };
-
-  const handleRateRecipe = (e) => {
-    props.rateRecipe(e, recipe);
-  };
-
-  const handleAddToGroceryList = () => {
-    props.addToGroceryList(recipe);
-  };
-
-  const handleMarkCooked = () => {
-    props.markCooked(recipe);
-  };
-
+  // DOM functions
   const showRatingsText = () => {
     const starsHover = document.querySelector(".stars-hover");
     starsHover.classList.remove("hidden");
@@ -79,10 +79,10 @@ const Recipe = (props) => {
   };
 
   return (
-    <StyledRecipe loggedIn={props.loggedIn} recipeRating={recipeRating}>
+    <StyledRecipe loggedIn={loggedIn} recipeRating={recipeRating}>
       <div className="recipe-page">
         <div className="recipe-content">
-          <div className="share-recipe">
+          <div className="share-recipe hidden">
             <Mail className="mail-icon" />
             <Pinterest className="pinterest-icon" />
             <Facebook className="facebook-icon" />
@@ -101,8 +101,16 @@ const Recipe = (props) => {
                 </div>
               </div>
               <div className="save-print-recipe">
-                <div className="save-recipe" onClick={handleSaveRecipe}>
-                  {props.user.savedRecipes.some(
+                <div
+                  className="save-recipe"
+                  onClick={() => {
+                    const saved = user.savedRecipes.some(
+                      (savedRecipe) => savedRecipe.title === recipe.title
+                    );
+                    saved ? unsaveRecipe(recipe) : saveRecipe(recipe);
+                  }}
+                >
+                  {user.savedRecipes.some(
                     (savedRecipe) => savedRecipe.title === recipe.title
                   ) ? (
                     <div className="saved">
@@ -119,12 +127,18 @@ const Recipe = (props) => {
                 <div className="print-recipe">
                   <Print className="print-icon" onClick={window.print} />
                 </div>
+                <div className="share-recipe">
+                  <Mail className="mail-icon" />
+                  <Pinterest className="pinterest-icon" />
+                  <Facebook className="facebook-icon" />
+                  <Twitter className="twitter-icon" />
+                </div>
               </div>
             </div>
             <div className="image-and-description">
               <img
                 className="recipe-image"
-                src={recipe.img}
+                src={require(`../assets/${recipe.img}`)}
                 alt={`${recipe.title}`}
               />
               <div className="description">{recipe.description}</div>
@@ -146,15 +160,22 @@ const Recipe = (props) => {
               })}
             </div>
             <div className="cooked-and-ratings">
-              {props.user.cookedRecipes.some(
+              {user.cookedRecipes.some(
                 (cookedRecipe) => cookedRecipe.title === recipe.title
               ) ? (
-                <div className="mark-as-cooked" onClick={handleMarkCooked}>
+                <div
+                  className="mark-as-cooked"
+                  onClick={() => markCooked(recipe)}
+                >
                   <Check className="check-icon cooked" /> Cooked
                 </div>
               ) : (
-                <div className="mark-as-cooked" onClick={handleMarkCooked}>
-                  <Check className="check-icon" /> Mark as <span> Cooked</span>
+                <div
+                  className="mark-as-cooked"
+                  onClick={() => markCooked(recipe)}
+                >
+                  <Check className="check-icon" />{" "}
+                  <span className="hidden"> Mark as </span>Cooked
                 </div>
               )}
               <span className="divider"></span>
@@ -171,7 +192,7 @@ const Recipe = (props) => {
                       setHoverOneStar(false);
                       hideRatingsText();
                     }}
-                    onClick={handleRateRecipe}
+                    onClick={(e) => rateRecipe(e, recipe)}
                     data-rating="1"
                   >
                     {recipeRating >= 1 ||
@@ -196,7 +217,7 @@ const Recipe = (props) => {
                       setHoverTwoStar(false);
                       hideRatingsText();
                     }}
-                    onClick={handleRateRecipe}
+                    onClick={(e) => rateRecipe(e, recipe)}
                     data-rating="2"
                   >
                     {recipeRating >= 2 ||
@@ -220,7 +241,7 @@ const Recipe = (props) => {
                       setHoverThreeStar(false);
                       hideRatingsText();
                     }}
-                    onClick={handleRateRecipe}
+                    onClick={(e) => rateRecipe(e, recipe)}
                     data-rating="3"
                   >
                     {recipeRating >= 3 ||
@@ -243,7 +264,7 @@ const Recipe = (props) => {
                       setHoverFourStar(false);
                       hideRatingsText();
                     }}
-                    onClick={handleRateRecipe}
+                    onClick={(e) => rateRecipe(e, recipe)}
                     data-rating="4"
                   >
                     {recipeRating >= 4 ||
@@ -265,7 +286,7 @@ const Recipe = (props) => {
                       setHoverFiveStar(false);
                       hideRatingsText();
                     }}
-                    onClick={handleRateRecipe}
+                    onClick={(e) => rateRecipe(e, recipe)}
                     data-rating="5"
                   >
                     {recipeRating === 5 ||
@@ -295,7 +316,7 @@ const Recipe = (props) => {
               </div>
             </div>
           </div>
-          <div className="instructions-and-cooking-notes">
+          <div className="columns">
             <div className="col-1">
               <div className="ingredients-container">
                 <div className="ingredients-header">INGREDIENTS</div>
@@ -309,19 +330,19 @@ const Recipe = (props) => {
                   })}
                 </div>
               </div>
-              {props.user.groceryList.some(
+              {user.groceryList.some(
                 (groceryRecipe) => groceryRecipe.title === recipe.title
               ) ? (
                 <div className="added">
                   Added <div className="divider"></div>
-                  <div className="open-grocery" onClick={props.showGroceryList}>
+                  <div className="open-grocery" onClick={showGroceryList}>
                     Open Grocery List
                   </div>
                 </div>
               ) : (
                 <div
                   className="add-to-grocery-list"
-                  onClick={handleAddToGroceryList}
+                  onClick={() => addToGroceryList(recipe)}
                 >
                   Add to Your Grocery List
                 </div>
@@ -348,45 +369,37 @@ const Recipe = (props) => {
                 </div>
               </div>
 
-              {props.user.cookedRecipes.some(
+              {user.cookedRecipes.some(
                 (cookedRecipe) => cookedRecipe.title === recipe.title
               ) ? (
                 <div className="mark-as-cooked-container">
                   You've Cooked This
-                  <div className="mark-as-cooked" onClick={handleMarkCooked}>
+                  <div
+                    className="mark-as-cooked"
+                    onClick={() => markCooked(recipe)}
+                  >
                     <Check className="check-icon cooked" /> Cooked
                   </div>
                 </div>
               ) : (
                 <div className="mark-as-cooked-container">
                   Have you cooked this?
-                  <div className="mark-as-cooked" onClick={handleMarkCooked}>
-                    <Check className="check-icon" /> Mark as{" "}
-                    <span> Cooked</span>
+                  <div
+                    className="mark-as-cooked"
+                    onClick={() => markCooked(recipe)}
+                  >
+                    <Check className="check-icon" />
+                    <span className="normal">Mark as </span> Cooked
                   </div>
                 </div>
               )}
-
-              <div className="cooking-notes">
-                <div className="cooking-notes-title">COOKING NOTES</div>
-                <input
-                  className="comment"
-                  type="text"
-                  placeholder="Share your notes with other cooks or leave a private note."
-                />
-                <div className="notes-container">
-                  <div className="notes-header">
-                    <div className="all">All</div>
-                    <div className="most-helpful">Most Helpful</div>
-                    <div className="private">Private</div>
-                  </div>
-                  <div className="notes">
-                    {/* {recipe.notes.map((note) => {
-                      return <CookingNote key={note} note={note} />;
-                    })} */}
-                  </div>
-                </div>
-              </div>
+              <CookingNotes
+                user={user}
+                recipe={recipe}
+                addPrivateNote={addPrivateNote}
+                addPublicNote={addPublicNote}
+                likeNote={likeNote}
+              />
             </div>
           </div>
         </div>
