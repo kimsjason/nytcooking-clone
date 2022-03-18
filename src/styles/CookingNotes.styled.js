@@ -4,6 +4,7 @@ const StyledCookingNotes = styled.div`
   .cooking-notes {
     display: flex;
     flex-direction: column;
+    padding: 0 1.5rem;
   }
 
   .cooking-notes-title {
@@ -178,6 +179,12 @@ const StyledCookingNotes = styled.div`
   }
   .hidden {
     display: none;
+  }
+
+  @media only screen and (min-width: 765px) {
+    .cooking-notes {
+      padding: 0;
+    }
   }
 `;
 
