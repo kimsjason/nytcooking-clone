@@ -4,11 +4,28 @@ import { Close, Facebook, Apple } from "@mui/icons-material";
 import { ReactComponent as Logo } from "../assets/nyt-cooking-logo.svg";
 
 const LogInPopup = ({ currentPage, signIn, hideLogInPopup }) => {
+  const showWebPopup = () => {
+    const webPopup = document.querySelector(".popup-web");
+    const mobilePopup = document.querySelector(".popup-mobile");
+    webPopup.classList.add("flex");
+    mobilePopup.classList.add("hidden");
+  };
+
+  const hideWebPopup = () => {
+    const webPopup = document.querySelector(".popup-web");
+    const mobilePopup = document.querySelector(".popup-mobile");
+    webPopup.classList.remove("flex");
+    mobilePopup.classList.remove("hidden");
+  };
+
   return (
     <StyledLogInPopup className="log-in-popup hidden">
       <div
         className="overlay"
-        onClick={currentPage === "recipe" ? () => {} : hideLogInPopup}
+        onClick={() => {
+          hideWebPopup();
+          if (currentPage !== "recipe") hideLogInPopup();
+        }}
       >
         <div
           className="content"
@@ -27,19 +44,34 @@ const LogInPopup = ({ currentPage, signIn, hideLogInPopup }) => {
               </div>
               <div className="options">
                 <div className="create-account">Create Account</div>
-                <div className="log-in">Log In</div>
+                <div className="log-in" onClick={showWebPopup}>
+                  Log In
+                </div>
                 <div className="subscribe">Subscribe Now</div>
               </div>
-              <div className="home">
+              <div
+                className="home"
+                onClick={() => {
+                  if (currentPage === "home") {
+                    hideLogInPopup();
+                  }
+                }}
+              >
                 <Link to="/">No thanks,</Link> <span>take me home</span>
               </div>
             </div>
           </div>
-          <div class="popup-web hidden">
+          <div className="popup-web">
             {currentPage === "recipe" ? (
               ""
             ) : (
-              <Close className="close-icon" onClick={hideLogInPopup} />
+              <Close
+                className="close-icon"
+                onClick={() => {
+                  hideLogInPopup();
+                  hideWebPopup();
+                }}
+              />
             )}
             <div className="image-container">
               <img
