@@ -53,6 +53,7 @@ const StyledHeader = styled.div`
   .recipe-box-icon {
     width: 2.25rem;
     height: auto;
+    cursor: pointer;
   }
 
   .menu-icon:hover,

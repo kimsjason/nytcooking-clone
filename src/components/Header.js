@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { StyledHeader } from "../styles/Header.styled";
 import { ReactComponent as Logo } from "../assets/nyt-cooking-logo.svg";
 import { Close, Inbox, Menu, Search, Settings } from "@mui/icons-material";
@@ -15,6 +15,9 @@ const Header = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+
+  let navigate = useNavigate();
+
   const expandSearchBar = () => {
     const search = document.querySelector(".search");
     const closeIcon = search.querySelector(".close-icon");
@@ -65,9 +68,12 @@ const Header = ({
             <Logo />
           </Link>
           <div className="recipe-box-and-search">
-            <Link to="/recipe-box">
-              <Inbox className="recipe-box-icon" />
-            </Link>
+            <Inbox
+              className="recipe-box-icon"
+              onClick={
+                loggedIn ? () => navigate("/recipe-box") : showLogInPopup
+              }
+            />
             <div className="divider"></div>
             <Search className="search-icon" />
           </div>
@@ -135,14 +141,14 @@ const Header = ({
 
           <div
             className="recipe-box-container"
-            onClick={loggedIn ? hideLogInPopup : showLogInPopup}
+            onClick={loggedIn ? () => navigate("/recipe-box") : showLogInPopup}
           >
-            <Link to="/recipe-box" className="recipe-box">
+            <div className="recipe-box">
               <div className="main-text">
                 <span className="your hidden">YOUR </span> RECIPE BOX
               </div>
               {loggedIn ? "" : <span>Log In</span>}
-            </Link>
+            </div>
           </div>
           {loggedIn ? (
             <div className="settings">
