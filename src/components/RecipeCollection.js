@@ -7,13 +7,14 @@ import {
   Twitter,
 } from "@mui/icons-material";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { StyledRecipeCollection } from "../styles/RecipeCollection.styled";
 import { RecipeThumbnail } from "./RecipeThumbnail";
 
 const RecipeCollection = ({
   user,
   loggedIn,
+  recipes,
   recipeCollections,
   setCurrentPage,
   saveRecipe,
@@ -61,18 +62,22 @@ const RecipeCollection = ({
         </div>
         <div className="collection-recipes-container">
           <div className="collection-recipes">
-            {collection.recipes.map((recipe) => {
+            {collection.recipes.map((recipeTitle) => {
+              const [recipe] = recipes.filter(
+                (recipe) => recipe.title === recipeTitle
+              );
               return (
-                <RecipeThumbnail
-                  key={recipe.title}
-                  user={user}
-                  loggedIn={loggedIn}
-                  recipe={recipe}
-                  saveRecipe={saveRecipe}
-                  unsaveRecipe={unsaveRecipe}
-                  hideLogInPopup={hideLogInPopup}
-                  showLogInPopup={showLogInPopup}
-                />
+                <Link key={recipe.title} to={`/recipe/${recipe.title}`}>
+                  <RecipeThumbnail
+                    user={user}
+                    loggedIn={loggedIn}
+                    recipe={recipe}
+                    saveRecipe={saveRecipe}
+                    unsaveRecipe={unsaveRecipe}
+                    hideLogInPopup={hideLogInPopup}
+                    showLogInPopup={showLogInPopup}
+                  />
+                </Link>
               );
             })}
           </div>

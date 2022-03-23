@@ -169,6 +169,8 @@ function App() {
 
   const createUser = async () => {
     const currentUser = getAuth().currentUser;
+
+    // Generate index to randomly pick a profile icon for the user
     const randomIndex = Math.floor(Math.random() * 5);
     const user = {
       uid: currentUser.uid,
@@ -487,6 +489,7 @@ function App() {
               <RecipeCollection
                 user={user}
                 loggedIn={loggedIn}
+                recipes={recipes}
                 recipeCollections={recipeCollections}
                 setCurrentPage={setCurrentPage}
                 saveRecipe={saveRecipe}
