@@ -165,6 +165,11 @@ const StyledRecipeCollection = styled.div`
     .collection-title {
       font-size: 2.8rem;
     }
+
+    .collection-recipes::after {
+      flex-basis: 233px;
+      max-width: 233px;
+    }
   }
 
   @media only screen and (min-width: 765px) {
