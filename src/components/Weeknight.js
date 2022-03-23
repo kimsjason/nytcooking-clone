@@ -1,5 +1,6 @@
 import { Facebook, Mail, Pinterest, Twitter } from "@mui/icons-material";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { StyledWeeknight } from "../styles/Weeknight.styled";
 import { RecipeThumbnail } from "./RecipeThumbnail";
 
@@ -38,20 +39,25 @@ const Weeknight = ({
         <div className="weeknight-collections">
           {recipeCollections.map((recipeCollection) => {
             return (
-              <div className="collection">
+              <div key={recipeCollection.title} className="collection">
                 <div className="collection-title">{recipeCollection.title}</div>
                 <div className="recipes">
-                  {recipeCollection.recipes.map((recipe) => {
+                  {recipeCollection.recipes.map((recipeTitle) => {
+                    const [recipe] = recipes.filter(
+                      (recipe) => recipe.title === recipeTitle
+                    );
                     return (
-                      <RecipeThumbnail
-                        user={user}
-                        loggedIn={loggedIn}
-                        recipe={recipe}
-                        saveRecipe={saveRecipe}
-                        unsaveRecipe={unsaveRecipe}
-                        showLogInPopup={showLogInPopup}
-                        hideLogInPopup={hideLogInPopup}
-                      />
+                      <Link key={recipe.id} to={`/recipe/${recipe.title}`}>
+                        <RecipeThumbnail
+                          user={user}
+                          loggedIn={loggedIn}
+                          recipe={recipe}
+                          saveRecipe={saveRecipe}
+                          unsaveRecipe={unsaveRecipe}
+                          showLogInPopup={showLogInPopup}
+                          hideLogInPopup={hideLogInPopup}
+                        />
+                      </Link>
                     );
                   })}
                 </div>
