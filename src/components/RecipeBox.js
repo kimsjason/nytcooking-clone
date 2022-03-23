@@ -8,6 +8,7 @@ import {
   PlayCircleOutline,
 } from "@mui/icons-material";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import StyledRecipeBox from "../styles/RecipeBox.styled";
 import { CookingGuideThumbnail } from "./CookingGuideThumbnail";
 import { RecipeThumbnail } from "./RecipeThumbnail";
@@ -255,15 +256,17 @@ const RecipeBox = ({
                 return <CookingGuideThumbnail cookingGuide={recipe} />;
               }
               return (
-                <RecipeThumbnail
-                  user={user}
-                  loggedIn={loggedIn}
-                  recipe={recipe}
-                  saveRecipe={saveRecipe}
-                  unsaveRecipe={unsaveRecipe}
-                  hideLogInPopup={hideLogInPopup}
-                  showLogInPopup={showLogInPopup}
-                />
+                <Link key={recipe.id} to={`/recipe/${recipe.title}`}>
+                  <RecipeThumbnail
+                    user={user}
+                    loggedIn={loggedIn}
+                    recipe={recipe}
+                    saveRecipe={saveRecipe}
+                    unsaveRecipe={unsaveRecipe}
+                    hideLogInPopup={hideLogInPopup}
+                    showLogInPopup={showLogInPopup}
+                  />
+                </Link>
               );
             })}
           </div>
