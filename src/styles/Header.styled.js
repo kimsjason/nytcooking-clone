@@ -20,6 +20,7 @@ const StyledHeader = styled.div`
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    position: relative;
     height: 44px;
     padding: 0 1rem;
   }
@@ -43,6 +44,7 @@ const StyledHeader = styled.div`
   }
 
   .menu-icon,
+  .close-icon,
   .search-icon {
     width: 2.5rem;
     height: auto;
@@ -57,9 +59,101 @@ const StyledHeader = styled.div`
   }
 
   .menu-icon:hover,
+  .close-icon:hover,
   .recipe-box-icon:hover,
   .search-icon:hover {
     color: #e33d26;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 45px;
+    left: 0;
+    width: 255px;
+    height: 100vh;
+    background: rgba(25, 25, 25, 0.97);
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1.2rem;
+  }
+
+  .nav-links > *:not(:last-child) {
+    border-bottom: 1px solid rgb(78, 78, 78);
+  }
+
+  .nav-links > * {
+    padding: 2.2rem 0;
+  }
+
+  .nav-links .recipe-box {
+    color: #e33d26;
+    font-size: 1.7rem;
+  }
+
+  .nav-links .grocery-list {
+    cursor: pointer;
+  }
+
+  .account {
+    margin-top: 7rem;
+    padding-left: 1.2rem;
+    color: #999999;
+    cursor: pointer;
+  }
+
+  .your-account {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 2.2rem 0;
+  }
+
+  .log-out {
+    margin-top: 1.5rem;
+  }
+
+  .log-in-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 3.5rem 1rem 0;
+    padding: 1.5rem;
+    background: white;
+    color: black;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: normal;
+  }
+
+  .create-recipe-box,
+  .log-in {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 207px;
+    height: 33.5px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .create-recipe-box {
+    background: #e33d26;
+    font-weight: bold;
+    color: white;
+  }
+
+  .log-in {
+    border: 1px solid black;
   }
 
   .hidden {
