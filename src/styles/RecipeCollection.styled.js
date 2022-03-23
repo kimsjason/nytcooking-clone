@@ -81,7 +81,6 @@ const StyledRecipeCollection = styled.div`
 
   .collection-recipes {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
     align-items: center;
@@ -166,6 +165,10 @@ const StyledRecipeCollection = styled.div`
       font-size: 2.8rem;
     }
 
+    .collection-recipes {
+      width: 510px;
+    }
+
     .collection-recipes::after {
       flex-basis: 233px;
       max-width: 233px;
@@ -192,7 +195,7 @@ const StyledRecipeCollection = styled.div`
 
     .collection-recipes {
       gap: 2rem;
-      width: 1000px;
+      width: 765px;
     }
   }
 
@@ -209,6 +212,9 @@ const StyledRecipeCollection = styled.div`
     .text {
       max-width: 505px;
       padding: 0 3rem;
+    }
+    .collection-recipes {
+      width: 1000px;
     }
   }
 `;
