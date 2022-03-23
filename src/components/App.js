@@ -21,13 +21,13 @@ import {
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
-import Weeknight from "./Weeknight";
+import LogInPopup from "./LogInPopup";
 import GroceryList from "./GroceryList";
+import Weeknight from "./Weeknight";
 import RecipeBox from "./RecipeBox";
 import Recipe from "./Recipe";
 import RecipeCollection from "./RecipeCollection";
 import "../styles/App.css";
-import { LogInPopup } from "./LogInPopup";
 
 function App() {
   // Firebase configuration
@@ -418,6 +418,7 @@ function App() {
                 recipes={recipes}
                 recipeCollections={recipeCollections}
                 cookingGuides={cookingGuides}
+                setCurrentPage={setCurrentPage}
                 saveRecipe={saveRecipe}
                 unsaveRecipe={unsaveRecipe}
                 showLogInPopup={showLogInPopup}
@@ -433,6 +434,7 @@ function App() {
                 loggedIn={loggedIn}
                 recipes={recipes}
                 recipeCollections={recipeCollections}
+                setCurrentPage={setCurrentPage}
                 saveRecipe={saveRecipe}
                 unsaveRecipe={unsaveRecipe}
                 showLogInPopup={showLogInPopup}
@@ -447,6 +449,8 @@ function App() {
                 user={user}
                 loggedIn={loggedIn}
                 recipes={recipes}
+                cookingGuides={cookingGuides}
+                setCurrentPage={setCurrentPage}
                 saveRecipe={saveRecipe}
                 unsaveRecipe={unsaveRecipe}
                 showLogInPopup={showLogInPopup}
@@ -458,8 +462,8 @@ function App() {
             path="/recipe/:recipe"
             element={
               <Recipe
-                loggedIn={loggedIn}
                 user={user}
+                loggedIn={loggedIn}
                 recipes={recipes}
                 setCurrentPage={setCurrentPage}
                 setLastViewedRecipe={setLastViewedRecipe}
@@ -481,10 +485,9 @@ function App() {
             path="/collection/:collection"
             element={
               <RecipeCollection
-                loggedIn={loggedIn}
                 user={user}
+                loggedIn={loggedIn}
                 recipeCollections={recipeCollections}
-                signIn={signIn}
                 setCurrentPage={setCurrentPage}
                 saveRecipe={saveRecipe}
                 unsaveRecipe={unsaveRecipe}

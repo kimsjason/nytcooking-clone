@@ -8,6 +8,7 @@ const Weeknight = ({
   loggedIn,
   recipes,
   recipeCollections,
+  setCurrentPage,
   saveRecipe,
   unsaveRecipe,
   showLogInPopup,
@@ -15,6 +16,7 @@ const Weeknight = ({
 }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
+    setCurrentPage("Weeknight");
   }, []);
 
   return (

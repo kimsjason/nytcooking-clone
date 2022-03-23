@@ -15,6 +15,7 @@ const RecipeCollection = ({
   user,
   loggedIn,
   recipeCollections,
+  setCurrentPage,
   saveRecipe,
   unsaveRecipe,
   showLogInPopup,
@@ -27,6 +28,7 @@ const RecipeCollection = ({
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setCurrentPage("Recipe Collection");
   }, []);
 
   return (

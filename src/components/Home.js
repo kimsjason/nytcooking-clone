@@ -8,6 +8,7 @@ const Home = ({
   recipes,
   recipeCollections,
   cookingGuides,
+  setCurrentPage,
   hideLogInPopup,
   showLogInPopup,
   saveRecipe,
@@ -18,6 +19,7 @@ const Home = ({
   useEffect(() => {
     window.scrollTo(0, 0);
     hideLogInPopup();
+    setCurrentPage("home");
   }, []);
 
   return (
