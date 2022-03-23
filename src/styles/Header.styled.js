@@ -36,10 +36,12 @@ const StyledHeader = styled.div`
 
   .recipe-box-and-search {
     display: flex;
+    align-items: center;
     gap: 1rem;
   }
 
   .divider {
+    height: 2rem;
     border-right: 1px solid #ccc;
   }
 
