@@ -102,7 +102,7 @@ const StyledHeader = styled.div`
     cursor: pointer;
   }
 
-  .account {
+  .sidebar .account {
     margin-top: 7rem;
     padding-left: 1.2rem;
     color: #999999;
@@ -116,7 +116,7 @@ const StyledHeader = styled.div`
     padding: 2.2rem 0;
   }
 
-  .log-out {
+  .sidebar .log-out {
     margin-top: 1.5rem;
   }
 
