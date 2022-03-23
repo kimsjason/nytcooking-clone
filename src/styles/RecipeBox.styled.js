@@ -138,9 +138,11 @@ const StyledRecipeBox = styled.div`
   }
 
   .recipes {
+    align-self: center;
     display: flex;
-    gap: 1rem;
     justify-content: center;
+    gap: 1rem;
+    width: 310px;
     flex-wrap: wrap;
     padding: 2rem 0;
   }
@@ -157,6 +159,11 @@ const StyledRecipeBox = styled.div`
     display: none;
   }
 
+  @media only screen and (min-width: 510px) {
+    .recipes {
+      width: 510px;
+    }
+  }
   @media only screen and (min-width: 600px) {
     // sidebar styles
     .navigation {
@@ -280,6 +287,7 @@ const StyledRecipeBox = styled.div`
     .header .web {
       display: flex;
       flex-direction: column;
+      margin: 0 auto;
     }
 
     .header .inputs {
@@ -322,6 +330,7 @@ const StyledRecipeBox = styled.div`
     }
 
     .recipes {
+      width: 310px;
       overflow: scroll;
     }
 
@@ -345,6 +354,23 @@ const StyledRecipeBox = styled.div`
       width: 175px;
       font-size: 1.2rem;
       padding: 0 1rem;
+    }
+
+    .recipes {
+      width: 510px;
+    }
+  }
+
+  @media only screen and (min-width: 1000px) {
+    .recipes {
+      width: 765px;
+    }
+  }
+
+  @media only screen and (min-width: 1255px) {
+    .recipes,
+    .header .web {
+      width: 1020px;
     }
   }
 `;
