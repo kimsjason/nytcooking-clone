@@ -60,6 +60,23 @@ const StyledWhatToCookThisWeek = styled.div`
     padding: 1rem;
   }
 
+  .recipe-collections {
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    overflow: scroll;
+    margin: 4rem 0;
+    padding: 1rem;
+  }
+
+  .recipe-collections::after {
+    content: "";
+    flex-basis: 300px;
+    max-width: 300px;
+  }
+
   .see-all {
     align-self: center;
     display: flex;
@@ -107,11 +124,24 @@ const StyledWhatToCookThisWeek = styled.div`
     .sub-header .title {
       font-size: 2.8rem;
     }
+
+    .recipe-collections {
+      gap: 2rem;
+    }
   }
 
   @media only screen and (min-width: 765px) {
     .what-to-cook-this-week {
       width: 745px;
+    }
+
+    .recipe-collections {
+      padding: 0;
+    }
+
+    .recipe-collections::after {
+      flex-basis: 360px;
+      max-width: 360px;
     }
   }
 
@@ -122,6 +152,11 @@ const StyledWhatToCookThisWeek = styled.div`
 
     .main-header .title {
       font-size: 3.6rem;
+    }
+
+    .recipe-collections::after {
+      flex-basis: 475px;
+      max-width: 475px;
     }
   }
 `;

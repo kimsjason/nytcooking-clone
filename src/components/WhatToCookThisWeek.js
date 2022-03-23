@@ -63,7 +63,7 @@ const WhatToCookThisWeek = ({
               week.
             </div>
           </div>
-          <div className="recipes">
+          <div className="recipe-collections">
             {recipeCollections.map((recipeCollection) => {
               return (
                 <Link
