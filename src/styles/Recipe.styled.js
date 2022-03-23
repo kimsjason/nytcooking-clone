@@ -305,7 +305,7 @@ const StyledRecipe = styled.div`
     align-items: center;
     width: 200px;
     height: 4rem;
-    margin: 3.5rem 0;
+    margin: 3.5rem auto;
     border: 1px solid #222222;
     border-radius: 3px;
     font-size: 1.4rem;

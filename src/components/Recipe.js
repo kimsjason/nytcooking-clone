@@ -404,17 +404,6 @@ const Recipe = ({
           </div>
         </div>
       </div>
-      <div className="recommendations">
-        <div className="collection">
-          <div className="collection-header">TRENDING ON COOKING</div>
-          <div className="collection-recipes"></div>
-        </div>
-        <div className="collection">
-          <div className="collection-header">YOU RECENTLY VIEWED</div>
-          <div className="collection-recipes"></div>
-        </div>
-      </div>
-      ;
     </StyledRecipe>
   );
 };
