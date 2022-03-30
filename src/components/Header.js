@@ -10,7 +10,6 @@ const Header = ({
   recipes,
   signOutUser,
   showLogInPopup,
-  hideLogInPopup,
   showGroceryList,
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -27,13 +26,6 @@ const Header = ({
   };
 
   // DOM functions
-  const expandSearchBar = () => {
-    const search = document.querySelector(".search");
-    const closeIcon = search.querySelector(".close-icon");
-    search.classList.add("expanded");
-    closeIcon.classList.add("fade-in");
-  };
-
   document.addEventListener("click", (e) => {
     // collapse search bar when clicking outside of search bar
     if (e.target.className !== "search-bar") {
@@ -48,16 +40,33 @@ const Header = ({
       e.target.className !== "search-result" ||
       e.target.className !== "search-bar"
     ) {
-      const searchResultsPreview = document.querySelector(
-        ".search-results-preview"
+      const searchResults = document.querySelectorAll(".search-results");
+      searchResults.forEach((searchResult) =>
+        searchResult.classList.add("hidden")
       );
-      searchResultsPreview.classList.add("hidden");
     }
   });
 
   const showSearchResults = () => {
-    const searchResults = document.querySelector(".search-results-preview");
-    searchResults.classList.remove("hidden");
+    const searchResults = document.querySelectorAll(".search-results");
+    searchResults.forEach((searchResult) =>
+      searchResult.classList.remove("hidden")
+    );
+  };
+
+  // mobile
+  const showSearchBar = () => {
+    const searchBar = document.querySelector(".header-mobile .search-bar");
+    searchBar.classList.add("search-bar-transition");
+    setTimeout(() => {
+      searchBar.style.overflow = "visible";
+    }, 500);
+  };
+
+  const hideSearchBar = () => {
+    const searchBar = document.querySelector(".header-mobile .search-bar");
+    searchBar.classList.remove("search-bar-transition");
+    searchBar.style.overflow = "hidden";
   };
 
   const showSideBar = () => {
@@ -70,11 +79,44 @@ const Header = ({
     sidebar.classList.add("hidden");
   };
 
-  const toggleMenuIcon = () => {
+  const showMenuIcon = () => {
     const menuIcon = document.querySelector(".menu-icon");
     const closeIcon = document.querySelector(".close-icon");
-    menuIcon.classList.toggle("hidden");
-    closeIcon.classList.toggle("hidden");
+    menuIcon.classList.remove("hidden");
+    closeIcon.classList.add("hidden");
+  };
+
+  const hideMenuIcon = () => {
+    const menuIcon = document.querySelector(".menu-icon");
+    const closeIcon = document.querySelector(".close-icon");
+    menuIcon.classList.add("hidden");
+    closeIcon.classList.remove("hidden");
+  };
+
+  const showSearchIcon = () => {
+    const searchIcon = document.querySelector(".search-icon");
+    const closeIcon = document.querySelector(
+      ".recipe-box-and-search .close-icon"
+    );
+    searchIcon.classList.remove("hidden");
+    closeIcon.classList.add("hidden");
+  };
+
+  const hideSearchIcon = () => {
+    const searchIcon = document.querySelector(".search-icon");
+    const closeIcon = document.querySelector(
+      ".recipe-box-and-search .close-icon"
+    );
+    searchIcon.classList.add("hidden");
+    closeIcon.classList.remove("hidden");
+  };
+
+  // web
+  const expandSearchBar = () => {
+    const search = document.querySelector(".search");
+    const closeIcon = search.querySelector(".close-icon");
+    search.classList.add("expanded");
+    closeIcon.classList.add("fade-in");
   };
 
   return (
@@ -84,14 +126,17 @@ const Header = ({
           <Menu
             className="menu-icon"
             onClick={() => {
-              toggleMenuIcon();
               showSideBar();
+              hideSearchBar();
+              hideMenuIcon();
+              showSearchIcon();
             }}
           />
           <Close
             className="close-icon hidden"
             onClick={() => {
-              toggleMenuIcon();
+              showMenuIcon();
+              // showMenuIcon()
               hideSideBar();
             }}
           />
@@ -106,7 +151,23 @@ const Header = ({
               }
             />
             <div className="divider"></div>
-            <Search className="search-icon" />
+            <Search
+              className="search-icon"
+              onClick={() => {
+                showSearchBar();
+                hideSideBar();
+                hideSearchIcon();
+                showMenuIcon();
+              }}
+            />
+            <Close
+              className="close-icon hidden"
+              onClick={() => {
+                hideSearchBar();
+                showMenuIcon();
+                showSearchIcon();
+              }}
+            />
           </div>
           <div className="sidebar hidden">
             <div className="nav-links">
@@ -114,7 +175,7 @@ const Header = ({
                 <div
                   className="home"
                   onClick={() => {
-                    toggleMenuIcon();
+                    showMenuIcon();
                     hideSideBar();
                   }}
                 >
@@ -125,7 +186,7 @@ const Header = ({
                 <div
                   className="weeknight"
                   onClick={() => {
-                    toggleMenuIcon();
+                    showMenuIcon();
                     hideSideBar();
                   }}
                 >
@@ -135,7 +196,7 @@ const Header = ({
               <div
                 className="grocery-list"
                 onClick={() => {
-                  toggleMenuIcon();
+                  showMenuIcon();
                   hideSideBar();
                   showGroceryList();
                 }}
@@ -147,7 +208,7 @@ const Header = ({
                   <div
                     className="recipe-box"
                     onClick={() => {
-                      toggleMenuIcon();
+                      showMenuIcon();
                       hideSideBar();
                     }}
                   >
@@ -163,7 +224,7 @@ const Header = ({
                 <div
                   className="your-account"
                   onClick={() => {
-                    toggleMenuIcon();
+                    showMenuIcon();
                     hideSideBar();
                   }}
                 >
@@ -173,7 +234,7 @@ const Header = ({
                 <div
                   className="log-out"
                   onClick={() => {
-                    toggleMenuIcon();
+                    showMenuIcon();
                     hideSideBar();
                     signOutUser();
                   }}
@@ -187,7 +248,7 @@ const Header = ({
                 <div
                   className="create-recipe-box"
                   onClick={() => {
-                    toggleMenuIcon();
+                    showMenuIcon();
                     hideSideBar();
                     showLogInPopup();
                   }}
@@ -197,7 +258,7 @@ const Header = ({
                 <div
                   className="log-in"
                   onClick={() => {
-                    toggleMenuIcon();
+                    showMenuIcon();
                     hideSideBar();
                     showLogInPopup();
                   }}
@@ -206,6 +267,56 @@ const Header = ({
                 </div>
               </div>
             )}
+          </div>
+          <div className="search-bar">
+            <div className="search-wrapper">
+              <input
+                type="text"
+                className="search-input"
+                placeholder="What would you like to cook?"
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  searchRecipes(e.target.value);
+                  if (searchResults.length > 0) {
+                    showSearchResults();
+                  }
+                }}
+              />
+              <div className="submit">
+                <span className="submit-go">Go</span>
+                <span className="submit-search">Search</span>
+              </div>
+              <div className="search-results">
+                {searchResults.slice(0, 5).map((searchResult) => {
+                  return (
+                    <Link
+                      key={searchResult.id}
+                      to={`/recipe/${searchResult.title}`}
+                      className="search-result"
+                      onClick={() => {
+                        hideSearchBar();
+                        showSearchIcon();
+                      }}
+                    >
+                      <img
+                        src={require(`../assets/${searchResult.img}`)}
+                        alt=""
+                        className="recipe-image-icon"
+                      />
+                      <div className="search-result-title">
+                        {reactStringReplace(
+                          searchResult.title,
+                          searchQuery,
+                          (match, i) => {
+                            return <span className="bold">{match}</span>;
+                          }
+                        )}
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
         <div className="header-web">
@@ -242,10 +353,11 @@ const Header = ({
                 <span className="your hidden">YOUR </span>GROCERY LIST
               </div>
             </div>
-            <div className="search-results-preview hidden">
+            <div className="search-results hidden">
               {searchResults.slice(0, 5).map((searchResult) => {
                 return (
                   <Link
+                    key={searchResult.id}
                     to={`/recipe/${searchResult.title}`}
                     className="search-result"
                   >

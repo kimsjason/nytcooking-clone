@@ -158,8 +158,116 @@ const StyledHeader = styled.div`
     border: 1px solid black;
   }
 
+  .header-mobile .search-bar {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    width: 100%;
+    max-height: 0;
+    padding: 0 4rem;
+    background: rgba(255, 255, 255, 0.95);
+    transition: max-height 0.5s;
+    overflow: hidden;
+  }
+
+  .search-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  .header-mobile .search-bar-transition {
+    max-height: 10rem;
+    transition: max-height 0.5s;
+  }
+
+  .search-input {
+    flex: 1;
+    height: 4rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.6rem;
+    outline: none;
+  }
+
+  .search-bar .submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.5rem;
+    height: 4rem;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    color: white;
+    background: #e33d26;
+    cursor: pointer;
+  }
+
+  span.submit-search {
+    display: none;
+  }
+
+  .search-bar .submit:hover {
+    background: #c83c26;
+  }
+
+  .search-results {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: calc(100% - 8rem);
+    top: 60px;
+    right: -1px;
+    border: 1px solid #cccccc;
+    margin: 0 4rem;
+    background: #f2f3ef;
+  }
+
+  .search-result {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    font-size: 1.7rem;
+    cursor: pointer;
+  }
+
+  .search-result:hover {
+    background: #767676;
+    color: white;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .recipe-image-icon {
+    width: 5rem;
+    height: auto;
+  }
+
   .hidden {
     display: none;
+  }
+
+  .header-mobile .search-bar.hidden {
+    display: none;
+  }
+
+  @media only screen and (min-width: 510px) {
+    .search-bar .submit {
+      width: 100px;
+    }
+
+    span.submit-go {
+      display: none;
+    }
+
+    span.submit-search {
+      display: inline-block;
+    }
   }
 
   @media only screen and (min-width: 1024px) {
@@ -280,17 +388,11 @@ const StyledHeader = styled.div`
       border-bottom: 4px solid #666666;
     }
 
-    .search-results-preview {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
+    .search-results {
       width: 100%;
       top: 61px;
-      right: -1px;
-      border: 1px solid #cccccc;
+      margin: 0;
       border-top: none;
-      background: #f2f3ef;
-      box-sizing: content-box;
     }
 
     .search-result {
