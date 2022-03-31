@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  onAuthStateChanged,
+  FacebookAuthProvider,
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
@@ -134,8 +134,21 @@ function App() {
   }, [recipes]);
 
   // User authentication functions
-  const signIn = async () => {
+  const signInWithGoogle = async () => {
     let provider = new GoogleAuthProvider();
+    await signInWithPopup(getAuth(), provider);
+    setLoggedIn(true);
+    hideLogInPopup();
+
+    // create new user if users database returns nothing
+    if (!(await getUser())) {
+      const newUser = await createUser();
+      setUser(newUser);
+    }
+  };
+
+  const signInWithFacebook = async () => {
+    let provider = new FacebookAuthProvider();
     await signInWithPopup(getAuth(), provider);
     setLoggedIn(true);
     hideLogInPopup();
@@ -210,24 +223,6 @@ function App() {
     const userCopy = { ...user };
     const recipesCopy = [...recipes];
 
-    // const rated = user.ratedRecipes.some(
-    //   (ratedRecipe) => ratedRecipe.title === recipe.title
-    // );
-
-    // if (rated) {
-    //   userCopy.ratedRecipes = userCopy.ratedRecipes.filter(
-    //     (ratedRecipe) => ratedRecipe.title !== recipe.title
-    //   );
-    //   recipesCopy.map((recipeData) => {
-    //     if (recipeData.title === recipe.title) {
-    //       recipeData.ratings = recipeData.ratings.filter(
-    //         (rating) => rating.userID !== user.uid
-    //       );
-    //     }
-    //     return recipeData;
-    //   });
-    // } else {
-    // const rating = parseInt(e.target.dataset.rating);
     userCopy.ratedRecipes.push({ title: recipe.title, rating: rating });
     recipesCopy.map((recipeData) => {
       if (recipeData.title === recipe.title) {
@@ -238,7 +233,6 @@ function App() {
       }
       return recipeData;
     });
-    // }
 
     setUser(userCopy);
     setRecipes(recipesCopy);
@@ -525,7 +519,8 @@ function App() {
         <Footer />
         <LogInPopup
           currentPage={currentPage}
-          signIn={signIn}
+          signInWithGoogle={signInWithGoogle}
+          signInWithFacebook={signInWithFacebook}
           showLogInPopup={showLogInPopup}
           hideLogInPopup={hideLogInPopup}
         />

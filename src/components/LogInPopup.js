@@ -3,7 +3,12 @@ import { StyledLogInPopup } from "../styles/LogInPopup.styled";
 import { Close, Facebook, Apple } from "@mui/icons-material";
 import { ReactComponent as Logo } from "../assets/nyt-cooking-logo.svg";
 
-const LogInPopup = ({ currentPage, signIn, hideLogInPopup }) => {
+const LogInPopup = ({
+  currentPage,
+  signInWithGoogle,
+  signInWithFacebook,
+  hideLogInPopup,
+}) => {
   const showWebPopup = () => {
     const webPopup = document.querySelector(".popup-web");
     const mobilePopup = document.querySelector(".popup-mobile");
@@ -104,7 +109,7 @@ const LogInPopup = ({ currentPage, signIn, hideLogInPopup }) => {
                 our Privacy Policy.
               </div>
               <div className="log-in-social">
-                <div className="google" onClick={signIn}>
+                <div className="google" onClick={signInWithGoogle}>
                   <img
                     src={require("../assets/google-icon.png")}
                     className="google-icon"
@@ -112,7 +117,7 @@ const LogInPopup = ({ currentPage, signIn, hideLogInPopup }) => {
                   />
                   Continue with Google
                 </div>
-                <div className="facebook">
+                <div className="facebook" onClick={signInWithFacebook}>
                   <Facebook className="facebook-icon" />
                   Continue with Facebook
                 </div>
