@@ -48,7 +48,7 @@ const StyledCookingNotes = styled.div`
   .user-comment {
     flex: 1;
     display: flex;
-    height: 4.5rem;
+    height: 6.4rem;
     padding: 1.5rem;
     padding-right: 5rem;
     border: 1px solid #dddddd;
@@ -179,6 +179,12 @@ const StyledCookingNotes = styled.div`
   }
   .hidden {
     display: none;
+  }
+
+  @media only screen and (min-width: 510px) {
+    .user-comment {
+      height: 4.5rem;
+    }
   }
 
   @media only screen and (min-width: 765px) {
