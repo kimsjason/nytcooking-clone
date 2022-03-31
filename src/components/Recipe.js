@@ -26,6 +26,7 @@ const Recipe = ({
   saveRecipe,
   unsaveRecipe,
   rateRecipe,
+  unrateRecipe,
   markCooked,
   unmarkCooked,
   addPublicNote,
@@ -196,7 +197,13 @@ const Recipe = ({
                       setHoverOneStar(false);
                       hideRatingsText();
                     }}
-                    onClick={(e) => rateRecipe(e, recipe)}
+                    onClick={(e) => {
+                      const rated = user.ratedRecipes.some(
+                        (ratedRecipe) => ratedRecipe.title === recipe.title
+                      );
+                      const rating = parseInt(e.target.dataset.rating);
+                      rated ? unrateRecipe(recipe) : rateRecipe(recipe, rating);
+                    }}
                     data-rating="1"
                   >
                     {recipeRating >= 1 ||
@@ -221,7 +228,13 @@ const Recipe = ({
                       setHoverTwoStar(false);
                       hideRatingsText();
                     }}
-                    onClick={(e) => rateRecipe(e, recipe)}
+                    onClick={(e) => {
+                      const rated = user.ratedRecipes.some(
+                        (ratedRecipe) => ratedRecipe.title === recipe.title
+                      );
+                      const rating = parseInt(e.target.dataset.rating);
+                      rated ? unrateRecipe(recipe) : rateRecipe(recipe, rating);
+                    }}
                     data-rating="2"
                   >
                     {recipeRating >= 2 ||
@@ -245,7 +258,13 @@ const Recipe = ({
                       setHoverThreeStar(false);
                       hideRatingsText();
                     }}
-                    onClick={(e) => rateRecipe(e, recipe)}
+                    onClick={(e) => {
+                      const rated = user.ratedRecipes.some(
+                        (ratedRecipe) => ratedRecipe.title === recipe.title
+                      );
+                      const rating = parseInt(e.target.dataset.rating);
+                      rated ? unrateRecipe(recipe) : rateRecipe(recipe, rating);
+                    }}
                     data-rating="3"
                   >
                     {recipeRating >= 3 ||
@@ -268,7 +287,13 @@ const Recipe = ({
                       setHoverFourStar(false);
                       hideRatingsText();
                     }}
-                    onClick={(e) => rateRecipe(e, recipe)}
+                    onClick={(e) => {
+                      const rated = user.ratedRecipes.some(
+                        (ratedRecipe) => ratedRecipe.title === recipe.title
+                      );
+                      const rating = parseInt(e.target.dataset.rating);
+                      rated ? unrateRecipe(recipe) : rateRecipe(recipe, rating);
+                    }}
                     data-rating="4"
                   >
                     {recipeRating >= 4 ||
@@ -290,7 +315,13 @@ const Recipe = ({
                       setHoverFiveStar(false);
                       hideRatingsText();
                     }}
-                    onClick={(e) => rateRecipe(e, recipe)}
+                    onClick={(e) => {
+                      const rated = user.ratedRecipes.some(
+                        (ratedRecipe) => ratedRecipe.title === recipe.title
+                      );
+                      const rating = parseInt(e.target.dataset.rating);
+                      rated ? unrateRecipe(recipe) : rateRecipe(recipe, rating);
+                    }}
                     data-rating="5"
                   >
                     {recipeRating === 5 ||

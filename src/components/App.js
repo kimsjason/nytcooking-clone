@@ -203,43 +203,62 @@ function App() {
       (cookedRecipe) => cookedRecipe.title !== recipe.title
     );
 
-    console.log("hi");
     setUser(userCopy);
   };
 
-  const rateRecipe = (e, recipe) => {
+  const rateRecipe = (recipe, rating) => {
     const userCopy = { ...user };
     const recipesCopy = [...recipes];
 
-    const rated = user.ratedRecipes.some(
-      (ratedRecipe) => ratedRecipe.title === recipe.title
-    );
+    // const rated = user.ratedRecipes.some(
+    //   (ratedRecipe) => ratedRecipe.title === recipe.title
+    // );
 
-    if (rated) {
-      userCopy.ratedRecipes = userCopy.ratedRecipes.filter(
-        (ratedRecipe) => ratedRecipe.title !== recipe.title
-      );
-      recipesCopy.map((recipeData) => {
-        if (recipeData.title === recipe.title) {
-          recipeData.ratings = recipeData.ratings.filter(
-            (rating) => rating.userID !== user.uid
-          );
-        }
-        return recipeData;
-      });
-    } else {
-      const rating = parseInt(e.target.dataset.rating);
-      userCopy.ratedRecipes.push({ title: recipe.title, rating: rating });
-      recipesCopy.map((recipeData) => {
-        if (recipeData.title === recipe.title) {
-          recipeData.ratings.push({
-            userID: user.uid,
-            rating: rating,
-          });
-        }
-        return recipeData;
-      });
-    }
+    // if (rated) {
+    //   userCopy.ratedRecipes = userCopy.ratedRecipes.filter(
+    //     (ratedRecipe) => ratedRecipe.title !== recipe.title
+    //   );
+    //   recipesCopy.map((recipeData) => {
+    //     if (recipeData.title === recipe.title) {
+    //       recipeData.ratings = recipeData.ratings.filter(
+    //         (rating) => rating.userID !== user.uid
+    //       );
+    //     }
+    //     return recipeData;
+    //   });
+    // } else {
+    // const rating = parseInt(e.target.dataset.rating);
+    userCopy.ratedRecipes.push({ title: recipe.title, rating: rating });
+    recipesCopy.map((recipeData) => {
+      if (recipeData.title === recipe.title) {
+        recipeData.ratings.push({
+          userID: user.uid,
+          rating: rating,
+        });
+      }
+      return recipeData;
+    });
+    // }
+
+    setUser(userCopy);
+    setRecipes(recipesCopy);
+  };
+
+  const unrateRecipe = (recipe) => {
+    const userCopy = { ...user };
+    const recipesCopy = [...recipes];
+
+    userCopy.ratedRecipes = userCopy.ratedRecipes.filter(
+      (ratedRecipe) => ratedRecipe.title !== recipe.title
+    );
+    recipesCopy.map((recipeData) => {
+      if (recipeData.title === recipe.title) {
+        recipeData.ratings = recipeData.ratings.filter(
+          (rating) => rating.userID !== user.uid
+        );
+      }
+      return recipeData;
+    });
 
     setUser(userCopy);
     setRecipes(recipesCopy);
@@ -474,6 +493,7 @@ function App() {
                 saveRecipe={saveRecipe}
                 unsaveRecipe={unsaveRecipe}
                 rateRecipe={rateRecipe}
+                unrateRecipe={unrateRecipe}
                 markCooked={markCooked}
                 unmarkCooked={unmarkCooked}
                 addPublicNote={addPublicNote}
