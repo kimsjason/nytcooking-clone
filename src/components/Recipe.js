@@ -136,11 +136,14 @@ const Recipe = ({
               </div>
             </div>
             <div className="image-and-description">
-              <img
-                className="recipe-image"
-                src={require(`../assets/${recipe.img}`)}
-                alt={`${recipe.title}`}
-              />
+              <div className="image-container">
+                <img
+                  className="recipe-image"
+                  src={require(`../assets/${recipe.img}`)}
+                  alt={`${recipe.title}`}
+                />
+                <div className="credits">{recipe.credits} </div>
+              </div>
               <div className="description">{recipe.description}</div>
             </div>
           </div>

@@ -38,7 +38,8 @@
     ],
     "category": "Snack",
     "notes": [],
-    "img": "simpsons-donut.jpeg"
+    "img": "simpsons-donut.jpeg",
+    "credits": "by Crystal Brackett - https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett"
   },
   {
     "id": "R2",
@@ -69,7 +70,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "steven-cookie-cat.jpeg"
+    "img": "steven-cookie-cat.jpeg",
+    "credits": "by Crystal Brackett - https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett"
   },
   {
     "id": "R3",
@@ -109,7 +111,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "krabby-patty.jpeg"
+    "img": "krabby-patty.jpeg",
+    "credits": "by Crystal Brackett - https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett"
   },
   {
     "id": "R4",
@@ -135,7 +138,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "sandwich-of-death.jpeg"
+    "img": "sandwich-of-death.jpeg",
+    "credits": "by Crystal Brackett - https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett"
   },
   {
     "id": "R5",
@@ -166,7 +170,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "bacon-pancakes.jpeg"
+    "img": "bacon-pancakes.jpeg",
+    "credits": "by Crystal Brackett - https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett"
   },
   {
     "id": "R6",
@@ -198,7 +203,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "chimicherrychanga.jpeg"
+    "img": "chimicherrychanga.jpeg",
+    "credits": "by Crystal Brackett - https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett"
   },
   {
     "id": "R7",
@@ -226,7 +232,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "reptar-bar.jpeg"
+    "img": "reptar-bar.jpeg",
+    "credits": "by Crystal Brackett - https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett"
   },
   {
     "id": "R8",
@@ -276,7 +283,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "katsudon-pirozhski.jpeg"
+    "img": "katsudon-pirozhski.jpeg",
+    "credits": "by Crystal Brackett - https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett"
   },
   {
     "id": "R9",
@@ -309,7 +317,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "chocolate-salty-balls.jpeg"
+    "img": "chocolate-salty-balls.jpeg",
+    "credits": "by Crystal Brackett - https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett"
   },
   {
     "id": "R10",
@@ -357,7 +366,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "poutine-on-the-ritz.jpeg"
+    "img": "poutine-on-the-ritz.jpeg",
+    "credits": "by Crystal Brackett - https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett"
   },
   {
     "id": "R11",
@@ -388,7 +398,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "rons-naco.jpeg"
+    "img": "rons-naco.jpeg",
+    "credits": "by Crystal Brackett - https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett"
   },
   {
     "id": "R12",
@@ -415,7 +426,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "grey-stuff.jpeg"
+    "img": "grey-stuff.jpeg",
+    "credits": "by Crystal Brackett - https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett"
   },
   {
     "id": "R13",
@@ -441,7 +453,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "herring-pumpkin-pot-pie.jpeg"
+    "img": "herring-pumpkin-pot-pie.jpeg",
+    "credits": "by Crystal Brackett - https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett"
   },
   {
     "id": "R14",
@@ -469,7 +482,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "carrot-on-a-stick.png"
+    "img": "carrot-on-a-stick.png",
+    "credits": "Disney Meals - http://disneymeals.me/zootopia/"
   },
   {
     "id": "R15",
@@ -491,7 +505,8 @@
     "instructions": ["Place all in blender and blend"],
     "category": "",
     "notes": [],
-    "img": "coco-nut-job.png"
+    "img": "coco-nut-job.png",
+    "credits": "Disney Meals - http://disneymeals.me/zootopia/"
   },
   {
     "id": "R16",
@@ -517,7 +532,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "jumbo-pop.png"
+    "img": "jumbo-pop.png",
+    "credits": "Disney Meals - http://disneymeals.me/zootopia/"
   },
   {
     "id": "R17",
@@ -558,13 +574,14 @@
     ],
     "category": "",
     "notes": [],
-    "img": "mob-boss-wedding-cake.png"
+    "img": "mob-boss-wedding-cake.png",
+    "credits": "Disney Meals - http://disneymeals.me/zootopia/"
   },
   {
     "id": "R18",
     "title": "Imagination Land Cupcakes",
     "author": "Inside Out",
-    "yield": "12",
+    "yield": "12 servings",
     "time": "45 minutes",
     "subtitle": "In the butchered dream sequence, the dream is failing and the camera pans around to see the Unicorn eating cupcakes.",
     "description": "In the butchered dream sequence, the dream is failing and the camera pans around to see the Unicorn eating cupcakes.",
@@ -604,7 +621,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "imagination-land-cupcakes.png"
+    "img": "imagination-land-cupcakes.png",
+    "credits": "Disney Meals - http://disneymeals.me/inside-out/"
   },
   {
     "id": "R19",
@@ -637,7 +655,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "gluten-free-broccoli-pizza.png"
+    "img": "gluten-free-broccoli-pizza.png",
+    "credits": "Disney Meals - http://disneymeals.me/inside-out/"
   },
   {
     "id": "R20",
@@ -675,7 +694,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "broccoli-and-beef.png"
+    "img": "broccoli-and-beef.png",
+    "credits": "Disney Meals - http://disneymeals.me/inside-out/"
   },
   {
     "id": "R21",
@@ -699,7 +719,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "brain-freeze-slushie.png"
+    "img": "brain-freeze-slushie.png",
+    "credits": "Disney Meals - http://disneymeals.me/inside-out/"
   },
   {
     "id": "R22",
@@ -730,7 +751,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "double-dutch-cherry-muffins.png"
+    "img": "double-dutch-cherry-muffins.png",
+    "credits": "Disney Meals - http://disneymeals.me/frankenweenie/"
   },
   {
     "id": "R23",
@@ -764,7 +786,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "dutch-apple-pie.png"
+    "img": "dutch-apple-pie.png",
+    "credits": "Disney Meals - http://disneymeals.me/frankenweenie/"
   },
   {
     "id": "R24",
@@ -815,7 +838,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "drink-me-drink.jpeg"
+    "img": "drink-me-drink.jpeg",
+    "credits": "Disney Meals - http://disneymeals.me/alice-in-wonderland/"
   },
   {
     "id": "R25",
@@ -847,7 +871,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "eat-me-cookies.jpeg"
+    "img": "eat-me-cookies.jpeg",
+    "credits": "Disney Meals - http://disneymeals.me/alice-in-wonderland/"
   },
   {
     "id": "R26",
@@ -892,7 +917,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "bread-and-butterflies.jpeg"
+    "img": "bread-and-butterflies.jpeg",
+    "credits": "Disney Meals - http://disneymeals.me/alice-in-wonderland/"
   },
   {
     "id": "R27",
@@ -926,7 +952,8 @@
     ],
     "category": "",
     "notes": [],
-    "img": "little-oysters.jpeg"
+    "img": "little-oysters.jpeg",
+    "credits": "Disney Meals - http://disneymeals.me/alice-in-wonderland/"
   },
   {
     "id": "R28",
@@ -967,6 +994,7 @@
     ],
     "category": "",
     "notes": [],
-    "img": "unbirthday-cake.jpeg"
+    "img": "unbirthday-cake.jpeg",
+    "credits": "Disney Meals - http://disneymeals.me/alice-in-wonderland/"
   }
 ]

@@ -168,6 +168,10 @@ const StyledRecipe = styled.div`
     height: auto;
   }
 
+  .credits {
+    color: #aaaaaa;
+  }
+
   .description {
     margin-top: 3rem;
     font-size: 1.7rem;
