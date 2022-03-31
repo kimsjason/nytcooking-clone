@@ -192,17 +192,18 @@ function App() {
   // Application logic functions
   const markCooked = (recipe) => {
     const userCopy = { ...user };
-    const cooked = user.cookedRecipes.some(
-      (cookedRecipe) => cookedRecipe.title === recipe.title
+    userCopy.cookedRecipes.push(recipe);
+
+    setUser(userCopy);
+  };
+
+  const unmarkCooked = (recipe) => {
+    const userCopy = { ...user };
+    userCopy.cookedRecipes = userCopy.cookedRecipes.filter(
+      (cookedRecipe) => cookedRecipe.title !== recipe.title
     );
 
-    if (cooked) {
-      userCopy.cookedRecipes = userCopy.cookedRecipes.filter(
-        (cookedRecipe) => cookedRecipe.title !== recipe.title
-      );
-    } else {
-      userCopy.cookedRecipes.push(recipe);
-    }
+    console.log("hi");
     setUser(userCopy);
   };
 
@@ -474,6 +475,7 @@ function App() {
                 unsaveRecipe={unsaveRecipe}
                 rateRecipe={rateRecipe}
                 markCooked={markCooked}
+                unmarkCooked={unmarkCooked}
                 addPublicNote={addPublicNote}
                 addPrivateNote={addPrivateNote}
                 likeNote={likeNote}

@@ -27,6 +27,7 @@ const Recipe = ({
   unsaveRecipe,
   rateRecipe,
   markCooked,
+  unmarkCooked,
   addPublicNote,
   addPrivateNote,
   likeNote,
@@ -168,7 +169,7 @@ const Recipe = ({
               ) ? (
                 <div
                   className="mark-as-cooked"
-                  onClick={() => markCooked(recipe)}
+                  onClick={() => unmarkCooked(recipe)}
                 >
                   <Check className="check-icon cooked" /> Cooked
                 </div>
@@ -379,7 +380,7 @@ const Recipe = ({
                   You've Cooked This
                   <div
                     className="mark-as-cooked"
-                    onClick={() => markCooked(recipe)}
+                    onClick={() => unmarkCooked(recipe)}
                   >
                     <Check className="check-icon cooked" /> Cooked
                   </div>
