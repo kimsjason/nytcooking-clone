@@ -80,17 +80,11 @@ const StyledRecipeCollection = styled.div`
   }
 
   .collection-recipes {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+    justify-content: center;
     padding: 4rem 0 5rem;
-  }
-
-  .collection-recipes::after {
-    content: "";
-    flex-basis: 142px;
-    max-width: 142px;
   }
 
   .bottom-text {
@@ -168,11 +162,6 @@ const StyledRecipeCollection = styled.div`
     .collection-recipes {
       width: 510px;
     }
-
-    .collection-recipes::after {
-      flex-basis: 233px;
-      max-width: 233px;
-    }
   }
 
   @media only screen and (min-width: 765px) {
@@ -194,6 +183,7 @@ const StyledRecipeCollection = styled.div`
     }
 
     .collection-recipes {
+      grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
       width: 765px;
     }
@@ -214,6 +204,7 @@ const StyledRecipeCollection = styled.div`
       padding: 0 3rem;
     }
     .collection-recipes {
+      grid-template-columns: repeat(4, 1fr);
       width: 1000px;
     }
   }
