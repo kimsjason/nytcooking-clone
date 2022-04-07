@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CookingNote } from "./CookingNote";
-import uniqid from "uniqid";
 import { StyledCookingNotes } from "../styles/CookingNotes.styled";
+import uniqid from "uniqid";
 
 const CookingNotes = ({
   user,
@@ -48,8 +48,8 @@ const CookingNotes = ({
     };
 
     noteVisibility === "everyone"
-      ? addPublicNote(recipe.title, note)
-      : addPrivateNote(recipe.title, note);
+      ? addPublicNote(recipe, note)
+      : addPrivateNote(recipe, note);
 
     // Reset note inputs
     userName.value = "";
@@ -250,27 +250,31 @@ const CookingNotes = ({
               ) : (
                 ""
               )}
+            </div>
+          ) : (
+            ""
+          )}
+          {userRecipeNotes.notes.length > 0 ? (
+            <div className="notes">
               {tab === "Private" ? (
                 <div className="private-notes">
-                  {userRecipeNotes
-                    ? userRecipeNotes.notes
-                        .slice(0, 4 + 10 * showMore.private)
-                        .sort((a, b) => {
-                          if (a.date < b.date) return -1;
-                          if (a.date > b.date) return 1;
-                          return 0;
-                        })
-                        .map((note) => {
-                          return (
-                            <CookingNote
-                              key={note.id}
-                              note={note}
-                              likeNote={likeNote}
-                              recipe={recipe}
-                            />
-                          );
-                        })
-                    : ""}
+                  {userRecipeNotes.notes
+                    .slice(0, 4 + 10 * showMore.private)
+                    .sort((a, b) => {
+                      if (a.date < b.date) return -1;
+                      if (a.date > b.date) return 1;
+                      return 0;
+                    })
+                    .map((note) => {
+                      return (
+                        <CookingNote
+                          key={note.id}
+                          note={note}
+                          likeNote={likeNote}
+                          recipe={recipe}
+                        />
+                      );
+                    })}
                 </div>
               ) : (
                 ""

@@ -17,6 +17,7 @@ import {
   updateDoc,
   query,
   onSnapshot,
+  arrayUnion,
 } from "firebase/firestore";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -87,77 +88,67 @@ function App() {
     // recipes.forEach((recipe) => addRecipe(recipe));
   }, []);
 
+  // RECIPES SNAPSHOT
   // Set recipes state upon initial component mount & Firebase snapshot listens
-  // for changes & updates the view
+  // for changes & updates the state
   useEffect(() => {
-    const recipes = async () => {
-      const q = query(collection(db, "recipes"));
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const recipesData = [];
-        querySnapshot.forEach((doc) => {
-          recipesData.push(doc.data());
-        });
-        setRecipes(recipesData);
+    const q = query(collection(db, "recipes"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const recipes = [];
+      querySnapshot.forEach((doc) => {
+        recipes.push(doc.data());
       });
-    };
+      setRecipes(recipes);
+    });
 
-    recipes();
+    return () => unsubscribe();
   }, []);
 
-  // update firestore users collection on user state change
+  // USER SNAPSHOT
+  // Set user's state upon login & Firebase snapshot listens for changes &
+  // updates the state
   useEffect(() => {
-    const updateUser = async () => {
-      const userID = getAuth().currentUser.uid;
-      const docRef = doc(db, "users", userID);
-      await updateDoc(docRef, user);
-    };
-
     if (loggedIn) {
-      updateUser();
+      const userRef = doc(db, "users", user.uid);
+      const unsubscribe = onSnapshot(userRef, (doc) => {
+        setUser(doc.data());
+      });
+      return () => unsubscribe();
     }
-  }, [user]);
-
-  // update firestore recipes collection on recipe state change
-  useEffect(() => {
-    const updateRecipes = async () => {
-      const recipeID = lastViewedRecipe.id;
-      const docRef = doc(db, "recipes", recipeID);
-      const [recipe] = recipes.filter(
-        (recipe) => recipe.title === lastViewedRecipe.title
-      );
-      await updateDoc(docRef, recipe);
-    };
-
-    if (loggedIn) {
-      updateRecipes();
-    }
-  }, [recipes]);
+  }, [loggedIn]);
 
   // User authentication functions
   const signInWithGoogle = async () => {
     let provider = new GoogleAuthProvider();
     await signInWithPopup(getAuth(), provider);
-    setLoggedIn(true);
-    hideLogInPopup();
 
     // create new user if users database returns nothing
-    if (!(await getUser())) {
+    const user = await getUser();
+    if (!user) {
       const newUser = await createUser();
       setUser(newUser);
+    } else {
+      setUser(user);
     }
+
+    setLoggedIn(true);
+    hideLogInPopup();
   };
 
   const signInWithFacebook = async () => {
     let provider = new FacebookAuthProvider();
     await signInWithPopup(getAuth(), provider);
-    setLoggedIn(true);
-    hideLogInPopup();
 
     // create new user if users database returns nothing
-    if (!(await getUser())) {
+    if (!user) {
       const newUser = await createUser();
       setUser(newUser);
+    } else {
+      setUser(user);
     }
+
+    setLoggedIn(true);
+    hideLogInPopup();
   };
 
   const signOutUser = () => {
@@ -173,7 +164,6 @@ function App() {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      setUser(docSnap.data());
       return docSnap.data();
     } else {
       return false;
@@ -202,194 +192,184 @@ function App() {
     return user;
   };
 
-  // Application logic functions
-  const markCooked = (recipe) => {
-    const userCopy = { ...user };
-    userCopy.cookedRecipes.push(recipe);
-
-    setUser(userCopy);
+  // Application logic functions - Firestore database updates
+  const markCooked = async (recipe) => {
+    const userRef = doc(db, "users", user.uid);
+    await updateDoc(userRef, {
+      cookedRecipes: arrayUnion(recipe),
+    });
   };
 
-  const unmarkCooked = (recipe) => {
-    const userCopy = { ...user };
-    userCopy.cookedRecipes = userCopy.cookedRecipes.filter(
-      (cookedRecipe) => cookedRecipe.title !== recipe.title
-    );
-
-    setUser(userCopy);
+  const unmarkCooked = async (recipe) => {
+    const userRef = doc(db, "users", user.uid);
+    await updateDoc(userRef, {
+      cookedRecipes: user.cookedRecipes.filter(
+        (cookedRecipe) => cookedRecipe.title !== recipe.title
+      ),
+    });
   };
 
-  const rateRecipe = (recipe, rating) => {
-    const userCopy = { ...user };
-    const recipesCopy = [...recipes];
-
-    userCopy.ratedRecipes.push({ title: recipe.title, rating: rating });
-    recipesCopy.map((recipeData) => {
-      if (recipeData.title === recipe.title) {
-        recipeData.ratings.push({
-          userID: user.uid,
-          rating: rating,
-        });
-      }
-      return recipeData;
+  const rateRecipe = async (recipe, rating) => {
+    const recipeRef = doc(db, "recipes", recipe.id);
+    await updateDoc(recipeRef, {
+      ratings: arrayUnion({
+        userID: user.uid,
+        rating: rating,
+      }),
     });
 
-    setUser(userCopy);
-    setRecipes(recipesCopy);
+    const userRef = doc(db, "users", user.uid);
+    await updateDoc(userRef, {
+      ratedRecipes: arrayUnion({
+        title: recipe.title,
+        rating: rating,
+      }),
+    });
   };
 
-  const unrateRecipe = (recipe) => {
-    const userCopy = { ...user };
-    const recipesCopy = [...recipes];
-
-    userCopy.ratedRecipes = userCopy.ratedRecipes.filter(
-      (ratedRecipe) => ratedRecipe.title !== recipe.title
-    );
-    recipesCopy.map((recipeData) => {
-      if (recipeData.title === recipe.title) {
-        recipeData.ratings = recipeData.ratings.filter(
-          (rating) => rating.userID !== user.uid
-        );
-      }
-      return recipeData;
+  const unrateRecipe = async (recipe) => {
+    const recipeRef = doc(db, "recipes", recipe.id);
+    await updateDoc(recipeRef, {
+      ratings: recipe.ratings.filter((rating) => rating.userID !== user.uid),
     });
 
-    setUser(userCopy);
-    setRecipes(recipesCopy);
-  };
-
-  const saveRecipe = (recipe) => {
-    const userCopy = { ...user };
-    userCopy.savedRecipes.push(recipe);
-
-    setUser(userCopy);
-  };
-
-  const unsaveRecipe = (recipe) => {
-    const userCopy = { ...user };
-    userCopy.savedRecipes = userCopy.savedRecipes.filter(
-      (savedRecipe) => savedRecipe.title !== recipe.title
-    );
-
-    setUser(userCopy);
-  };
-
-  const addToGroceryList = (recipe) => {
-    const userCopy = { ...user };
-    const groceryInfo = {
-      title: recipe.title,
-      yield: recipe.yield,
-      ingredients: recipe.ingredients,
-    };
-    userCopy.groceryList.push(groceryInfo);
-
-    setUser(userCopy);
-  };
-
-  const removeGroceryRecipe = (recipeTitle) => {
-    const userCopy = { ...user };
-    userCopy.groceryList = userCopy.groceryList.filter(
-      (recipe) => recipe.title !== recipeTitle
-    );
-
-    setUser(userCopy);
-  };
-
-  const removeGroceryIngredient = (recipeTitle, ingredientName) => {
-    const userCopy = { ...user };
-    userCopy.groceryList = userCopy.groceryList.map((recipe) => {
-      if (recipe.title === recipeTitle) {
-        recipe.ingredients = recipe.ingredients.filter(
-          (ingredient) => ingredient !== ingredientName
-        );
-      }
-      return recipe;
+    const userRef = doc(db, "users", user.uid);
+    await updateDoc(userRef, {
+      ratedRecipes: user.ratedRecipes.filter(
+        (ratedRecipe) => ratedRecipe.title !== recipe.title
+      ),
     });
-
-    setUser(userCopy);
   };
 
-  const syncDisplayName = (recipeTitle, note) => {
-    const recipesCopy = [...recipes];
-    const userCopy = { ...user };
-
-    recipesCopy.map((recipeData) => {
-      if (recipeData.title === recipeTitle) {
-        recipeData.notes.forEach((oldNote) => {
-          if (oldNote.uid === user.uid) {
-            oldNote.user = note.user;
-          }
-        });
-      }
-      return recipeData;
+  const saveRecipe = async (recipe) => {
+    const userRef = doc(db, "users", user.uid);
+    await updateDoc(userRef, {
+      savedRecipes: arrayUnion(recipe),
     });
-
-    userCopy.commentedRecipes.map((commentedRecipe) => {
-      if (commentedRecipe.title === recipeTitle) {
-        commentedRecipe.notes.forEach((oldNote) => (oldNote.user = note.user));
-      }
-      return commentedRecipe;
-    });
-
-    setUser(userCopy);
-    setRecipes(recipesCopy);
   };
 
-  const addPublicNote = (recipeTitle, note) => {
-    const recipesCopy = [...recipes];
-
-    recipesCopy.map((recipeData) => {
-      if (recipeData.title === recipeTitle) {
-        recipeData.notes.push(note);
-      }
-      return recipeData;
+  const unsaveRecipe = async (recipe) => {
+    const userRef = doc(db, "users", user.uid);
+    await updateDoc(userRef, {
+      savedRecipes: user.savedRecipes.filter(
+        (savedRecipe) => savedRecipe.title !== recipe.title
+      ),
     });
-
-    syncDisplayName(recipeTitle, note);
-    setRecipes(recipesCopy);
   };
 
-  const addPrivateNote = (recipeTitle, note) => {
-    const userCopy = { ...user };
-    const isFirstPrivateComment = userCopy.commentedRecipes.some(
-      (commentedRecipe) => commentedRecipe.title === recipeTitle
-    );
+  const addToGroceryList = async (recipe) => {
+    const userRef = doc(db, "users", user.uid);
+    await updateDoc(userRef, {
+      groceryList: arrayUnion({
+        title: recipe.title,
+        yield: recipe.yield,
+        ingredients: recipe.ingredients,
+      }),
+    });
+  };
 
-    if (isFirstPrivateComment) {
-      userCopy.commentedRecipes.map((commentedRecipe) => {
-        if (commentedRecipe.title === recipeTitle) {
-          commentedRecipe.notes.push(note);
+  const removeGroceryRecipe = async (recipeTitle) => {
+    const userRef = doc(db, "users", user.uid);
+    await updateDoc(userRef, {
+      groceryList: user.groceryList.filter(
+        (recipe) => recipe.title !== recipeTitle
+      ),
+    });
+  };
+
+  const removeGroceryIngredient = async (recipeTitle, ingredientName) => {
+    const userRef = doc(db, "users", user.uid);
+    await updateDoc(userRef, {
+      groceryList: user.groceryList.map((recipe) => {
+        if (recipe.title === recipeTitle) {
+          recipe.ingredients = recipe.ingredients.filter(
+            (ingredient) => ingredient !== ingredientName
+          );
         }
-        return commentedRecipe;
-      });
-    } else {
-      userCopy.commentedRecipes.push({ title: recipeTitle, notes: [note] });
-    }
-
-    syncDisplayName(recipeTitle, note);
-    setUser(userCopy);
+        return recipe;
+      }),
+    });
   };
 
-  const likeNote = (recipeTitle, likedNote) => {
-    const recipesCopy = [...recipes];
-
-    recipesCopy.map((recipe) => {
-      if (recipe.title === recipeTitle) {
-        recipe.notes.map((note) => {
-          if (note.id === likedNote.id) {
-            if (note.likes.some((like) => like === user.uid)) {
-              note.likes = note.likes.filter((like) => like !== user.uid);
-            } else {
-              note.likes.push(user.uid);
-            }
-          }
-          return note;
-        });
+  const syncDisplayName = async (recipeID, note) => {
+    // Sync name with user's public notes
+    const recipeRef = doc(db, "recipes", recipeID);
+    const [recipe] = recipes.filter((recipe) => recipe.id === recipeID);
+    const updatedNotes = recipe.notes.map((oldNote) => {
+      if (oldNote.uid === user.uid) {
+        oldNote.user = note.user;
       }
-      return recipe;
+      return oldNote;
+    });
+    await updateDoc(recipeRef, {
+      notes: updatedNotes,
     });
 
-    setRecipes(recipesCopy);
+    // Sync name with user's private notes
+    const userRef = doc(db, "users", user.uid);
+    const updatedCommentedRecipes = user.commentedRecipes.map(
+      (commentedRecipe) => {
+        commentedRecipe.notes.map((oldNote) => {
+          oldNote.user = note.user;
+          return oldNote;
+        });
+        return commentedRecipe;
+      }
+    );
+    await updateDoc(userRef, {
+      commentedRecipes: updatedCommentedRecipes,
+    });
+  };
+
+  const addPublicNote = (recipe, note) => {
+    syncDisplayName(recipe.id, note).then(async () => {
+      const recipeRef = doc(db, "recipes", recipe.id);
+      await updateDoc(recipeRef, {
+        notes: arrayUnion(note),
+      });
+    });
+  };
+
+  const addPrivateNote = (recipe, note) => {
+    syncDisplayName(recipe.id, note).then(async () => {
+      const userRef = doc(db, "users", user.uid);
+      const isFirstPrivateComment = !user.commentedRecipes.some(
+        (commentedRecipe) => commentedRecipe.title === recipe.title
+      );
+      if (isFirstPrivateComment) {
+        await updateDoc(userRef, {
+          commentedRecipes: arrayUnion({
+            title: recipe.title,
+            notes: [note],
+          }),
+        });
+      } else {
+        await updateDoc(userRef, {
+          commentedRecipes: user.commentedRecipes.map((commentedRecipe) => {
+            if (commentedRecipe.title === recipe.title) {
+              commentedRecipe.notes.push(note);
+            }
+            return commentedRecipe;
+          }),
+        });
+      }
+    });
+  };
+
+  const likeNote = async (recipe, likedNote) => {
+    const recipeRef = doc(db, "recipes", recipe.id);
+    await updateDoc(recipeRef, {
+      notes: recipe.notes.map((note) => {
+        if (note.id === likedNote.id) {
+          if (note.likes.some((like) => like === user.uid)) {
+            note.likes = note.likes.filter((like) => like !== user.uid);
+          } else {
+            note.likes.push(user.uid);
+          }
+        }
+        return note;
+      }),
+    });
   };
 
   // DOM functions

@@ -29,7 +29,7 @@ const CookingNote = ({ note, likeNote, recipe }) => {
           </div>
           <div className="text">{note.text}</div>
           {note.noteVisibility === "everyone" ? (
-            <div className="likes" onClick={() => likeNote(recipe.title, note)}>
+            <div className="likes" onClick={() => likeNote(recipe, note)}>
               <ThumbUp className="thumbup-icon" />
               {note.likes.length > 0 ? note.likes.length : ""} This is helpful
             </div>
