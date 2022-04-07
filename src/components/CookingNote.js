@@ -2,7 +2,7 @@ import { ThumbUp } from "@mui/icons-material";
 import { formatDuration, intervalToDuration } from "date-fns";
 import { StyledCookingNote } from "../styles/CookingNote.styled";
 
-const CookingNote = ({ note, likeNote, recipe }) => {
+const CookingNote = ({ user, note, likeNote, unlikeNote, recipe }) => {
   const duration = intervalToDuration({
     start: new Date(note.date),
     end: new Date(),
@@ -29,7 +29,21 @@ const CookingNote = ({ note, likeNote, recipe }) => {
           </div>
           <div className="text">{note.text}</div>
           {note.noteVisibility === "everyone" ? (
-            <div className="likes" onClick={() => likeNote(recipe, note)}>
+            <div
+              className="likes"
+              onClick={() => {
+                recipe.notes.map((recipeNote) => {
+                  if (recipeNote.id === note.id) {
+                    if (note.likes.some((like) => like === user.uid)) {
+                      unlikeNote(recipe.id, note.id);
+                    } else {
+                      likeNote(recipe.id, note.id);
+                    }
+                  }
+                  return note;
+                });
+              }}
+            >
               <ThumbUp className="thumbup-icon" />
               {note.likes.length > 0 ? note.likes.length : ""} This is helpful
             </div>

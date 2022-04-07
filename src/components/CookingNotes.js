@@ -9,6 +9,7 @@ const CookingNotes = ({
   addPrivateNote,
   addPublicNote,
   likeNote,
+  unlikeNote,
 }) => {
   const [tab, setTab] = useState("Most Helpful");
   const [nameCharCount, setNameCharCount] = useState(0);
@@ -217,9 +218,11 @@ const CookingNotes = ({
                       return (
                         <CookingNote
                           key={note.id}
+                          user={user}
+                          recipe={recipe}
                           note={note}
                           likeNote={likeNote}
-                          recipe={recipe}
+                          unlikeNote={unlikeNote}
                         />
                       );
                     })}
@@ -240,9 +243,11 @@ const CookingNotes = ({
                       return (
                         <CookingNote
                           key={note.id}
+                          user={user}
+                          recipe={recipe}
                           note={note}
                           likeNote={likeNote}
-                          recipe={recipe}
+                          unlikeNote={unlikeNote}
                         />
                       );
                     })}
@@ -269,9 +274,11 @@ const CookingNotes = ({
                       return (
                         <CookingNote
                           key={note.id}
+                          user={user}
+                          recipe={recipe}
                           note={note}
                           likeNote={likeNote}
-                          recipe={recipe}
+                          unlikeNote={unlikeNote}
                         />
                       );
                     })}

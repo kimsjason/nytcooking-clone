@@ -32,6 +32,7 @@ const Recipe = ({
   addPublicNote,
   addPrivateNote,
   likeNote,
+  unlikeNote,
   showLogInPopup,
   hideLogInPopup,
   showGroceryList,
@@ -434,6 +435,7 @@ const Recipe = ({
                 addPrivateNote={addPrivateNote}
                 addPublicNote={addPublicNote}
                 likeNote={likeNote}
+                unlikeNote={unlikeNote}
               />
             </div>
           </div>

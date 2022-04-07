@@ -348,20 +348,40 @@ function App() {
     });
   };
 
-  const likeNote = async (recipe, likedNote) => {
-    const recipeRef = doc(db, "recipes", recipe.id);
-    await updateDoc(recipeRef, {
-      notes: recipe.notes.map((note) => {
-        if (note.id === likedNote.id) {
-          if (note.likes.some((like) => like === user.uid)) {
-            note.likes = note.likes.filter((like) => like !== user.uid);
-          } else {
-            note.likes.push(user.uid);
-          }
+  const likeNote = async (recipeID, noteID) => {
+    const recipeRef = doc(db, "recipes", recipeID);
+    const docSnap = await getDoc(recipeRef);
+
+    if (docSnap.exists()) {
+      const recipe = docSnap.data();
+      const notes = recipe.notes.map((note) => {
+        if (note.id === noteID) {
+          note.likes.push(user.uid);
         }
         return note;
-      }),
-    });
+      });
+      await updateDoc(recipeRef, {
+        notes: notes,
+      });
+    }
+  };
+
+  const unlikeNote = async (recipeID, noteID) => {
+    const recipeRef = doc(db, "recipes", recipeID);
+    const docSnap = await getDoc(recipeRef);
+
+    if (docSnap.exists()) {
+      const recipe = docSnap.data();
+      const notes = recipe.notes.map((note) => {
+        if (note.id === noteID) {
+          note.likes = note.likes.filter((like) => like !== user.uid);
+        }
+        return note;
+      });
+      await updateDoc(recipeRef, {
+        notes: notes,
+      });
+    }
   };
 
   // DOM functions
@@ -465,6 +485,7 @@ function App() {
                 addPublicNote={addPublicNote}
                 addPrivateNote={addPrivateNote}
                 likeNote={likeNote}
+                unlikeNote={unlikeNote}
                 showLogInPopup={showLogInPopup}
                 hideLogInPopup={hideLogInPopup}
                 showGroceryList={showGroceryList}
