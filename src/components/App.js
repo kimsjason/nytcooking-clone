@@ -18,6 +18,7 @@ import {
   query,
   onSnapshot,
   arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -29,18 +30,11 @@ import RecipeBox from "./RecipeBox";
 import Recipe from "./Recipe";
 import RecipeCollection from "./RecipeCollection";
 import "../styles/App.css";
+import { getFirebaseConfig } from "../firebase-config";
 
 function App() {
   // Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyA9kwwvwh3hcuotK1nBd36bOGOZM-RcSh4",
-    authDomain: "nyt-cooking-clone.firebaseapp.com",
-    projectId: "nyt-cooking-clone",
-    storageBucket: "nyt-cooking-clone.appspot.com",
-    messagingSenderId: "7910689021",
-    appId: "1:7910689021:web:eb4b978cf826ade44bd694",
-    measurementId: "G-MVK92FWB4Y",
-  };
+  const firebaseConfig = getFirebaseConfig();
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
@@ -251,9 +245,7 @@ function App() {
   const unsaveRecipe = async (recipe) => {
     const userRef = doc(db, "users", user.uid);
     await updateDoc(userRef, {
-      savedRecipes: user.savedRecipes.filter(
-        (savedRecipe) => savedRecipe.title !== recipe.title
-      ),
+      savedRecipes: arrayRemove(recipe),
     });
   };
 
