@@ -3,10 +3,13 @@ import { StyledRecipeCollectionThumbnail } from "../styles/RecipeCollectionThumb
 
 const RecipeCollectionThumbnail = ({
   user,
+  loggedIn,
   recipes,
   recipeCollection,
   saveRecipe,
   unsaveRecipe,
+  showLogInPopup,
+  hideLogInPopup,
 }) => {
   const savedAllRecipes = recipeCollection.recipes.every((recipeTitle) => {
     return user.savedRecipes.some(
@@ -47,24 +50,49 @@ const RecipeCollectionThumbnail = ({
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
-                recipeCollection.recipes.forEach((recipeTitle) => {
-                  const [recipe] = recipes.filter(
-                    (recipe) => recipe.title === recipeTitle
-                  );
 
-                  // only save recipes that aren't already saved - avoid duplicates
-                  if (
-                    !user.savedRecipes.some(
-                      (savedRecipe) => savedRecipe.title === recipe.title
-                    )
-                  ) {
-                    saveRecipe(recipe);
-                  }
-                });
+                if (loggedIn) {
+                  recipeCollection.recipes.forEach((recipeTitle) => {
+                    const [recipe] = recipes.filter(
+                      (recipe) => recipe.title === recipeTitle
+                    );
+
+                    // only save recipes that aren't already saved - avoid duplicates
+                    if (
+                      !user.savedRecipes.some(
+                        (savedRecipe) => savedRecipe.title === recipe.title
+                      )
+                    ) {
+                      saveRecipe(recipe);
+                    }
+                  });
+
+                  hideLogInPopup();
+                } else {
+                  showLogInPopup();
+                }
               }}
             >
               <BookmarkBorder className="bookmark-icon" />
               Save all {recipeCollection.recipes.length} Recipes
+              {loggedIn ? (
+                ""
+              ) : (
+                <div className="description-box-container">
+                  <div className="description-box">
+                    <div className="title">Build Your Recipe Box</div>
+                    <div className="description">
+                      Save your favorite recipes, even recipes from other
+                      websites, in one place.
+                    </div>
+                    <div className="log-in-sign-up">
+                      <span>Log in</span> or <span>Sign up</span> to save this
+                      recipe.
+                    </div>
+                  </div>
+                  <div className="arrow"></div>
+                </div>
+              )}
             </div>
           )}
         </div>

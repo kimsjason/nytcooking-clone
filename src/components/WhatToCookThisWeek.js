@@ -72,10 +72,13 @@ const WhatToCookThisWeek = ({
                 >
                   <RecipeCollectionThumbnail
                     user={user}
+                    loggedIn={loggedIn}
                     recipes={recipes}
                     recipeCollection={recipeCollection}
                     saveRecipe={saveRecipe}
                     unsaveRecipe={unsaveRecipe}
+                    showLogInPopup={showLogInPopup}
+                    hideLogInPopup={hideLogInPopup}
                   />
                 </Link>
               );

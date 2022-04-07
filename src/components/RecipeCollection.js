@@ -73,20 +73,26 @@ const RecipeCollection = ({
                   onClick={(e) => {
                     e.stopPropagation();
                     e.preventDefault();
-                    collection.recipes.forEach((recipeTitle) => {
-                      const [recipe] = recipes.filter(
-                        (recipe) => recipe.title === recipeTitle
-                      );
 
-                      // only save recipes that aren't already saved - avoid duplicates
-                      if (
-                        !user.savedRecipes.some(
-                          (savedRecipe) => savedRecipe.title === recipe.title
-                        )
-                      ) {
-                        saveRecipe(recipe);
-                      }
-                    });
+                    if (loggedIn) {
+                      collection.recipes.forEach((recipeTitle) => {
+                        const [recipe] = recipes.filter(
+                          (recipe) => recipe.title === recipeTitle
+                        );
+
+                        // only save recipes that aren't already saved - avoid duplicates
+                        if (
+                          !user.savedRecipes.some(
+                            (savedRecipe) => savedRecipe.title === recipe.title
+                          )
+                        ) {
+                          saveRecipe(recipe);
+                        }
+                      });
+                      hideLogInPopup();
+                    } else {
+                      showLogInPopup();
+                    }
                   }}
                 >
                   <BookmarkBorder className="bookmark-icon" />
