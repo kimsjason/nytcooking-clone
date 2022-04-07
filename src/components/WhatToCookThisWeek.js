@@ -71,7 +71,11 @@ const WhatToCookThisWeek = ({
                   key={recipeCollection.title}
                 >
                   <RecipeCollectionThumbnail
+                    user={user}
+                    recipes={recipes}
                     recipeCollection={recipeCollection}
+                    saveRecipe={saveRecipe}
+                    unsaveRecipe={unsaveRecipe}
                   />
                 </Link>
               );

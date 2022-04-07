@@ -26,6 +26,11 @@ const RecipeCollection = ({
   const [collection] = recipeCollections.filter(
     (collection) => collection.title === collectionTitle
   );
+  const savedAllRecipes = collection.recipes.every((recipeTitle) => {
+    return user.savedRecipes.some(
+      (savedRecipe) => savedRecipe.title === recipeTitle
+    );
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -45,12 +50,49 @@ const RecipeCollection = ({
             EDITOR'S COLLECTION
             <div className="collection-title">{collection.title}</div>
             <div className="save-share">
-              <div className="save-recipes" onClick={saveRecipe}>
-                <div className="not-saved">
-                  <BookmarkBorder className="bookmark-icon" />
-                  Save All {collection.recipes.length} Recipes
+              {savedAllRecipes ? (
+                <div
+                  className="save-recipes"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    collection.recipes.forEach((recipeTitle) => {
+                      const [recipe] = recipes.filter(
+                        (recipe) => recipe.title === recipeTitle
+                      );
+                      unsaveRecipe(recipe);
+                    });
+                  }}
+                >
+                  <Bookmark className="bookmark-icon" />
+                  Saved
                 </div>
-              </div>
+              ) : (
+                <div
+                  className="save-recipes"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    collection.recipes.forEach((recipeTitle) => {
+                      const [recipe] = recipes.filter(
+                        (recipe) => recipe.title === recipeTitle
+                      );
+
+                      // only save recipes that aren't already saved - avoid duplicates
+                      if (
+                        !user.savedRecipes.some(
+                          (savedRecipe) => savedRecipe.title === recipe.title
+                        )
+                      ) {
+                        saveRecipe(recipe);
+                      }
+                    });
+                  }}
+                >
+                  <BookmarkBorder className="bookmark-icon" />
+                  Save all {collection.recipes.length} Recipes
+                </div>
+              )}
               <div className="share-recipe">
                 <Mail className="mail-icon" />
                 <Pinterest className="pinterest-icon" />
