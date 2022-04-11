@@ -134,10 +134,55 @@ const RecipeCollection = ({
           <div className="caption">Like this collection?</div>
           <div className="save-share">
             <div className="save-recipes" onClick={saveRecipe}>
-              <div className="not-saved">
-                <BookmarkBorder className="bookmark-icon" />
-                Save All {collection.recipes.length} Recipes
-              </div>
+              {savedAllRecipes ? (
+                <div
+                  className="save-recipes"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    collection.recipes.forEach((recipeTitle) => {
+                      const [recipe] = recipes.filter(
+                        (recipe) => recipe.title === recipeTitle
+                      );
+                      unsaveRecipe(recipe);
+                    });
+                  }}
+                >
+                  <Bookmark className="bookmark-icon" />
+                  Saved
+                </div>
+              ) : (
+                <div
+                  className="save-recipes"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+
+                    if (loggedIn) {
+                      collection.recipes.forEach((recipeTitle) => {
+                        const [recipe] = recipes.filter(
+                          (recipe) => recipe.title === recipeTitle
+                        );
+
+                        // only save recipes that aren't already saved - avoid duplicates
+                        if (
+                          !user.savedRecipes.some(
+                            (savedRecipe) => savedRecipe.title === recipe.title
+                          )
+                        ) {
+                          saveRecipe(recipe);
+                        }
+                      });
+                      hideLogInPopup();
+                    } else {
+                      showLogInPopup();
+                    }
+                  }}
+                >
+                  <BookmarkBorder className="bookmark-icon" />
+                  Save all {collection.recipes.length} Recipes
+                </div>
+              )}
             </div>
             <div className="share-recipe">
               <Mail className="mail-icon" />
