@@ -31,6 +31,7 @@ import Recipe from "./Recipe";
 import RecipeCollection from "./RecipeCollection";
 import "../styles/App.css";
 import { getFirebaseConfig } from "../firebase-config";
+import Collections from "./Collections";
 
 function App() {
   // Firebase configuration
@@ -489,6 +490,22 @@ function App() {
                 showLogInPopup={showLogInPopup}
                 hideLogInPopup={hideLogInPopup}
                 showGroceryList={showGroceryList}
+              />
+            }
+          />
+          <Route
+            path="/collections"
+            element={
+              <Collections
+                user={user}
+                loggedIn={loggedIn}
+                recipes={recipes}
+                recipeCollections={recipeCollections}
+                setCurrentPage={setCurrentPage}
+                saveRecipe={saveRecipe}
+                unsaveRecipe={unsaveRecipe}
+                showLogInPopup={showLogInPopup}
+                hideLogInPopup={hideLogInPopup}
               />
             }
           />

@@ -6,6 +6,7 @@ const StyledRecipeCollectionThumbnail = styled.div`
     flex-direction: column;
     width: 300px;
     height: 325px;
+    border: 1px solid #e6e6e6;
     background: white;
     cursor: pointer;
   }

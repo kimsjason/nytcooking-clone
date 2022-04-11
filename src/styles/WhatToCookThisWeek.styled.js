@@ -77,8 +77,11 @@ const StyledWhatToCookThisWeek = styled.div`
     max-width: 300px;
   }
 
-  .see-all {
+  .see-all-link {
     align-self: center;
+  }
+
+  .see-all {
     display: flex;
     justify-content: center;
     width: 235px;

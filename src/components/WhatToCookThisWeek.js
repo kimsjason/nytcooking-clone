@@ -84,7 +84,9 @@ const WhatToCookThisWeek = ({
               );
             })}
           </div>
-          <div className="see-all">See All Editor's Collections</div>
+          <Link to="/collections" className="see-all-link">
+            <div className="see-all">See All Editor's Collections</div>
+          </Link>
         </div>
         <div className="editor-recommendations">
           <div className="sub-header">
