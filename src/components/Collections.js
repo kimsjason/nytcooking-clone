@@ -167,7 +167,26 @@ const Collections = ({
           </div>
         </div>
         <div className="collections">
-          {recipeCollections.map((recipeCollection) => {
+          {recipeCollections.slice(4).map((recipeCollection) => {
+            return (
+              <Link
+                to={`/collection/${recipeCollection.title}`}
+                key={recipeCollection.title}
+              >
+                <RecipeCollectionThumbnail
+                  user={user}
+                  loggedIn={loggedIn}
+                  recipes={recipes}
+                  recipeCollection={recipeCollection}
+                  saveRecipe={saveRecipe}
+                  unsaveRecipe={unsaveRecipe}
+                  showLogInPopup={showLogInPopup}
+                  hideLogInPopup={hideLogInPopup}
+                />
+              </Link>
+            );
+          })}
+          {recipeCollections.slice(0, 4).map((recipeCollection) => {
             return (
               <Link
                 to={`/collection/${recipeCollection.title}`}

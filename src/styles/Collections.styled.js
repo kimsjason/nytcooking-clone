@@ -166,6 +166,13 @@ const StyledCollections = styled.div`
     .filters {
       font-size: 1.3rem;
     }
+
+    .collections {
+      justify-content: space-between;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
   }
 
   @media only screen and (min-width: 765px) {
@@ -216,9 +223,6 @@ const StyledCollections = styled.div`
     }
 
     .collections {
-      justify-content: space-between;
-      flex-direction: row;
-      flex-wrap: wrap;
       gap: 3rem;
     }
   }

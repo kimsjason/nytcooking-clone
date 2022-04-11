@@ -64,7 +64,7 @@ const WhatToCookThisWeek = ({
             </div>
           </div>
           <div className="recipe-collections">
-            {recipeCollections.map((recipeCollection) => {
+            {recipeCollections.slice(0, 4).map((recipeCollection) => {
               return (
                 <Link
                   to={`/collection/${recipeCollection.title}`}
