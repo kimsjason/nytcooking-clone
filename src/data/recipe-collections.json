@@ -1,5 +1,63 @@
 [
   {
+    "title": "Treats To Satisfy Your Sweet Tooth",
+    "img": "reptar-bar.jpeg",
+    "recipes": [
+      "Reptar Bar",
+      "Chocolate Salty Balls",
+      "A Mad Unbirthday Cake",
+      "Eat Me Sugar Cookies",
+      "Dutch Apple Pie",
+      "Brain Freeze Slushie",
+      "Cookie Cat Ice Cream Sandwiches",
+      "Imagination Land Cupcakes",
+      "Mob Boss Wedding Cake",
+      "Jumbo Pop",
+      "Homer Simpson's Donut"
+    ]
+  },
+  {
+    "title": "The All Carb Diet",
+    "img": "bread-and-butterflies.jpeg",
+    "recipes": [
+      "Bread and Butterflies",
+      "Poutine on the Ritz",
+      "Krabby Patty",
+      "Sandwich of Death",
+      "A Mad Unbirthday Cake",
+      "Eat Me Sugar Cookies",
+      "Dutch Apple Pie",
+      "Double Dutch Cherry Muffins",
+      "Ron's Naco",
+      "Cookie Cat Ice Cream Sandwiches",
+      "Imagination Land Cupcakes",
+      "Mob Boss Wedding Cake",
+      "Homer Simpson's Donut"
+    ]
+  },
+  {
+    "title": "Breakfast of Champions",
+    "img": "bacon-pancakes.jpeg",
+    "recipes": [
+      "Bacon Pancakes",
+      "Homer Simpson's Donut",
+      "Bread and Butterflies",
+      "Double Dutch Cherry Muffins",
+      "Coco Nut-job"
+    ]
+  },
+  {
+    "title": "You Might Want to Skip These",
+    "img": "grey-stuff.jpeg",
+    "recipes": [
+      "The Grey Stuff",
+      "Sandwich of Death",
+      "Herring and Pumpkin Pot Pie",
+      "Carrots on a Stick",
+      "Gluten Free Broccoli Pizza"
+    ]
+  },
+  {
     "title": "Recipes from Alice in Wonderland",
     "img": "drink-me-drink.jpeg",
     "recipes": [
