@@ -7,6 +7,7 @@ import reactStringReplace from "react-string-replace";
 
 const Header = ({
   loggedIn,
+  currentPage,
   recipes,
   signOutUser,
   showLogInPopup,
@@ -120,7 +121,7 @@ const Header = ({
   };
 
   return (
-    <StyledHeader>
+    <StyledHeader currentPage={currentPage}>
       <div className="header">
         <div className="header-mobile">
           <Menu

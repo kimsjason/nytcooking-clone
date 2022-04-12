@@ -44,6 +44,10 @@ button {
   top: 45px;
 }
 
+.App.no-header {
+  top: 0;
+}
+
 .hidden {
   display: none;
 }
@@ -52,5 +56,9 @@ button {
   .App:nth-child(1) {
     position: relative;
     top: 61px;
+  }
+
+  .App.no-header {
+    top: 0;
   }
 }

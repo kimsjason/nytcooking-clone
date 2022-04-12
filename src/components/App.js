@@ -28,10 +28,11 @@ import GroceryList from "./GroceryList";
 import Weeknight from "./Weeknight";
 import RecipeBox from "./RecipeBox";
 import Recipe from "./Recipe";
+import Collections from "./Collections";
 import RecipeCollection from "./RecipeCollection";
 import "../styles/App.css";
 import { getFirebaseConfig } from "../firebase-config";
-import Collections from "./Collections";
+import Subscribe from "./Subscribe";
 
 function App() {
   // Firebase configuration
@@ -407,10 +408,11 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className={`App ${currentPage === "subscribe" ? "no-header" : ""}`}>
       <BrowserRouter>
         <Header
           loggedIn={loggedIn}
+          currentPage={currentPage}
           recipes={recipes}
           signOutUser={signOutUser}
           showLogInPopup={showLogInPopup}
@@ -522,6 +524,15 @@ function App() {
                 unsaveRecipe={unsaveRecipe}
                 showLogInPopup={showLogInPopup}
                 hideLogInPopup={hideLogInPopup}
+              />
+            }
+          />
+          <Route
+            path="/subscribe"
+            element={
+              <Subscribe
+                setCurrentPage={setCurrentPage}
+                showLogInPopup={showLogInPopup}
               />
             }
           />

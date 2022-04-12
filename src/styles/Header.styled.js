@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 const StyledHeader = styled.div`
   z-index: 50;
-
   .header {
+    display: ${(props) =>
+      props.currentPage === "subscribe" ? "none" : "block"};
     position: fixed;
     width: 100%;
     top: 0;
