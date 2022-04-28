@@ -101,6 +101,7 @@ const CookingGuides = ({
               <Link
                 to={`/cooking-guide/${cookingGuide.title}`}
                 key={cookingGuide.title}
+                cookingGuide={cookingGuide}
               >
                 <CookingGuideThumbnail
                   user={user}

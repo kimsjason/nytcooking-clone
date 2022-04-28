@@ -99,10 +99,12 @@ const WhatToCookThisWeek = ({
           <div className="recipes">
             {cookingGuides.map((cookingGuide) => {
               return (
-                <CookingGuideThumbnail
+                <Link
+                  to={`/cooking-guide/${cookingGuide.title}`}
                   key={cookingGuide.title}
-                  cookingGuide={cookingGuide}
-                />
+                >
+                  <CookingGuideThumbnail cookingGuide={cookingGuide} />
+                </Link>
               );
             })}
           </div>

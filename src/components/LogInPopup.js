@@ -29,7 +29,11 @@ const LogInPopup = ({
         className="overlay"
         onClick={() => {
           hideWebPopup();
-          if (currentPage !== "recipe" && currentPage !== "recipe-box") {
+          if (
+            currentPage !== "recipe" &&
+            currentPage !== "cooking-guide" &&
+            currentPage !== "recipe-box"
+          ) {
             hideLogInPopup();
           }
         }}
@@ -69,7 +73,9 @@ const LogInPopup = ({
             </div>
           </div>
           <div className="popup-web">
-            {currentPage === "recipe" || currentPage === "recipe-box" ? (
+            {currentPage === "recipe" ||
+            currentPage === "cooking-guide" ||
+            currentPage === "recipe-box" ? (
               ""
             ) : (
               <Close

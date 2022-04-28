@@ -20,6 +20,7 @@ import {
   arrayUnion,
   arrayRemove,
 } from "firebase/firestore";
+import { getFirebaseConfig } from "../firebase-config";
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
@@ -30,10 +31,10 @@ import RecipeBox from "./RecipeBox";
 import Recipe from "./Recipe";
 import Collections from "./Collections";
 import RecipeCollection from "./RecipeCollection";
-import "../styles/App.css";
-import { getFirebaseConfig } from "../firebase-config";
-import Subscribe from "./Subscribe";
 import CookingGuides from "./CookingGuides";
+import CookingGuide from "./CookingGuide";
+import Subscribe from "./Subscribe";
+import "../styles/App.css";
 
 function App() {
   // Firebase configuration
@@ -532,6 +533,19 @@ function App() {
             path="/cooking-guides"
             element={
               <CookingGuides
+                user={user}
+                loggedIn={loggedIn}
+                cookingGuides={cookingGuides}
+                setCurrentPage={setCurrentPage}
+                showLogInPopup={showLogInPopup}
+                hideLogInPopup={hideLogInPopup}
+              />
+            }
+          />
+          <Route
+            path="/cooking-guide/:guide"
+            element={
+              <CookingGuide
                 user={user}
                 loggedIn={loggedIn}
                 cookingGuides={cookingGuides}
