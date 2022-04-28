@@ -106,7 +106,9 @@ const WhatToCookThisWeek = ({
               );
             })}
           </div>
-          <div className="see-all">See All Cooking Guides</div>
+          <Link to="/cooking-guides" className="see-all-link">
+            <div className="see-all">See All Cooking Guides</div>
+          </Link>
         </div>
       </div>
     </StyledWhatToCookThisWeek>

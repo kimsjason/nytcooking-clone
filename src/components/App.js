@@ -33,6 +33,7 @@ import RecipeCollection from "./RecipeCollection";
 import "../styles/App.css";
 import { getFirebaseConfig } from "../firebase-config";
 import Subscribe from "./Subscribe";
+import CookingGuides from "./CookingGuides";
 
 function App() {
   // Firebase configuration
@@ -522,6 +523,19 @@ function App() {
                 setCurrentPage={setCurrentPage}
                 saveRecipe={saveRecipe}
                 unsaveRecipe={unsaveRecipe}
+                showLogInPopup={showLogInPopup}
+                hideLogInPopup={hideLogInPopup}
+              />
+            }
+          />
+          <Route
+            path="/cooking-guides"
+            element={
+              <CookingGuides
+                user={user}
+                loggedIn={loggedIn}
+                cookingGuides={cookingGuides}
+                setCurrentPage={setCurrentPage}
                 showLogInPopup={showLogInPopup}
                 hideLogInPopup={hideLogInPopup}
               />
