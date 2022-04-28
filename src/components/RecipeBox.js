@@ -253,7 +253,14 @@ const RecipeBox = ({
           <div className="recipes">
             {pageViewRecipes.map((recipe) => {
               if (pageViewTitle === "Cooking Guides") {
-                return <CookingGuideThumbnail cookingGuide={recipe} />;
+                return (
+                  <Link
+                    to={`/cooking-guide/${recipe.title}`}
+                    key={recipe.title}
+                  >
+                    <CookingGuideThumbnail cookingGuide={recipe} />;
+                  </Link>
+                );
               }
               return (
                 <Link key={recipe.id} to={`/recipe/${recipe.title}`}>
