@@ -4,8 +4,8 @@ const StyledCookingGuideThumbnail = styled.div`
   .cooking-guide-thumbnail {
     display: flex;
     flex-direction: column;
-    width: 235px;
-    height: 275px;
+    width: 145px;
+    height: 212px;
     background: #1b1b1b;
     font-size: 1.2rem;
     color: white;
@@ -14,8 +14,8 @@ const StyledCookingGuideThumbnail = styled.div`
 
   .cooking-guide-image {
     object-fit: cover;
-    width: 235px;
-    height: 145px;
+    width: 144px;
+    height: 96px;
   }
 
   .cooking-guide-thumbnail:hover {
@@ -35,6 +35,18 @@ const StyledCookingGuideThumbnail = styled.div`
   .author {
     padding-top: 3px;
     font-size: 1.3rem;
+  }
+
+  @media only screen and (min-width: 510px) {
+    .cooking-guide-thumbnail {
+      width: 235px;
+      height: 275px;
+    }
+
+    .cooking-guide-image {
+      width: 235px;
+      height: 145px;
+    }
   }
 `;
 
