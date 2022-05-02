@@ -397,7 +397,9 @@ const Header = ({
             <div className="settings">
               <Settings className="settings-icon" />
               <div className="settings-expanded">
-                <div className="account">Manage Your Account</div>
+                <Link to="/account" className="account">
+                  Manage Your Account
+                </Link>
                 <div className="log-out" onClick={signOutUser}>
                   Log Out
                 </div>

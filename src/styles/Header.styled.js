@@ -507,6 +507,7 @@ const StyledHeader = styled.div`
       padding: 0.8rem 1.5rem;
       border: 1px solid #ccc;
       cursor: pointer;
+      box-sizing: border-box;
     }
 
     .hidden {

@@ -35,6 +35,7 @@ import CookingGuides from "./CookingGuides";
 import CookingGuide from "./CookingGuide";
 import Subscribe from "./Subscribe";
 import "../styles/App.css";
+import ManageAccount from "./ManageAccount";
 
 function App() {
   // Firebase configuration
@@ -564,6 +565,7 @@ function App() {
               />
             }
           />
+          <Route path="/account" element={<ManageAccount user={user} />} />
         </Routes>
         <Footer />
         <LogInPopup
