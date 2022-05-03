@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# NYT Cooking Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Explore and learn to recreate recipes you've always wanted to try from your favorite animated films and TV shows. With the NYT Cooking Clone, you can now browse a _limited_ selection of recipes from Disney, Pixar, and more!
 
-## Available Scripts
+This site was created for the final project in the Javascript course of The Odin Project's full-stack Javascript curriculum. The project details can be found [here](https://www.theodinproject.com/lessons/node-path-javascript-javascript-final-project).
 
-In the project directory, you can run:
+[Live Demo](https://nyt-cooking-clone.web.app/)
+| DESKTOP | MOBILE |
+:-------------------:|:----------------------:
+![NYT Cooking Site - Web Demo](https://media.giphy.com/media/yMsYaBlJPvN8GLqN1W/giphy.gif) | ![NYT Cooking Site - Mobile Demo](https://media.giphy.com/media/iNGUdq6EbdzagKdxap/giphy.gif)
 
-### `npm start`
+### Built With
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [ReactJS](https://reactjs.org/)
+- [Firebase](https://firebase.google.com/)
+- [`styled-components`](https://styled-components.com/) 💅🏾
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
 
-### `npm test`
+- Search & save recipes, marked them as cooked, or add their ingredients to your grocery list
+- Leave a public cooking note to share your experiences with other readers or add a private one to keep your secret ingredient additions hidden from prying eyes
+- Log in using Google or Facebook
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+### 1) Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Fork and clone the repository on your local machine
+- Install project dependencies
+  - `npm install`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 2) Firebase Setup and Deploy
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Create a Firebase account if you don't already have one and set up a Firebase project to host your site
+- At the top level of your src folder, create a configuration file called `firebase-config.js`
+  - Copy [this code](https://github.com/firebase/codelab-friendlychat-web/blob/main/web/src/firebase-config.js) into your file
+  - Replace the comment with your own Firebase configuration object
+- Initialize a Firebase project in your project directory
+  - `firebase init`
+- Log in to your Firebase account
+  - `firebase login`
 
-### `npm run eject`
+### 3) Initialize Firestore Database - Upload Data
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Start the application on a local server
+  - `npm start`
+- In `App.js`, uncomment lines 85 - 87 in the first useEffect hook. Save the file, and check to see that the recipes data was successfully uploaded to your Firestore database.
+- \*\*Re-comment lines 85-87 to avoid recipes duplication in the database.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 4) Deploy App
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Build your application
+  - `npm run build`
+- Deploy the application!
+  - `firebase deploy`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Credits
 
-## Learn More
+### Recipes
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- ["Cartoon Foods You Can Make in Real Life" by Crystal Brackett](https://www.ranker.com/list/cartoon-food-you-can-make-in-real-life/crystal-brackett)
+- [Disney Meals](https://disneymeals.me/)
+- [14 Anime Foods Every Anime Fan Needs to Try by Zuleika](https://www.fandom.com/articles/13-anime-foods-every-anime-fan-needs-try)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Icons
 
-### Code Splitting
+- [MUI](https://mui.com/material-ui/icons/)
+- [Flaticon](https://www.flaticon.com/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Logos
 
-### Analyzing the Bundle Size
+- [The New York Times](https://www.nytimes.com/) / [NYT Cooking](http://nytcooking.com/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Images
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Unsplash](https://unsplash.com/)
+- [NYT Cooking](http://nytcooking.com/)
